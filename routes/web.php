@@ -18,7 +18,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth' ], function () {
-	//list users
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    //list users
 	Route::get('/users', 'UserController@index')->name('admin_users');
 
 	Route::get('/user/create', 'UserController@create_user_form')->name('create_user_form');

@@ -14,5 +14,5 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
-   mix.copy('node_modules/materialize-css/dist/css/materialize.min.css', 'public/css/materialize.css');
-   mix.copy('node_modules/materialize-css/dist/js/materialize.min.js', 'public/js/materialize.js'); 
+//    mix.copy('node_modules/materialize-css/dist/css/materialize.min.css', 'public/css/materialize.css');
+//    mix.copy('node_modules/materialize-css/dist/js/materialize.min.js', 'public/js/materialize.js'); 
