@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'DashboardController@index')->name('dashboard');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth' ], function () {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+	Route::get('/', 'DashboardController@index')->name('dashboard');
+	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     //list users
 	Route::get('/users', 'UserController@index')->name('admin_users');
 
