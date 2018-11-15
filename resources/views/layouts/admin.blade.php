@@ -17,6 +17,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/materialize.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     
     {{-- <link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
@@ -27,7 +30,7 @@
 </head>
 <body>
     <div id="app">
-        @include('includes.navigation')
+        @include('admin.includes.navigation')
 
         <main class="py-4">
             @yield('content')

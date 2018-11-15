@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'DashboardController@index')->name('dashboard');
+Route::get('logout','Auth\LoginController@logout')->name('logout');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth' ], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web'] ], function () {
+
 	Route::get('/', 'DashboardController@index')->name('dashboard');
 	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     //list users
-	Route::get('/users', 'UserController@index')->name('admin_users');
+	Route::get('/users', 'UserController@index')->name('users');
 
 	Route::get('/user/create', 'UserController@create_user_form')->name('create_user_form');
 	Route::post('/user/create', 'UserController@create')->name('create_user');

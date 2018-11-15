@@ -1,2 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css?family=Nunito);html,
+body {
+  overflow: hidden;
+}
+
+#nav-main {
+  margin-bottom: 40px;
+}
 

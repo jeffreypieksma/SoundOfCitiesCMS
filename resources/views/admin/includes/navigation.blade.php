@@ -1,10 +1,11 @@
-<nav id="nav-main">
+<nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">{{ config('app.name', '') }}</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       
       <ul class="right hide-on-med-and-down">
-        <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="/">Home</a></li>
+        <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="/admin/users/">Users</a></li>
         @guest
             <li class="{{ $current_route_name == 'login' ? 'active' : '' }}"><a href="{{ route('login') }}">Login</a></li>
             <li class="{{ $current_route_name == 'register' ? 'active' : '' }}"><a href="{{ route('register') }}">Register</a></li>

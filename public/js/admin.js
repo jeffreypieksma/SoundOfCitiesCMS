@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -35918,16 +35918,64 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 34 */,
-/* 35 */
+/* 34 */
+/***/ (function(module, exports) {
+
+module.exports = {
+    getLocation: function getLocation() {
+        return _getLocation();
+    }
+};
+
+var output = document.getElementById("output");
+var btn = document.getElementById("test");
+
+$(btn).click(function () {
+    _getLocation();
+});
+
+function _getLocation() {
+    if (navigator.geolocation) {
+        console.log('working');
+        navigator.geolocation.watchPosition(showPosition);
+    } else {
+        showError();
+    }
+}
+
+function showPosition(position) {
+    output.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+}
+
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            output.innerHTML = "User denied the request for Geolocation.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            output.innerHTML = "Location information is unavailable.";
+            break;
+        case error.TIMEOUT:
+            output.innerHTML = "The request to get user location timed out.";
+            break;
+        case error.UNKNOWN_ERROR:
+            output.innerHTML = "An unknown error occurred.";
+            break;
+    }
+}
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(36);
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(39);
 
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -35938,6 +35986,10 @@ module.exports = __webpack_require__(37);
  */
 
 __webpack_require__(10);
+
+__webpack_require__(40);
+
+__webpack_require__(34);
 
 //window.Vue = require('vue');
 
@@ -35971,13 +36023,44 @@ $(document).ready(function () {
 
   $('.sidenav').sidenav();
   $(".dropdown-trigger").dropdown();
+  // $('#dataTable').DataTable({
+  // //paging: false
+  // });
 });
 
 /***/ }),
-/* 37 */
-/***/ (function(module, exports) {
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+var location = __webpack_require__(34);
+
+location.getLocation();
+
+var mapboxAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' + '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    mapboxUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnJleXBpZWtzbWEiLCJhIjoiY2pvZWFxZDYwMm12MDNwbzExbmJvbXM0byJ9.YTv6qq_Kjc7w3AhTwZd0Sg';
+
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+L.tileLayer(mapboxUrl, {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    layers: [grayscale],
+    id: 'mapbox.streets'
+}).addTo(mymap);
+
+var grayscale = L.tileLayer(mapboxUrl, { id: 'mapid', attribution: mapboxAttribution }),
+    streets = L.tileLayer(mapboxUrl, { id: 'mapid', attribution: mapboxAttribution });
+
+var baseMaps = {
+    "Grayscale": grayscale,
+    "Streets": streets
+};
+
+L.control.layers(baseMaps).addTo(mymap);
+
+var baseMaps = {
+    "<span style='color: gray'>Grayscale</span>": grayscale,
+    "Streets": streets
+};
 
 /***/ })
 /******/ ]);

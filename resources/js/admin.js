@@ -7,6 +7,10 @@
 
 require('./bootstrap');
 
+require('./map');
+
+require('./location');
+
 //window.Vue = require('vue');
 
 /**
@@ -39,5 +43,8 @@ $(document).ready( function () {
 
     $('.sidenav').sidenav();
     $(".dropdown-trigger").dropdown();
+    // $('#dataTable').DataTable({
+    // //paging: false
+    // });
              
 });
