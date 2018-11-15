@@ -1,12 +1,15 @@
 module.exports = {
     getLocation: function(){
         return getLocation();
+    },
+    showPosition: function (){
+        return showPosition();
     }
 }
 
-
 var output = document.getElementById("output");
 var btn = document.getElementById("test");
+
 
 $(btn).click(function(){
     getLocation();
@@ -14,14 +17,21 @@ $(btn).click(function(){
 
 function getLocation() {
     if (navigator.geolocation) {
-        console.log('working');
         navigator.geolocation.watchPosition(showPosition);
-    } else { 
-        showError();
+        navigator.geolocation.watchPosition(setCoords);
+    }else{
+        //Error handling 
     }
 }
 
+function setCoords(position){
+    this.coords = position; 
+}
+
 function showPosition(position) {
+    // var lat = position.coords.latitude;
+    // var lon = position.coords.longitude;
+
     output.innerHTML="Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;
 }
