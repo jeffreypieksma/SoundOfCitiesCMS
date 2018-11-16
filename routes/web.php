@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('logout','Auth\LoginController@logout')->name('logout');
+Route::get('logout', function (){
+	Auth::logout();
+	return redirect('/login');
+});
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web'] ], function () {
 

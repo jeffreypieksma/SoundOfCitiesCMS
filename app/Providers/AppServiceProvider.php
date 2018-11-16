@@ -18,8 +18,12 @@ class AppServiceProvider extends ServiceProvider
         Resource::withoutWrapping();
 
         view()->composer('*', function ($view) {
-            $current_route_name = \Request::route()->getName();
-            $view->with('current_route_name', $current_route_name);
+            $route = \Request::route();
+
+            if($route) {
+                $current_route_name = $route;
+                $view->with('current_route_name', $current_route_name);
+            }  
         });
     
     }
