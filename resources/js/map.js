@@ -2,9 +2,14 @@ var location = require('./location');
 
 var currentLocation = location.getLocation();
 
-//mapboxUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnJleXBpZWtzbWEiLCJhIjoiY2pvZWFxZDYwMm12MDNwbzExbmJvbXM0byJ9.YTv6qq_Kjc7w3AhTwZd0Sg';
-mapboxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+function Zone (type, coords, center_point) {
+    this.type = type;
+    this.coords = coords;
+    this.center_point = center_point;
+}
 
+//Init map 
+mapboxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 var map = L.map('mapid', { drawControl: true }).setView([53.201233, 5.799913], 13);
 L.tileLayer(mapboxUrl, {
     attribution: '&copy; <a href=“https://www.openstreetmap.org/copyright“>OpenStreetMap</a> contributors',
@@ -42,27 +47,23 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl);
 
 map.on(L.Draw.Event.CREATED, function (e) {
-    console.log(e);
     var type = e.layerType,
         layer = e.layer;
 
-    switch(type){
-        case 'marker': 
-            console.log('marker');
-        break;
-        case 'circle':
-            console.log('circle');
-        break;
-        case 'polyline':
-            console.log('polyline');
-        break;
-        case 'polygon':
-            console.log('polygon');
-        break;
-        default:
+    var coords = layer._latlngs;
+    console.log(coords);
+        
+    var zone = new Zone();
+    zone.type = type;
 
-        break;
+    //Length checken of controleren als het een array is. 
+   
+    for(var i=0; i < coords.length; i++){
+        zone.coords = coords[i];
     }
+    console.log(zone);  
+
+
     // Save to DB and Map 
     map.addLayer(layer);
  });

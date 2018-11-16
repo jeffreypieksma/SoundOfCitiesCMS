@@ -11,6 +11,10 @@ require('./map');
 
 require('./location');
 
+$(document).ready(function(){
+    $('.modal').modal();
+});
+
 //window.Vue = require('vue');
 
 /**

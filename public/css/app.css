@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);html,
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 #nav-main {
