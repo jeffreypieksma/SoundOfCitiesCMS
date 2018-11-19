@@ -36002,6 +36002,8 @@ __webpack_require__(41);
 
 __webpack_require__(34);
 
+__webpack_require__(46);
+
 $(document).ready(function () {
   $('.modal').modal();
 });
@@ -36131,6 +36133,44 @@ map.on('draw:deletestart', function () {});
 
 // when the map is clicked, stop editing
 map.on('click', function (e) {});
+
+/***/ }),
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __webpack_require__(14);
+var save_collection = document.getElementById('save-collection');
+save_collection.onclick = function (event) {
+    event.preventDefault();
+    var title = document.getElementById('title').value;
+    var description = document.getElementById('description').value;
+    var location = document.getElementById('location').value;
+    storeData();
+    {
+    }
+};
+function storeData(data) {
+    var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
+    api.post('/collection/post', {
+        title: data.title,
+        description: data.description,
+        location: data.location
+    })
+        .then(function (res) {
+        console.log(res);
+    })
+        .catch(function (error) {
+        console.log(error);
+    });
+}
+
 
 /***/ })
 /******/ ]);

@@ -11,6 +11,8 @@ require('./map');
 
 require('./location');
 
+require('./collection');
+
 $(document).ready(function(){
     $('.modal').modal();
 });
