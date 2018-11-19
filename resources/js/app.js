@@ -7,6 +7,10 @@
 
 require('./bootstrap');
 
+const helloWorld = require('./test').helloWorld();
+
+console.log(helloWorld);
+
 //window.Vue = require('vue');
 
 /**

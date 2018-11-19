@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 
-@section('content')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+@section('head')
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin=""/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
@@ -17,6 +18,10 @@
     <style>
         #mapid { height: calc(100vh - 64px); }
     </style>
+
+@endsection
+
+@section('content')
 
     <div class="container-fluid">
         <div id="output" style="">Output: </div><button id="test" class="btn button">Show position</div>
@@ -42,5 +47,11 @@
     </div>
 
     <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
+
+@endsection
+
+@section('scripts')
+
+
 
 @endsection

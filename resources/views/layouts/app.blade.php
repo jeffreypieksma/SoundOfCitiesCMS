@@ -19,7 +19,7 @@
     <link href="{{ asset('css/materialize.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
     
-
+    @yield('head')
 </head>
 <body>
     <div id="app">
@@ -33,6 +33,8 @@
     <!-- Compiled and minified JavaScript -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
-     
+
+    @yield('scripts')
+
 </body>
 </html>
