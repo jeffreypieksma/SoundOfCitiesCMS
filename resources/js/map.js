@@ -2,6 +2,9 @@ var location = require('./location');
 
 var currentLocation = location.getLocation();
 
+console.log(currentLocation);
+
+//Constructor
 function Zone (type, coords, center_point) {
     this.type = type;
     this.coords = coords;
@@ -17,10 +20,14 @@ L.tileLayer(mapboxUrl, {
 }).addTo(map);
 
  // create a feature group for Leaflet Draw to hook into for delete functionality
- var drawnItems = L.featureGroup();
+ var drawnItems = L.featureGroup().addTo(map).on("click", zoneClick);
  map.addLayer(drawnItems);
 
-// create a new Leaflet Draw control
+ function zoneClick(event) {
+    console.log("Clicked on marker " + event.layer);
+  }
+
+ // create a new Leaflet Draw control
 var drawControl = new L.Control.Draw({
     edit: {
         featureGroup: drawnItems,
@@ -62,10 +69,11 @@ map.on(L.Draw.Event.CREATED, function (e) {
         zone.coords = coords[i];
     }
     console.log(zone);  
+    
 
 
     // Save to DB and Map 
-    map.addLayer(layer);
+    map.addLayer(layer).bindPopup("polygon lat lon: " + coords);
  });
 
  map.on('draw:edited', function (e) {
