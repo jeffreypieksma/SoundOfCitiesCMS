@@ -1,8 +1,6 @@
-// var location = require('./location');
+import axios from 'axios'
 
-// var currentLocation = location.getLocation();
-
-// console.log(currentLocation);
+declare let L: any;
 
 //Constructor
 function Zone (type, coords, center_point, radius) {
@@ -11,8 +9,6 @@ function Zone (type, coords, center_point, radius) {
     this.center_point = center_point;
     this.radius = radius;
 }
-
-declare let L: any;
 
 // Create the map
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -70,16 +66,17 @@ map.on(L.Draw.Event.CREATED, function (e) {
         }  
     }
 
+    storeAudioZone(zone);
+
     console.log(zone);
     
-
     // Save to DB and Map
     drawnItems.addLayer(layer);
  });
 
  //Handle click on polygon
 var onPolyClick = function(e){
-   //console.log(e);
+   console.log(e);
 
     drawnItems.setStyle({
         color: 'red',
@@ -89,7 +86,19 @@ var onPolyClick = function(e){
 
 drawnItems.on('click', onPolyClick);
 
+function storeAudioZone(zone){
 
+    const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
+    api.post('/audioZone/create', {
+        zone
+    })
+    .then(res => {
+        console.log(res)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+}
 
 
 

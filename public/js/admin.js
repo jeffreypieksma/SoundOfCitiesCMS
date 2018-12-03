@@ -1901,11 +1901,12 @@ $(document).ready(function () {
 
 /***/ }),
 /* 40 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// var location = require('./location');
-// var currentLocation = location.getLocation();
-// console.log(currentLocation);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __webpack_require__(7);
 //Constructor
 function Zone(type, coords, center_point, radius) {
     this.type = type;
@@ -1954,19 +1955,32 @@ map.on(L.Draw.Event.CREATED, function (e) {
             zone.coords = coords[i];
         }
     }
+    storeAudioZone(zone);
     console.log(zone);
     // Save to DB and Map
     drawnItems.addLayer(layer);
 });
 //Handle click on polygon
 var onPolyClick = function (e) {
-    //console.log(e);
+    console.log(e);
     drawnItems.setStyle({
         color: 'red',
         fillColor: 'blue'
     });
 };
 drawnItems.on('click', onPolyClick);
+function storeAudioZone(zone) {
+    var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
+    api.post('/audioZone/create', {
+        zone: zone
+    })
+        .then(function (res) {
+        console.log(res);
+    })
+        .catch(function (error) {
+        console.log(error);
+    });
+}
 //Init map 
 // mapboxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 // var map = L.map('mapid', { drawControl: true }).setView([53.201233, 5.799913], 13);
