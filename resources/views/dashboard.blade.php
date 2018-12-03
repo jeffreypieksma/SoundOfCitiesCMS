@@ -13,10 +13,6 @@
     
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script> --}}
 
-    <style>
-        #mapid{  height: calc(100vh - 64px); width:100%;}
-    </style>
-
     {{-- Leaflet extension  --}}
 
     <script src="{{'js/src/Leaflet.draw.js'}}"></script>
@@ -58,59 +54,20 @@
 @section('content')
 
     <div class="container-fluid">
-        <div id="toolbar-wrapper" style="display:none;">
+        <div id="toolbar-wrapper" style="">
             <div id="output" style="">Output: </div><button id="test" class="btn button">Show position</button>
-            <!-- Modal Trigger -->
-            <button data-target="modal1" class="btn modal-trigger">Modal</button>
+            <!-- Modal Trigger for collection -->
+            <button data-target="collection-modal" class="btn modal-trigger">Collection popup</button>
+            <!-- Modal Trigger for audio  -->
+            <button data-target="audio-modal" class="btn modal-trigger">Audio popup</button>
         </div>
         <div id="mapid"></div>
-
-         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create a collection</a>
-
-         
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal">
-            
-            <div class="modal-content">
-                <h4>{{ __('app.collection_title') }}</h4>
-                <form method="POST" action="">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="title" type="text" name="title" class="validate">
-                            <label for="title">{{ __('collection.title') }}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="location" type="text" name="location" class="validate">
-                            <label for="location">{{ __('collection.location') }}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="description" type="text" name="description" class="validate">
-                            <label for="description">{{ __('collection.description') }}</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-field col s6">                         
-                            <button class="btn waves-effect waves-light" type="submit" onclick="storeCollection();" id="save-collection" name="action">{{ __('app.save') }}
-                                <i class="material-icons right">send</i>
-                            </button>
+  
         
-                        </div>
-                    </div>
-                </form>
+        @include('modals.audio')
 
-            </div>
-
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">{{ __('app.cancel') }}</a>
-            </div>
-        </div>
-
+        @include('modals.collection')
+        
     </div>
 
     

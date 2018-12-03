@@ -5,10 +5,11 @@ var currentLocation = location.getLocation();
 console.log(currentLocation);
 
 //Constructor
-function Zone (type, coords, center_point) {
+function Zone (type, coords, center_point, radius) {
     this.type = type;
     this.coords = coords;
     this.center_point = center_point;
+    this.radius = radius;
 }
 
 // Create the map
@@ -42,38 +43,45 @@ map.addControl(new L.Control.Draw({
     }
 }));
 
-map.on(L.Draw.Event.CREATED, function (e) {
+map.on(L.Draw.Event.CREATED, function (e) { 
     var type = e.layerType,
         layer = e.layer;
         coords = layer._latlngs; 
-        
+          
     var zone = new Zone();
     zone.type = type;
 
     //TO DO Length checken of controleren als het een array is. 
-    console.log(type);
+    
     //rectangle, circle, polygon, polyline
 
-    if(type=='circle'){
-        console.log('coords'+ coords);
+    if(type=='circle'){  
+        var latLng = layer.getLatLng();
+        zone.coords = latLng;
+        //console.log('center '+ latLng);
 
-        //Coords undefined here. add L
+        var radius = layer.getRadius();
+        zone.radius = radius;
+        //console.log('Radius  '+ radius);
         
     }else{   
         for(var i=0; i < coords.length; i++){
             zone.coords = coords[i];
         }  
     }
-    console.log(zone);
 
     // Save to DB and Map
-    drawnItems.addLayer(layer); 
-   // map.addLayer(layer);
+    drawnItems.addLayer(layer);
  });
 
  //Handle click on polygon
-var onPolyClick = function(event){
-   console.log(event);
+var onPolyClick = function(e){
+   //console.log(e);
+
+    drawnItems.setStyle({
+        color: 'red',
+        fillColor: 'blue'
+    });
 };
 
 drawnItems.on('click', onPolyClick);

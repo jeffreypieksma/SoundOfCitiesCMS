@@ -13,12 +13,19 @@ class CreateHotspotTable extends Migration
      */
     public function up()
     {
-        Schema::create('hotspot', function (Blueprint $table) {
+        Schema::create('hotspots', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('audio_zones_id');
             $table->string('title');
-            $table->mediumText('description');
-            $table->string('image_url');
+            $table->mediumText('description')->nullable();
+            $table->string('image_url')->nullable();
         });
+
+        Schema::table('hotspots', function (Blueprint $table) {
+            $table->foreign('audio_zones_id')->references('id')->on('audio_zones')->onDelete('cascade');
+
+        });
+       
     }
 
     /**
@@ -28,6 +35,6 @@ class CreateHotspotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotspot');
+        Schema::dropIfExists('hotspots');
     }
 }

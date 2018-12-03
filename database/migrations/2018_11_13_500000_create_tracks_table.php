@@ -15,10 +15,19 @@ class CreateTracksTable extends Migration
     {
         Schema::create('tracks', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('audio_zones_id');
             $table->string('audio_url');
-            $table->float('length');
-            $table->float('fadeinpoint');
-            $table->float('fadeoutpoint');
+            $table->float('length')->nullable();
+            $table->float('fadeinpoint')->nullable();
+            $table->float('fadeoutpoint')->nullable();
+            $table->float('volume')->nullable(); 
+            $table->smallInteger('loopable')->nullable();
+
+        });
+
+        Schema::table('tracks', function (Blueprint $table) {
+            $table->foreign('audio_zones_id')->references('id')->on('audio_zones')->onDelete('cascade');
+
         });
     }
 
@@ -30,5 +39,6 @@ class CreateTracksTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tracks');
+           
     }
 }

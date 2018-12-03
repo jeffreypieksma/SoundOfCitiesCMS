@@ -10,6 +10,8 @@ require('./map');
 
 require('./collection');
 
+require('./audio');
+
 $(document).ready(function(){
     $('.modal').modal();
 });

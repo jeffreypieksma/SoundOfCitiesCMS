@@ -87,6 +87,8 @@ __webpack_require__(40);
 
 __webpack_require__(42);
 
+__webpack_require__(43);
+
 $(document).ready(function () {
   $('.modal').modal();
 });
@@ -131,33 +133,24 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 40:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var location = __webpack_require__(41);
-
-var currentLocation = location.getLocation();
-
-console.log(currentLocation);
-
+// var location = require('./location');
+// var currentLocation = location.getLocation();
+// console.log(currentLocation);
 //Constructor
-function Zone(type, coords, center_point) {
+function Zone(type, coords, center_point, radius) {
     this.type = type;
     this.coords = coords;
     this.center_point = center_point;
+    this.radius = radius;
 }
-
 // Create the map
-var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-    map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 13 }),
-    drawnItems = L.featureGroup().addTo(map);
-
+var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors', osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }), map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 13 }), drawnItems = L.featureGroup().addTo(map);
 L.control.layers({
     'osm': osm.addTo(map),
     'google': L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', { attribution: 'Google' })
 }, { 'drawlayer': drawnItems }, { position: 'topright', collapsed: false }).addTo(map);
-
 map.addControl(new L.Control.Draw({
     edit: {
         featureGroup: drawnItems,
@@ -172,42 +165,40 @@ map.addControl(new L.Control.Draw({
         }
     }
 }));
-
 map.on(L.Draw.Event.CREATED, function (e) {
-    var type = e.layerType,
-        layer = e.layer;
-    coords = layer._latlngs;
-
-    var zone = new Zone();
-    zone.type = type;
-
-    //TO DO Length checken of controleren als het een array is. 
-    console.log(type);
+    var type = e.layerType;
+    var layer = e.layer;
+    var coords = layer._latlngs;
+    var center_point = '';
+    var zone = new Zone(type, coords, center_point, radius);
     //rectangle, circle, polygon, polyline
-
+    zone.type = type;
     if (type == 'circle') {
-        console.log('coords' + coords);
-
-        //Coords undefined here. add L
-    } else {
+        var latLng = layer.getLatLng();
+        zone.coords = latLng;
+        //console.log('center '+ latLng);
+        var radius = layer.getRadius();
+        zone.radius = radius;
+        //console.log('Radius  '+ radius);
+    }
+    else {
         for (var i = 0; i < coords.length; i++) {
             zone.coords = coords[i];
         }
     }
     console.log(zone);
-
     // Save to DB and Map
     drawnItems.addLayer(layer);
-    // map.addLayer(layer);
 });
-
 //Handle click on polygon
-var onPolyClick = function onPolyClick(event) {
-    console.log(event);
+var onPolyClick = function (e) {
+    //console.log(e);
+    drawnItems.setStyle({
+        color: 'red',
+        fillColor: 'blue'
+    });
 };
-
 drawnItems.on('click', onPolyClick);
-
 //Init map 
 // mapboxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 // var map = L.map('mapid', { drawControl: true }).setView([53.201233, 5.799913], 13);
@@ -215,11 +206,9 @@ drawnItems.on('click', onPolyClick);
 //     attribution: '&copy; <a href=“https://www.openstreetmap.org/copyright“>OpenStreetMap</a> contributors',
 //     maxZoom: 18,
 // }).addTo(map);
-
 //  // create a feature group for Leaflet Draw to hook into for delete functionality
 //  var drawnItems = L.featureGroup().addTo(map);
 //  map.addLayer(drawnItems);
-
 // // create a new Leaflet Draw control
 // var drawControl = new L.Control.Draw({
 //     edit: {
@@ -227,7 +216,6 @@ drawnItems.on('click', onPolyClick);
 //         edit: true 
 //     },
 //     delete: {
-
 //     },
 //     draw: {
 //       circle: false, // disable circles
@@ -242,31 +230,23 @@ drawnItems.on('click', onPolyClick);
 //       }
 //     }
 //   });
-
 // // add our drawing controls to the map
 // map.addControl(drawControl);
-
 // map.on(L.Draw.Event.CREATED, function (e) {
 //     var type = e.layerType,
 //         layer = e.layer;
-
 //     var coords = layer._latlngs;
 //     console.log(coords);
-
 //     var zone = new Zone();
 //     zone.type = type;
-
 //     //Length checken of controleren als het een array is. 
-
 //     for(var i=0; i < coords.length; i++){
 //         zone.coords = coords[i];
 //     }
 //     console.log(zone);  
-
 //     // Save to DB and Map 
 //     map.addLayer(layer);
 //  });
-
 //  map.on('draw:edited', function (e) {
 //     var layers = e.layers;
 //     console.log(e);
@@ -275,81 +255,16 @@ drawnItems.on('click', onPolyClick);
 //         console.log(layer);
 //     });
 // });
-
-
 // // when we start using creation tools disable our custom editing
 // map.on('draw:createstart', function() {
-
 // });
-
-
 // // when we start using deletion tools, hide attributes and disable custom editing
 // map.on('draw:deletestart', function() {
-
 // });
-
 // // when the map is clicked, stop editing
 // map.on('click', function(e) {
-
 // });
 
-/***/ }),
-
-/***/ 41:
-/***/ (function(module, exports) {
-
-module.exports = {
-    getLocation: function getLocation() {
-        return _getLocation();
-    },
-    showPosition: function showPosition() {
-        return _showPosition();
-    }
-};
-
-var output = document.getElementById("output");
-var btn = document.getElementById("test");
-
-$(btn).click(function () {
-    _getLocation();
-});
-
-function _getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(_showPosition);
-        navigator.geolocation.watchPosition(setCoords);
-    } else {
-        //Error handling 
-    }
-}
-
-function setCoords(position) {
-    this.coords = position;
-}
-
-function _showPosition(position) {
-    // var lat = position.coords.latitude;
-    // var lon = position.coords.longitude;
-
-    output.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-}
-
-function showError(error) {
-    switch (error.code) {
-        case error.PERMISSION_DENIED:
-            output.innerHTML = "User denied the request for Geolocation.";
-            break;
-        case error.POSITION_UNAVAILABLE:
-            output.innerHTML = "Location information is unavailable.";
-            break;
-        case error.TIMEOUT:
-            output.innerHTML = "The request to get user location timed out.";
-            break;
-        case error.UNKNOWN_ERROR:
-            output.innerHTML = "An unknown error occurred.";
-            break;
-    }
-}
 
 /***/ }),
 
@@ -385,6 +300,96 @@ function storeCollection(event) {
 //         console.log(error)
 //     })
 // };
+
+
+/***/ }),
+
+/***/ 43:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function getAudio(object) {
+    console.log(object.url);
+}
+function storeAudio(event) {
+    event.preventDefault();
+    var object = {
+        name: 'cooletrack',
+        url: 'resources/ditismijnmooiepath',
+        extension: 'mp3',
+        length: 9
+        // title: (<HTMLInputElement>document.getElementById('title')).value,
+        // description: (<HTMLInputElement>document.getElementById('description')).value,
+        // location: (<HTMLInputElement>document.getElementById('location')).value
+    };
+    getAudio(object);
+}
+var save_audio = document.getElementById('save-audio');
+save_audio.onclick = function (event) {
+    event.preventDefault();
+    //var form = new FormData(<HTMLFormElement>document.getElementById("audio_form"));
+    var formData = new FormData();
+    var audioFile = document.getElementById('audio-file').value;
+    var fileExtension = audioFile.replace(/^.*\./, '');
+    console.log('File Extension ' + fileExtension);
+    console.log('File ' + audioFile);
+    //formData.append("audio", audioFile, audioFile.name)
+    var request = new XMLHttpRequest();
+    var async = true;
+    request.open("POST", "/my_form_handler", async);
+    if (async) {
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var response = null;
+                try {
+                    response = JSON.parse(request.responseText);
+                }
+                catch (e) {
+                    response = request.responseText;
+                }
+                console.log(response);
+            }
+        };
+    }
+    request.send(formData);
+    // const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
+    // api.post('/collection/create', {
+    //     object
+    // })
+    // .then(res => {
+    //     console.log(res)
+    // })
+    // .catch(error => {
+    //     console.log(error)
+    // })
+};
+// function uploadForm() {
+//     var formElement = document.querySelector("audio_form");
+//     var formData = new FormData(<HTMLFormElement>formElement);
+//     formData.append('username', 'Chris');
+//     formData.append('username', 'Bob');
+//     var form = new FormData(<HTMLElement>document.getElementById("my_form"));
+//     form.append("user_audio_blob", audioBlob);
+//     var request = new XMLHttpRequest();
+//     var async = true;
+//     request.open("POST", "/my_form_handler", async);
+//     if (async) {
+//         request.onreadystatechange = function() {
+//             if(request.readyState == 4 && request.status == 200) {
+//                 var response = null;
+//                 try {
+//                     response = JSON.parse(request.responseText);
+//                 } catch (e) {
+//                     response = request.responseText;
+//                 }
+//                 uploadFormCallback(response);
+//             }
+//         }
+//     }
+//     request.send(form);
+// }
 
 
 /***/ })
