@@ -20,6 +20,13 @@ Route::get('logout', function (){
 	return redirect('/login');
 });
 
+//Collection CRUD
+Route::post('/collection/create', 'CollectionController@create')->name('create_collection');
+Route::get('/collection', 'CollectionController@index')->name('collections');
+Route::put('/collection', 'CollectionController@update')->name('update_collections');
+Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
+
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web'] ], function () {
 
@@ -36,12 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web'] ], function () {
 	Route::post('/user/update', 'UserController@update')->name('update_user');
 	Route::get('/user/delete/{id}', 'UserController@delete')->name('delete_user');
 
-	//Collection CRUD
-	Route::post('/collection/create', 'collectionController@create')->name('create_collection');
-	Route::get('/collection', 'collectionController@index')->name('collections');
-	Route::put('/collection', 'collectionController@update')->name('update_collections');
-	Route::delete('/collection', 'collectionController@delete')->name('delete_collections');
-
+	
 
 });
 

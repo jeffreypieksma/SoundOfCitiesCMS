@@ -27,7 +27,6 @@ class CreateTracksTable extends Migration
 
         Schema::table('tracks', function (Blueprint $table) {
             $table->foreign('audio_zones_id')->references('id')->on('audio_zones')->onDelete('cascade');
-
         });
     }
 

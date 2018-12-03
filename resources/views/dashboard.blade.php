@@ -49,6 +49,8 @@
     <script src="{{'js/src/edit/handler/Edit.CircleMarker.js'}}"></script>
     <script src="{{'js/src/edit/handler/Edit.Circle.js'}}"></script>
 
+    {{ csrf_field() }}
+
 @endsection
 
 @section('content')
@@ -56,8 +58,10 @@
     <div class="container-fluid">
         <div id="toolbar-wrapper" style="">
             <div id="output" style="">Output: </div><button id="test" class="btn button">Show position</button>
+            
             <!-- Modal Trigger for collection -->
             <button data-target="collection-modal" class="btn modal-trigger">Collection popup</button>
+            
             <!-- Modal Trigger for audio  -->
             <button data-target="audio-modal" class="btn modal-trigger">Audio popup</button>
         </div>

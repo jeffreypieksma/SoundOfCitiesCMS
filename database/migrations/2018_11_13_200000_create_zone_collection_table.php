@@ -17,8 +17,8 @@ class CreateZoneCollectionTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            $table->mediumText('description');
-            $table->string('image_url');
+            $table->mediumText('description')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
 
