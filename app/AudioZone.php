@@ -11,9 +11,16 @@ class AudioZone extends Model
 
     protected $fillable = ['shape', 'color', 'label', 'visibility'];
 
+    public $timestamps = false;
+
     public function collection()
     {
         return $this->belongsTo('App\Collection');
+    }
+
+    public function zoneCoordinates()
+    {
+        return $this->hasMany('App\ZoneCoordinate', 'audio_zones_id');
     }
 
     public function hotspots()
@@ -21,10 +28,7 @@ class AudioZone extends Model
         return $this->hasMany('App\Hotspot');
     }
 
-    public function zoneCoordinates()
-    {
-        return $this->hasMany('App\ZoneCoordinate');
-    }
+
 
     public function tracks()
     {

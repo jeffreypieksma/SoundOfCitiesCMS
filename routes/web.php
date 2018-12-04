@@ -28,7 +28,7 @@ Route::delete('/collection', 'CollectionController@delete')->name('delete_collec
 
 //AudioZone
 Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
-Route::get('/audioZone', 'AudioZoneController@index')->name('audioZone');
+//Route::get('/audioZone', 'AudioZoneController@index')->name('audioZone');
 Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
 Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
 

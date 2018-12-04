@@ -21,8 +21,8 @@ save_button.onclick = function(event){
     event.preventDefault()
 
     let data = {
-        title: (<HTMLInputElement>document.getElementById('title')).value,
-        description: (<HTMLInputElement>document.getElementById('description')).value
+        title: (<HTMLInputElement>document.getElementById('collection_title')).value,
+        description: (<HTMLInputElement>document.getElementById('collection_description')).value
     }
 
     const api = axios.create({baseURL: 'http://soundofcitiescms.test'})

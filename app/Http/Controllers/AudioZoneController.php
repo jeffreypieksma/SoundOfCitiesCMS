@@ -9,26 +9,66 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Collection;
 use App\AudioZone;
+use App\ZoneCoordinate;
 
 class AudioZoneController extends Controller
 {
-    public function create(Request $request){
+    public function index() {
+        $audioZone = AudioZone::with('zoneCoordinates')->get();
+    }
+
+    public function getZoneWithCoordinates($id) {
+        $audioZone = AudioZone::find($id)->zoneCoordinates;
+    }
+
+    public function create(Request $request) {
 
         $validatedData = $request->validate([
-            'type' => 'required',
-            'center_point' => '',
-            'coords' => '',
-            'lat' => '',
-            'lng' => '',
-            'radius' => '',
-            'center_point' => ''
+            'zone.type' => 'required',
+            'zone.center_point' => '',
+            'zone.coords' => '',
+            'zone.lat' => '',
+            'zone.lng' => '',
+            'zone.radius' => '',
+            'zone.center_point' => ''
         ]);
 
         $audioZone = new AudioZone;
-        $audioZone->shape = $request->type;
-        $audioZone->zone_collection_id = 3;    
+        $audioZone->zone_collection_id = 1;
+        $audioZone->shape_type = $request->zone['type'];
+        $coords = $request->zone['coords'];
         $audioZone->save();
+
+        print_r($coords);
+
+        $audioZone->zoneCoordinates()->create($coords);
+
+        //$audioZone->zoneCoordinates()->create($coords);
+
+        /*
+            currently not working for circles 
+        */
+
+        // foreach($coords as $key => $value) {
+        //     $zoneCoordinates = new ZoneCoordinate;
+        //     $zoneCoordinates->audio_zones_id = $audioZone->id;
+
+        //     $zoneCoordinates->lat = $value["lat"];
+        //     $zoneCoordinates->lng = $value["lng"];
+
+        //     $zoneCoordinates->save();
+                 
+        // }
 
 
     }
+
+    public function update(){
+
+    }
+
+    public function delete(){
+
+    }
+
 }

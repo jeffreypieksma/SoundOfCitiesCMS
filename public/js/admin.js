@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1834,15 +1834,14 @@ module.exports = function spread(callback) {
 /* 34 */,
 /* 35 */,
 /* 36 */,
-/* 37 */,
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -1852,11 +1851,11 @@ module.exports = __webpack_require__(39);
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+__webpack_require__(39);
+
 __webpack_require__(40);
 
 __webpack_require__(41);
-
-__webpack_require__(42);
 
 $(document).ready(function () {
   $('.modal').modal();
@@ -1900,7 +1899,7 @@ $(document).ready(function () {
 });
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2049,7 +2048,7 @@ function storeAudioZone(zone) {
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2067,8 +2066,8 @@ var save_button = document.getElementById('store-collection');
 save_button.onclick = function (event) {
     event.preventDefault();
     var data = {
-        title: document.getElementById('title').value,
-        description: document.getElementById('description').value
+        title: document.getElementById('collection_title').value,
+        description: document.getElementById('collection_description').value
     };
     var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
     api.post('/collection/create', {
@@ -2085,7 +2084,7 @@ save_button.onclick = function (event) {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -12,6 +12,10 @@ use App\Collection;
 
 class CollectionController extends Controller
 {
+    public function index(){
+        
+    }
+    
     public function create(Request $request){
         
         $validatedData = $request->validate([

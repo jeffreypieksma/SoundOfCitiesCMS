@@ -17,7 +17,7 @@ class CreateZoneCoordinates extends Migration
             $table->increments('id');
             $table->unsignedInteger('audio_zones_id');
             $table->decimal('lat', 10, 8);
-            $table->decimal('lon', 10, 8);        
+            $table->decimal('lng', 11, 8);       
         });
 
         Schema::table('zone_coordinates', function (Blueprint $table) {

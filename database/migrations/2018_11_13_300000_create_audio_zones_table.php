@@ -16,7 +16,8 @@ class CreateAudioZonesTable extends Migration
         Schema::create('audio_zones', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('zone_collection_id');
-            $table->string('shape', 30);
+            $table->string('shape_type', 30);
+            $table->string('radius', 30)->nullable();
             $table->string('label', 120)->nullable();        
             $table->string('color', 20)->nullable();
             $table->tinyInteger('visibility')->default(1);   

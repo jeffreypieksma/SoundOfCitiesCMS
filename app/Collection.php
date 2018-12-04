@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Collection extends Model
 {
     protected $table = 'zone_collections';
-
+    public $timestamps = false;
     protected $fillable = ['title', 'description', 'image_url'];
     
-    protected $guarded = ['user_id'];
+    //protected $guarded = ['user_id'];
 
     public function user()
     {

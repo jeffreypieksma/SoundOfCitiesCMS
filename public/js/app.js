@@ -14769,7 +14769,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31);
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(36);
 
 
 /***/ }),
@@ -14784,10 +14784,6 @@ module.exports = __webpack_require__(37);
  */
 
 __webpack_require__(32);
-
-var helloWorld = __webpack_require__(36).helloWorld();
-
-console.log(helloWorld);
 
 //window.Vue = require('vue');
 
@@ -35978,19 +35974,6 @@ module.exports = function(module) {
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function helloWorld() {
-    return 'Hello world!';
-}
-exports.helloWorld = helloWorld;
-
-
-/***/ }),
-/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
