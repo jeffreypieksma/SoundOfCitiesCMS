@@ -3,7 +3,8 @@ import axios from 'axios'
 declare let L: any;
 
 //Constructor
-function Zone (type, coords, center_point, radius) {
+function Zone (id, type, coords, center_point, radius) {
+    this.id = 1234;
     this.type = type;
     this.coords = coords;
     this.center_point = center_point;
@@ -56,8 +57,9 @@ map.on(L.Draw.Event.CREATED, function (e) {
     let layer = e.layer;
     let coords = layer._latlngs; 
     let center_point = '';
+    let id = null;
 
-    let zone = new Zone(type, coords, center_point, radius);
+    let zone = new Zone(id, type, coords, center_point, radius);
 
     //rectangle, circle, polygon, polyline
     zone.type = type;
@@ -104,6 +106,7 @@ function storeAudioZone(zone){
     })
     .then(res => {
         console.log(res)
+        
     })
     .catch(error => {
         console.log(error)
