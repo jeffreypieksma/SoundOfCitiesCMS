@@ -15,13 +15,28 @@
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Audio file: </span>
-                        <input type="file" name="audioFile" id="audio-file" accept="audio/mp3,audio/*;capture=microphone"/>
+                        {{-- accept="audio/mp3,audio/*;capture=microphone" --}}
+                        <input type="file" name="audioFile" id="audio-file" />
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <p class="range-field">
+                    <input type="range" id="volume-control" min="0" max="100" />
+                </p>
+            </div>
+
+            <div class="row">
+                <label>
+                    <input type="checkbox" />
+                    <span>Loopable</span>
+                </label>
+            </div>
+     
 
             <div class="row">
                 <div class="input-field col s6">                         
