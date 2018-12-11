@@ -68,13 +68,12 @@
         <div id="mapid"></div>
   
         
-        @include('modals.audio')
+        {{-- @include('modals.audio') --}}
 
-        @include('modals.collection')
+        {{-- @include('modals.collection') --}}
         
     </div>
 
-    
 
 @endsection
 

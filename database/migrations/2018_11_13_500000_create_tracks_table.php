@@ -16,6 +16,7 @@ class CreateTracksTable extends Migration
         Schema::create('tracks', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('audio_zones_id');
+            $table->unsignedInteger('collection_id');
             $table->string('audio_url');
             $table->float('length')->nullable();
             $table->float('fadeinpoint')->nullable();
@@ -27,6 +28,7 @@ class CreateTracksTable extends Migration
 
         Schema::table('tracks', function (Blueprint $table) {
             $table->foreign('audio_zones_id')->references('id')->on('audio_zones')->onDelete('cascade');
+            $table->foreign('collection_id')->references('id')->on('zone_collections')->onDelete('cascade');
         });
     }
 

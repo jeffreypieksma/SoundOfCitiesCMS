@@ -50,18 +50,18 @@
 
            
 
-             {{-- <div class="row">
+             <div class="row">
                 <div class="file-field input-field col s6">
                     <div class="btn">
-                        <span>Audio file: </span>
+                        <span>Upload multiple audio files</span>
                 
-                        <input type="file" name="audioFile[]" id="audio-file" multiple/>
+                        <input type="file" name="audioFiles[]" id="audio-files" multiple/>
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
              <div class="row">
                 <div class="input-field col s6">                         

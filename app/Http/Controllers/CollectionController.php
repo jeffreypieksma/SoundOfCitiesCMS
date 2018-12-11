@@ -32,6 +32,15 @@ class CollectionController extends Controller
             'description' => '',
         ]);
 
+        foreach ($request->audioFiles as $file) {
+            $filename = $file->store('audioFiles');
+            ProductsPhoto::create([
+                'product_id' => $product->id,
+                'filename' => $filename
+            ]);
+        }
+        return 'Upload successful!';
+
         $collection = new Collection;
         $collection->user_id = \Auth::user()->id;
         $collection->title = $request->title;

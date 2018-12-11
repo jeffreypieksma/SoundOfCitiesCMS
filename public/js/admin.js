@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(2);
+var bind = __webpack_require__(3);
 var isBuffer = __webpack_require__(9);
 
 /*global toString:true*/
@@ -397,10 +397,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(3);
+    adapter = __webpack_require__(4);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(3);
+    adapter = __webpack_require__(4);
   }
   return adapter;
 }
@@ -481,6 +481,12 @@ module.exports = defaults;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(8);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -496,7 +502,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -507,7 +513,7 @@ var settle = __webpack_require__(13);
 var buildURL = __webpack_require__(15);
 var parseHeaders = __webpack_require__(16);
 var isURLSameOrigin = __webpack_require__(17);
-var createError = __webpack_require__(4);
+var createError = __webpack_require__(5);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(18);
 
 module.exports = function xhrAdapter(config) {
@@ -683,7 +689,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -708,7 +714,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -720,7 +726,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -746,12 +752,6 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(8);
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -759,7 +759,7 @@ module.exports = __webpack_require__(8);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(2);
+var bind = __webpack_require__(3);
 var Axios = __webpack_require__(10);
 var defaults = __webpack_require__(1);
 
@@ -794,9 +794,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(6);
+axios.Cancel = __webpack_require__(7);
 axios.CancelToken = __webpack_require__(25);
-axios.isCancel = __webpack_require__(5);
+axios.isCancel = __webpack_require__(6);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -1139,7 +1139,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(4);
+var createError = __webpack_require__(5);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -1572,7 +1572,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(22);
-var isCancel = __webpack_require__(5);
+var isCancel = __webpack_require__(6);
 var defaults = __webpack_require__(1);
 var isAbsoluteURL = __webpack_require__(23);
 var combineURLs = __webpack_require__(24);
@@ -1732,7 +1732,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(6);
+var Cancel = __webpack_require__(7);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -1853,9 +1853,9 @@ module.exports = __webpack_require__(38);
 
 __webpack_require__(39);
 
-__webpack_require__(40);
+//require('./collection');
 
-__webpack_require__(41);
+//require('./audio');
 
 $(document).ready(function () {
   $('.modal').modal();
@@ -1905,9 +1905,10 @@ $(document).ready(function () {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __webpack_require__(7);
+var axios_1 = __webpack_require__(2);
 //Constructor
-function Zone(type, coords, center_point, radius) {
+function Zone(id, type, coords, center_point, radius) {
+    this.id = 1234;
     this.type = type;
     this.coords = coords;
     this.center_point = center_point;
@@ -1938,7 +1939,6 @@ map.addControl(new L.Control.Draw({
         },
         marker: false,
         circlemarker: false,
-        circle: false,
     }
 }));
 //var layerControl = L.control.layers(null, mapOverlays, {position:'topleft'}).addTo(map);
@@ -1947,7 +1947,8 @@ map.on(L.Draw.Event.CREATED, function (e) {
     var layer = e.layer;
     var coords = layer._latlngs;
     var center_point = '';
-    var zone = new Zone(type, coords, center_point, radius);
+    var id = null;
+    var zone = new Zone(id, type, coords, center_point, radius);
     //rectangle, circle, polygon, polyline
     zone.type = type;
     if (type == 'circle') {
@@ -1977,6 +1978,55 @@ var onPolyClick = function (e) {
     });
 };
 drawnItems.on('click', onPolyClick);
+/* Unit testing
+
+    1st: Check if all zones are stored properly and the amount is right.
+        Store data - return the ids - count ids - compare with amount of objects.
+    2nd test: Check if the amount of coordinates are right.
+    3rd: test: Check if coordinates are stored right.
+    4th: test: Draw items on map.
+    5th: test: Delete a zone
+*/
+var ZoneCreator = /** @class */ (function () {
+    function ZoneCreator() {
+    }
+    ZoneCreator.prototype.drawZone = function (coords) {
+        return "";
+    };
+    return ZoneCreator;
+}());
+function assertTrue(isSuccess, message) {
+    if (!isSuccess) {
+        console.error("Test niet geslaagd: " + message);
+    }
+}
+var zoneCreator = new ZoneCreator();
+var coords = [
+    [
+        function (lat) { return '53.21061991910329'; },
+        function (lng) { return '5.702758220639979'; }
+    ],
+    [
+        function (lat) { return '53.21051704917011'; },
+        function (lng) { return '5.733996253312515'; }
+    ],
+    [
+        function (lat) { return '53.20188619560709'; },
+        function (lng) { return '5.731593310342751'; }
+    ]
+];
+var circleCoords = [function (lat) { return '	53.21061991910329'; }, function (lng) { return '5.702758220639979'; }];
+var circleZone = new Zone(1, 'circle', circleCoords, '53.21061991910329', 302323);
+//storeAudioZone(circleZone)
+var polygonZone = new Zone(2, 'circle', coords, '53.21061991910329', '');
+//storeAudioZone(polygonZone)
+var squareZone = new Zone(3, 'circle', coords, '53.21061991910329', '');
+//storeAudioZone(squareZone)
+//assertTrue must be true 
+assertTrue(zoneCreator.drawZone(circleZone) === "", "Should handle...");
+assertTrue(zoneCreator.drawZone(polygonZone) === "", "Should handle...");
+assertTrue(zoneCreator.drawZone(squareZone) === "", "Should handle...");
+console.log("All tests executed");
 function storeAudioZone(zone) {
     var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
     api.post('/audioZone/create', {
@@ -1989,90 +2039,8 @@ function storeAudioZone(zone) {
         console.log(error);
     });
 }
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __webpack_require__(7);
-function getCollection(object) {
-    console.log(object.title);
+function getCurrentCollection() {
 }
-function storeCollection(event) {
-    event.preventDefault();
-    //getCollection(object);
-}
-var save_button = document.getElementById('store-collection');
-save_button.onclick = function (event) {
-    event.preventDefault();
-    var data = {
-        title: document.getElementById('collection_title').value,
-        description: document.getElementById('collection_description').value
-    };
-    var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
-    api.post('/collection/create', {
-        title: data.title,
-        description: data.description
-    })
-        .then(function (res) {
-        console.log(res);
-    })
-        .catch(function (error) {
-        console.log(error);
-    });
-};
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __webpack_require__(7);
-function getAudio(object) {
-    console.log(object.url);
-}
-function storeAudio(event) {
-    event.preventDefault();
-    var object = {
-        name: 'cooletrack',
-        url: 'resources/ditismijnmooiepath',
-        extension: 'mp3',
-        length: 9
-        // title: (<HTMLInputElement>document.getElementById('title')).value,
-        // description: (<HTMLInputElement>document.getElementById('description')).value,
-        // location: (<HTMLInputElement>document.getElementById('location')).value
-    };
-    getAudio(object);
-}
-var save_audio = document.getElementById('save-audio');
-save_audio.onclick = function (event) {
-    event.preventDefault();
-    var formData = new FormData();
-    var audioFile = document.getElementById('audio-file').value;
-    var fileExtension = audioFile.replace(/^.*\./, '');
-    formData.append("audio", audioFile[0]);
-    console.log('File Extension ' + fileExtension);
-    console.log('File ' + audioFile);
-    var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
-    api.post('/audio/create', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-        .then(function (res) {
-        console.log(res);
-    })
-        .catch(function (error) {
-        console.log(error);
-    });
-};
 
 
 /***/ })

@@ -8,9 +8,9 @@
 
 require('./map');
 
-require('./collection');
+//require('./collection');
 
-require('./audio');
+//require('./audio');
 
 $(document).ready(function(){
     $('.modal').modal();

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Database\QueryException;
 use App\User;
 use Illuminate\Support\Facades\Auth; 
 use Validator;
 use App\Collection;
 use App\AudioZone;
 use App\ZoneCoordinate;
+use DB;
 
 class AudioZoneController extends Controller
 {
@@ -22,6 +23,7 @@ class AudioZoneController extends Controller
     }
 
     public function create(Request $request) {
+       
 
         $validatedData = $request->validate([
             'zone.type' => 'required',
@@ -34,31 +36,48 @@ class AudioZoneController extends Controller
         ]);
 
         $audioZone = new AudioZone;
+        //TO DO get current collection ID 
         $audioZone->zone_collection_id = 1;
-        $audioZone->shape_type = $request->zone['type'];
+        $type =  $request->zone['type'];
+        $audioZone->shape_type = $type;
         $coords = $request->zone['coords'];
-        $audioZone->save();
 
-        print_r($coords);
+        /* Not working anymore */
+        
+        DB::transaction(function() {   
+            
+            try {
+                $audioZone->save();
+           
+                if($type==='circle'){
+                    $zoneCoordinates = new ZoneCoordinate;
+                    $zoneCoordinates->audio_zones_id = $audioZone->id;
+                    $zoneCoordinates->lat = $coords['lat'];
+                    $zoneCoordinates->lng = $coords['lng'];
+                    $zoneCoordinates->save();
+                }else{
+                    foreach($coords as $key => $value) {
+                        $zoneCoordinates = new ZoneCoordinate;
+                        $zoneCoordinates->audio_zones_id = $audioZone->id;
+            
+                        $zoneCoordinates->lat = $value["lat"];
+                        $zoneCoordinates->lng = $value["lng"];
+            
+                        $zoneCoordinates->save();
+                            
+                    }
+                }
+            } catch (QueryException $e) {   
+                DB::rollback();
 
-        $audioZone->zoneCoordinates()->create($coords);
+            }catch (\Exception $e) {
+                //Something else went wrong. 
+            }
+        });
+       
 
+        //return $audioZone;
         //$audioZone->zoneCoordinates()->create($coords);
-
-        /*
-            currently not working for circles 
-        */
-
-        // foreach($coords as $key => $value) {
-        //     $zoneCoordinates = new ZoneCoordinate;
-        //     $zoneCoordinates->audio_zones_id = $audioZone->id;
-
-        //     $zoneCoordinates->lat = $value["lat"];
-        //     $zoneCoordinates->lng = $value["lng"];
-
-        //     $zoneCoordinates->save();
-                 
-        // }
 
 
     }
