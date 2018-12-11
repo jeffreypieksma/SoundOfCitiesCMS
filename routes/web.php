@@ -21,17 +21,17 @@ Route::get('logout', function (){
 });
 
 //Collection
-Route::post('/collection/create', 'CollectionController@create')->name('create_collection');
 Route::get('/collection/create', 'CollectionController@createForm')->name('create_collection_form');
+Route::post('/collection/create', 'CollectionController@create')->name('create_collection');
 Route::get('/collection', 'CollectionController@index')->name('collections');
 Route::put('/collection', 'CollectionController@update')->name('update_collections');
 Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
 //AudioZone
-Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
-//Route::get('/audioZone', 'AudioZoneController@index')->name('audioZone');
-Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
-Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
+// Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
+// Route::get('/audioZone', 'AudioZoneController@index')->name('audioZone');
+// Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
+// Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
 
 //Upload audio 
 

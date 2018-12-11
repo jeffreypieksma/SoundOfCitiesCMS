@@ -56,21 +56,8 @@
 @section('content')
 
     <div class="container-fluid">
-        <div id="toolbar-wrapper" style="">
-            <div id="output" style="">Output: </div><button id="test" class="btn button">Show position</button>
-            
-            <!-- Modal Trigger for collection -->
-            <button data-target="collection-modal" class="btn modal-trigger">Collection popup</button>
-            
-            <!-- Modal Trigger for audio  -->
-            <button data-target="audio-modal" class="btn modal-trigger">Audio popup</button>
-        </div>
-        <div id="mapid"></div>
-  
-        
-        {{-- @include('modals.audio') --}}
 
-        {{-- @include('modals.collection') --}}
+        <div id="mapid"></div>
         
     </div>
 
@@ -79,6 +66,7 @@
 
 @section('scripts')
 
-<script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{'js/map.js'}}"></script>
 
 @endsection
