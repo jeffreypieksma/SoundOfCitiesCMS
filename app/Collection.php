@@ -21,4 +21,10 @@ class Collection extends Model
     {
         return $this->hasMany('App\AudioZone');
     }
+
+    public function track()
+    {
+        return $this->hasMany('App\Track');
+    }
+    
 }
