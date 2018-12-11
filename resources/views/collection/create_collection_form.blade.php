@@ -87,6 +87,9 @@
         </form>
     </div>
 
+
+  <a class="btn-floating btn-large waves-effect waves-light green" id="create-collection"><i class="material-icons">add_circle</i></a>
+
 @endsection
 
 @section('scripts')

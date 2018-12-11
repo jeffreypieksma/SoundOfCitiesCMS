@@ -43,7 +43,7 @@ class CollectionController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|max:256',
-            'description' => 'required|',
+            'description' => 'required|5000',
             //'audioFiles.*' => 'required|audio/mpeg,mpga,mp3,wav|max:20000',
         ]);
 

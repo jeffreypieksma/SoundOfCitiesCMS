@@ -12,3 +12,9 @@ body {
   width: 100%;
 }
 
+#create-collection {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+

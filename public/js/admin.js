@@ -90,13 +90,18 @@ module.exports = __webpack_require__(38);
 //require('./audio');
 
 $(document).ready(function () {
-    $('.modal').modal();
     console.log('running admin scripts');
-    $('#create_collection_form').hide();
+
+    $('.modal').modal();
 
     $('.sidenav').sidenav();
 
     $(".dropdown-trigger").dropdown();
+
+    // var create_form_btn = $('#create_collection_form').hide();
+    // $( "#create-collection" ).click(function() {
+    //     create_form_btn.show();
+    // });
 
     // $('#dataTable').DataTable({
     // //paging: false
