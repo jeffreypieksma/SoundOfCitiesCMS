@@ -7,11 +7,10 @@ export class AudioZone {
         return document.getElementById('collection_info').dataset.id
     }
     
-
     getAudioZones(){
         let id = this.getCurrentCollectionId()
 
-        axios.get('/audioZones/'+id)
+        axios.get('/audioZones/1/')
         .then(function (response) {
             // handle success
             console.log(response);

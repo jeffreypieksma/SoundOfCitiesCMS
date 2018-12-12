@@ -1839,7 +1839,7 @@ var AudioZone = /** @class */ (function () {
     };
     AudioZone.prototype.getAudioZones = function () {
         var id = this.getCurrentCollectionId();
-        axios_1.default.get('/audioZones/' + id)
+        axios_1.default.get('/audioZones/1/')
             .then(function (response) {
             // handle success
             console.log(response);
