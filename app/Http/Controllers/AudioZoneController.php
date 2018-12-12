@@ -17,6 +17,10 @@ class AudioZoneController extends Controller
     public function index() {
         $audioZone = AudioZone::with('zoneCoordinates')->get();
     }
+    //Get collection with audio zones ands coordinates
+    public function getAudioZones(Request $request, $id){
+        return Collection::find($id)->audioZones;
+    }
 
     public function getZoneWithCoordinates($id) {
         $audioZone = AudioZone::find($id)->zoneCoordinates;
@@ -35,7 +39,7 @@ class AudioZoneController extends Controller
 
         $audioZone = new AudioZone;
         //TO DO get current collection ID 
-        $audioZone->zone_collection_id = 1;
+        $audioZone->collection_id = 1;
         $type =  $request->zone['type'];
         $audioZone->shape_type = $type;
         $coords = $request->zone['coords'];

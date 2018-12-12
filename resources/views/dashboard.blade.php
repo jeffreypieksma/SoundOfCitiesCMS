@@ -48,6 +48,15 @@
     <div id="hidden" style="display:none">
          <div id="collection_info" data-id="{{ $collection->id }}" data-title="{{ $collection->title }}" data-created="{{ $collection->created_at }}"></div>
     </div>
+
+    <div id="testData">
+        @foreach($audioZones as $audioZone)
+            {{$audioZone}}
+            {{ $audioZone->zoneCoordinates }}
+
+        @endforeach
+    </div>
+
     <div class="container-fluid">
       
         <div id="mapid"></div>
@@ -61,5 +70,6 @@
 
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
-
+    <script src="{{ asset('js/audioZone.js') }}"></script>
+    <script src="{{ asset('js/tests.js') }}"></script>
 @endsection

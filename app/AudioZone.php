@@ -28,8 +28,6 @@ class AudioZone extends Model
         return $this->hasMany('App\Hotspot');
     }
 
-
-
     public function tracks()
     {
         return $this->hasMany('App\Tracks');

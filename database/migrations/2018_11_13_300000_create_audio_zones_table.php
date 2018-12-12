@@ -15,7 +15,7 @@ class CreateAudioZonesTable extends Migration
     {
         Schema::create('audio_zones', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('zone_collection_id');
+            $table->unsignedInteger('collection_id');
             $table->string('shape_type', 30);
             $table->string('radius', 30)->nullable();
             $table->string('label', 120)->nullable();        
@@ -25,7 +25,7 @@ class CreateAudioZonesTable extends Migration
         });
 
         Schema::table('audio_zones', function (Blueprint $table) {
-            $table->foreign('zone_collection_id')->references('id')->on('zone_collections')->onDelete('cascade');       
+            $table->foreign('collection_id')->references('id')->on('zone_collections')->onDelete('cascade');       
         });
     }
 

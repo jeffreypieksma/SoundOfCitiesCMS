@@ -20,25 +20,25 @@ class CollectionController extends Controller
     public function index(Request $request, $id){
         $collection = Collection::find($id);
 
-        // session(['collection_id' => $id]);
-        // $value = session('collection_id');
+        //Get current collection with audioZones and coordinates
+        $audioZones = Collection::find($id)->audioZones;
 
-        return View('dashboard', compact('collection'));
+        return View('dashboard', compact('collection','audioZones'));
+    }
+
+    public function getCollectionWithAudioZones(){
+        $collection = Collection::find($id)->audioZones;
     }
 
     /* Get all collections from logged in user and return this to the view */
     public function createForm(){
         $user = \Auth::user()->first(['id','name','email']);
-        
-        if(!$user){
-            abort(403, 'Unauthorized action.');
-        }else{
+        // abort(403, 'Unauthorized action.');
 
-            $collections = Collection::where('user_id', $user->id)
-               ->orderBy('created_at', 'desc')
-               ->take(10)
-               ->paginate(10);   
-        }
+        $collections = Collection::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->paginate(10);   
         
         return view('collection.create_collection_form', compact('collections','user'));
        

@@ -26,6 +26,8 @@
                             <td> {{ $collection->created_at}} </td>
                             <td> <a href="/dashboard/{{ $collection->id }}">View</a> </td>
                             <td> <a href="/dashboard/edit/{{ $collection->id }}">Edit</a> </td>
+
+                            {{-- {{ route('update_collections', ['id' => $collection->id]) }} --}}
                         </tr>
                     @endforeach    
                     

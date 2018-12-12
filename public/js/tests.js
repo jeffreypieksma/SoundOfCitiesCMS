@@ -60,53 +60,82 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 43);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 38:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(44);
 
 
 /***/ }),
 
-/***/ 39:
+/***/ 44:
 /***/ (function(module, exports) {
 
+//Import map and audioZone
+//Constructor for all the full zones 
+function Zone(id, type, coords, center_point, radius) {
+    this.id = id;
+    this.type = type;
+    this.coords = coords;
+    this.center_point = center_point;
+    this.radius = radius;
+}
+console.log('test init');
+/* Unit testing
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+    1st: Check if all zones are stored properly and the amount is right.
+        Store data - return the ids - count ids - compare with amount of objects.
+    2nd test: Check if the amount of coordinates are right.
+    3rd: test: Check if coordinates are stored right.
+    4th: test: Draw items on map.
+    5th: test: Delete a zone
+*/
+var ZoneCreator = /** @class */ (function () {
+    function ZoneCreator() {
+    }
+    ZoneCreator.prototype.drawZone = function (coords) {
+        return "";
+    };
+    return ZoneCreator;
+}());
+function assertTrue(isSuccess, message) {
+    if (!isSuccess) {
+        console.error("Test niet geslaagd: " + message);
+    }
+}
+var zoneCreator = new ZoneCreator();
+var coords = [
+    [
+        function (lat) { return '53.21061991910329'; },
+        function (lng) { return '5.702758220639979'; }
+    ],
+    [
+        function (lat) { return '53.21051704917011'; },
+        function (lng) { return '5.733996253312515'; }
+    ],
+    [
+        function (lat) { return '53.20188619560709'; },
+        function (lng) { return '5.731593310342751'; }
+    ]
+];
+var circleCoords = [function (lat) { return '	53.21061991910329'; }, function (lng) { return '5.702758220639979'; }];
+var circleZone = new Zone(1, 'circle', circleCoords, '53.21061991910329', 302323);
+//storeAudioZone(circleZone)
+var polygonZone = new Zone(2, 'circle', coords, '53.21061991910329', '');
+//storeAudioZone(polygonZone)
+var squareZone = new Zone(3, 'circle', coords, '53.21061991910329', '');
+//storeAudioZone(squareZone)
+//assertTrue must be true 
+assertTrue(zoneCreator.drawZone(circleZone) === "", "Should handle...");
+assertTrue(zoneCreator.drawZone(polygonZone) === "", "Should handle...");
+assertTrue(zoneCreator.drawZone(squareZone) === "", "Should handle...");
+console.log("All tests executed");
 
-//require('./map');
-
-//require('./collection');
-
-//require('./audio');
-
-$(document).ready(function () {
-    console.log('running admin scripts');
-
-    $('.modal').modal();
-
-    $('.sidenav').sidenav();
-
-    $(".dropdown-trigger").dropdown();
-
-    // var create_form_btn = $('#create_collection_form').hide();
-    // $( "#create-collection" ).click(function() {
-    //     create_form_btn.show();
-    // });
-
-    // $('#dataTable').DataTable({
-    // //paging: false
-    // });
-});
 
 /***/ })
 

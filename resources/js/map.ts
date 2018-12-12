@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { AudioZone } from "./AudioZone.ts"
+let audioZone = new AudioZone()
 
 declare let L: any
 
@@ -19,11 +21,11 @@ function Zone (id, type, coords, center_point, radius) {
     this.radius = radius
 }
 
-//Get data attributes from html
-let collection_info = document.getElementById('collection_info')
-let collection_id = collection_info.dataset.id
-let collection_title = collection_info.dataset.title
-let collection_created = collection_info.dataset.created
+function getCurrentCollectionId(){
+    return document.getElementById('collection_info').dataset.id
+}
+
+audioZone.getAudioZones();
 
 // Create the map
 let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -92,37 +94,18 @@ map.on(L.Draw.Event.CREATED, function (e) {
         }  
     }
 
-   console.log( storeAudioZone(vectorZone) );
+   console.log( audioZone.storeAudioZone(vectorZone) );
    
     // Save to DB and Map
     drawnItems.addLayer(layer);
- });
+});
 
-function storeAudioZone(vectorZone){
-    //console.log(vectorZone)
-    const zone = vectorZone;
-    const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
-    api.post('/audioZone/create', {
-        zone
-    })
-    .then(res => {
-        let data = res.data;
-        let zone = new Zone (data.id, vectorZone.type, vectorZone.coords, vectorZone.center_point, vectorZone.radius);
-        console.log(zone);
-    })
-    .catch(error => {
-        console.log(error)
-    })
+ function getAllZoneObjects(){
 
 }
 
-function getAllZoneObjects(){
 
-}
 
-function getCurrentCollection(){
-
-}
 
  //Handle click on polygon
  var onPolyClick = function(e){
@@ -135,60 +118,3 @@ function getCurrentCollection(){
  };
  
  drawnItems.on('click', onPolyClick);
-
-
-/* Unit testing
-
-    1st: Check if all zones are stored properly and the amount is right. 
-        Store data - return the ids - count ids - compare with amount of objects. 
-    2nd test: Check if the amount of coordinates are right.  
-    3rd: test: Check if coordinates are stored right. 
-    4th: test: Draw items on map. 
-    5th: test: Delete a zone  
-*/
-
-class ZoneCreator {
-    drawZone (coords : any) : String {
-        return ""
-    }
-}
-
-function assertTrue (isSuccess : Boolean, message: String) {
-    if (!isSuccess) {
-        console.error ("Test niet geslaagd: " + message);
-    }
-}
-
-let zoneCreator = new ZoneCreator ();
-
-let coords = [
-    [
-        lat =>	'53.21061991910329',
-        lng	=> '5.702758220639979'
-    ],
-    [
-        lat =>	'53.21051704917011',
-        lng	=> '5.733996253312515'
-    ],
-    [
-        lat =>	'53.20188619560709',
-        lng	=> '5.731593310342751'
-    ]
-]
-let circleCoords = [lat=> '	53.21061991910329', lng => '5.702758220639979']
-
-let circleZone = new Zone(1, 'circle', circleCoords, '53.21061991910329', 302323)
-//storeAudioZone(circleZone)
-
-let polygonZone = new Zone(2, 'circle', coords, '53.21061991910329', '')
-//storeAudioZone(polygonZone)
-
-let squareZone = new Zone(3, 'circle', coords, '53.21061991910329', '')
-//storeAudioZone(squareZone)
-
-//assertTrue must be true 
-assertTrue (zoneCreator.drawZone (circleZone) === "", "Should handle...")
-assertTrue (zoneCreator.drawZone (polygonZone) === "", "Should handle...")
-assertTrue (zoneCreator.drawZone (squareZone) === "", "Should handle...")
-
-console.log ("All tests executed");
