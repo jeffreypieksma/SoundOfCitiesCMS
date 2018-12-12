@@ -6,39 +6,17 @@
 
 @section('content')
 
-    <div class="container">
-        <h3 class="collection-intro">Welcome {{ $user->name }} </h3>
-
-        <table>
-            <thead>
-            <tr>
-                <th>{{ __('collection.title') }}</th>
-                <th>{{ __('app.created_at') }}</th>
-                <th>{{ __('app.view') }}</th>
-                <th>{{ __('app.edit') }}</th>
-            </tr>
-            </thead>
-
-            <tbody>   
-                    @foreach ( $collections as $collection )
-                        <tr>
-                            <td>  <a href="/dashboard/{{$collection->id}}"> {{ $collection->title }}</a> </td>
-                            <td> {{ $collection->created_at}} </td>
-                            <td> <a href="/dashboard/{{ $collection->id }}">View</a> </td>
-                            <td> <a href="/dashboard/edit/{{ $collection->id }}">Edit</a> </td>
-
-                            {{-- {{ route('update_collections', ['id' => $collection->id]) }} --}}
-                        </tr>
-                    @endforeach    
-                    
-            </body>
-        </table>
-        <div id="paginate-links">
-            {{ $collections->links() }}
-        </div>
-
-    </div>
     <div class="container" id="create_collection_form" >
+        <div id="error-wrapper">
+            @if (count($errors) > 0)
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+        
         <form method="POST" action="{{ route('create_collection') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{-- <meta name="csrf" value="{{ csrf_token() }}"> --}}
@@ -77,15 +55,6 @@
 
                 </div>
             </div>
-
-            @if (count($errors) > 0)
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
         </form>
     </div>
 

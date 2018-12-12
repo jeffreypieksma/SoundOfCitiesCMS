@@ -25,9 +25,11 @@ Route::group(['middleware' => ['web'] ], function () {
 	Route::get('dashboard/{id}', 'CollectionController@index')->name('map');
 	
 	//Collection
-	Route::get('/collection', 'CollectionController@index')->name('collections');
+	Route::get('/collections', 'CollectionController@index')->name('collections');
+	Route::get('collection/create', 'CollectionController@createForm')->name('create_collection_form');
 
-	Route::get('collections', 'CollectionController@createForm')->name('create_collection_form');
+	
+	//Route::get('collections', 'CollectionController@createForm')->name('create_collection_form');
 	Route::post('/collection/create', 'CollectionController@create')->name('create_collection');
 	Route::put('/collection', 'CollectionController@update')->name('update_collections');
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Collection;
 use App\Track;
@@ -17,12 +17,23 @@ use Illuminate\Support\Facades\Storage;
 class CollectionController extends Controller
 {
 
-    public function index(Request $request, $id){
+    public function index(){
+        $user = Auth::user(['id','name','email']);
+        $userID = Auth::id();
+
+        $collections = Collection::where('user_id', $userID)
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->paginate(10);   
+        
+        return view('collection.index', compact('collections','user'));
+    }
+
+    public function getCollectionData(){
         $collection = Collection::find($id);
 
         //Get current collection with audioZones and coordinates
         $audioZones = Collection::find($id)->audioZones;
-
         return View('dashboard', compact('collection','audioZones'));
     }
 
@@ -32,19 +43,14 @@ class CollectionController extends Controller
 
     /* Get all collections from logged in user and return this to the view */
     public function createForm(){
-        $user = \Auth::user()->first(['id','name','email']);
-        // abort(403, 'Unauthorized action.');
-
-        $collections = Collection::where('user_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->paginate(10);   
-        
-        return view('collection.create_collection_form', compact('collections','user'));
-       
+        $user = Auth::user(['id','name','email']);
+        $userID = Auth::id();
+        return view('collection.create', compact('user'));
     }
     
     public function create(Request $request){
+        $user = Auth::user(['id','name','email']);
+        $userID = Auth::id();
 
         $validatedData = $request->validate([
             'title' => 'required|max:256',
@@ -54,7 +60,8 @@ class CollectionController extends Controller
 
     
         $collection = new Collection;
-        $collection->user_id = \Auth::user()->id;
+        
+        $collection->user_id = $userID;
         $collection->title = $request->title;
         $collection->description = $request->description;
         $collection->image_url = 'test';    
@@ -78,7 +85,11 @@ class CollectionController extends Controller
                 $track->save();
             }
         }
+
+        if($validatedData){
+            return redirect()->route('collections');
+        }
      
-        return redirect()->route('create_collection_form');
+       
     }
 }
