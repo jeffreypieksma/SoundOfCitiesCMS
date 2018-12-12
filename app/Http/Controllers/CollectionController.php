@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Storage;
 class CollectionController extends Controller
 {
 
-    public function index(){
-        
+    public function index(Request $request, $id){
+        $collection = Collection::find($id);
+
+        // session(['collection_id' => $id]);
+        // $value = session('collection_id');
+
+        return View('dashboard', compact('collection'));
     }
 
     /* Get all collections from logged in user and return this to the view */
@@ -43,7 +48,7 @@ class CollectionController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|max:256',
-            'description' => 'required|5000',
+            'description' => 'required|max:5000',
             //'audioFiles.*' => 'required|audio/mpeg,mpga,mp3,wav|max:20000',
         ]);
 

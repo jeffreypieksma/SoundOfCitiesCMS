@@ -7,6 +7,7 @@
 
     <script src="{{ asset('js/src/Leaflet.draw.js') }}"></script>
     <script src="{{ asset('js/src/Leaflet.Draw.Event.js') }}"></script>
+    
     <link rel="stylesheet" href="{{ asset('js/src/leaflet.draw.css') }}"/>
 
     <script src="{{ asset('js/src/Toolbar.js') }}"></script>
@@ -44,9 +45,11 @@
 @endsection
 
 @section('content')
-
+    <div id="hidden" style="display:none">
+         <div id="collection_info" data-id="{{ $collection->id }}" data-title="{{ $collection->title }}" data-created="{{ $collection->created_at }}"></div>
+    </div>
     <div class="container-fluid">
-
+      
         <div id="mapid"></div>
         
     </div>

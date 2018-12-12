@@ -1,15 +1,29 @@
 import axios from 'axios'
 
-declare let L: any;
+declare let L: any
 
-//Constructor
-function Zone (id, type, coords, center_point, radius) {
-    this.id = 1234;
-    this.type = type;
-    this.coords = coords;
-    this.center_point = center_point;
-    this.radius = radius;
+//Constructor for Leaflet zone creator 
+function VectorZone (type, coords, center_point, radius) {
+    this.type = type
+    this.coords = coords
+    this.center_point = center_point
+    this.radius = radius
 }
+
+//Constructor for all the full zones 
+function Zone (id, type, coords, center_point, radius) {
+    this.id =  id
+    this.type = type
+    this.coords = coords
+    this.center_point = center_point
+    this.radius = radius
+}
+
+//Get data attributes from html
+let collection_info = document.getElementById('collection_info')
+let collection_id = collection_info.dataset.id
+let collection_title = collection_info.dataset.title
+let collection_created = collection_info.dataset.created
 
 // Create the map
 let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -51,52 +65,77 @@ map.addControl(new L.Control.Draw({
 }));
 
 //var layerControl = L.control.layers(null, mapOverlays, {position:'topleft'}).addTo(map);
-
+//http://jsfiddle.net/guspersson/393ehmsq/
 map.on(L.Draw.Event.CREATED, function (e) { 
+    //console.log(e);
     let type = e.layerType
     let layer = e.layer;
     let coords = layer._latlngs; 
     let center_point = '';
-    let id = null;
 
-    let zone = new Zone(id, type, coords, center_point, radius);
+    let vectorZone = new VectorZone (type, coords, center_point, radius);
 
     //rectangle, circle, polygon, polyline
-    zone.type = type;
+    vectorZone.type = type;
     if(type=='circle'){  
         var latLng = layer.getLatLng();
-        zone.coords = latLng;
+        vectorZone.coords = latLng;
         //console.log('center '+ latLng);
-
+        
         var radius = layer.getRadius();
-        zone.radius = radius;
+        vectorZone.radius = radius;
         //console.log('Radius  '+ radius);
         
     }else{   
         for(var i=0; i < coords.length; i++){
-            zone.coords = coords[i];
+            vectorZone.coords = coords[i];
         }  
     }
 
-    storeAudioZone(zone);
-
-    console.log(zone);
-    
+   console.log( storeAudioZone(vectorZone) );
+   
     // Save to DB and Map
     drawnItems.addLayer(layer);
  });
 
+function storeAudioZone(vectorZone){
+    //console.log(vectorZone)
+    const zone = vectorZone;
+    const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
+    api.post('/audioZone/create', {
+        zone
+    })
+    .then(res => {
+        let data = res.data;
+        let zone = new Zone (data.id, vectorZone.type, vectorZone.coords, vectorZone.center_point, vectorZone.radius);
+        console.log(zone);
+    })
+    .catch(error => {
+        console.log(error)
+    })
+
+}
+
+function getAllZoneObjects(){
+
+}
+
+function getCurrentCollection(){
+
+}
+
  //Handle click on polygon
-var onPolyClick = function(e){
-   console.log(e);
+ var onPolyClick = function(e){
+    console.log(e);
+ 
+     drawnItems.setStyle({
+         color: 'red',
+         fillColor: 'blue'
+     });
+ };
+ 
+ drawnItems.on('click', onPolyClick);
 
-    drawnItems.setStyle({
-        color: 'red',
-        fillColor: 'blue'
-    });
-};
-
-drawnItems.on('click', onPolyClick);
 
 /* Unit testing
 
@@ -153,23 +192,3 @@ assertTrue (zoneCreator.drawZone (polygonZone) === "", "Should handle...")
 assertTrue (zoneCreator.drawZone (squareZone) === "", "Should handle...")
 
 console.log ("All tests executed");
-
-function storeAudioZone(zone){
-
-    const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
-    api.post('/audioZone/create', {
-        zone
-    })
-    .then(res => {
-        console.log(res)
-        
-    })
-    .catch(error => {
-        console.log(error)
-    })
-
-}
-
-function getCurrentCollection(){
-
-}

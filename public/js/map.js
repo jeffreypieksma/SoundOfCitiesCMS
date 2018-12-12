@@ -1850,14 +1850,26 @@ module.exports = __webpack_require__(40);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __webpack_require__(7);
-//Constructor
-function Zone(id, type, coords, center_point, radius) {
-    this.id = 1234;
+//Constructor for Leaflet zone creator 
+function VectorZone(type, coords, center_point, radius) {
     this.type = type;
     this.coords = coords;
     this.center_point = center_point;
     this.radius = radius;
 }
+//Constructor for all the full zones 
+function Zone(id, type, coords, center_point, radius) {
+    this.id = id;
+    this.type = type;
+    this.coords = coords;
+    this.center_point = center_point;
+    this.radius = radius;
+}
+//Get data attributes from html
+var collection_info = document.getElementById('collection_info');
+var collection_id = collection_info.dataset.id;
+var collection_title = collection_info.dataset.title;
+var collection_created = collection_info.dataset.created;
 // Create the map
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors', osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }), map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 13 }), drawnItems = L.featureGroup().addTo(map);
 L.control.layers({
@@ -1886,33 +1898,53 @@ map.addControl(new L.Control.Draw({
     }
 }));
 //var layerControl = L.control.layers(null, mapOverlays, {position:'topleft'}).addTo(map);
+//http://jsfiddle.net/guspersson/393ehmsq/
 map.on(L.Draw.Event.CREATED, function (e) {
+    //console.log(e);
     var type = e.layerType;
     var layer = e.layer;
     var coords = layer._latlngs;
     var center_point = '';
-    var id = null;
-    var zone = new Zone(id, type, coords, center_point, radius);
+    var vectorZone = new VectorZone(type, coords, center_point, radius);
     //rectangle, circle, polygon, polyline
-    zone.type = type;
+    vectorZone.type = type;
     if (type == 'circle') {
         var latLng = layer.getLatLng();
-        zone.coords = latLng;
+        vectorZone.coords = latLng;
         //console.log('center '+ latLng);
         var radius = layer.getRadius();
-        zone.radius = radius;
+        vectorZone.radius = radius;
         //console.log('Radius  '+ radius);
     }
     else {
         for (var i = 0; i < coords.length; i++) {
-            zone.coords = coords[i];
+            vectorZone.coords = coords[i];
         }
     }
-    storeAudioZone(zone);
-    console.log(zone);
+    console.log(storeAudioZone(vectorZone));
     // Save to DB and Map
     drawnItems.addLayer(layer);
 });
+function storeAudioZone(vectorZone) {
+    //console.log(vectorZone)
+    var zone = vectorZone;
+    var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
+    api.post('/audioZone/create', {
+        zone: zone
+    })
+        .then(function (res) {
+        var data = res.data;
+        var zone = new Zone(data.id, vectorZone.type, vectorZone.coords, vectorZone.center_point, vectorZone.radius);
+        console.log(zone);
+    })
+        .catch(function (error) {
+        console.log(error);
+    });
+}
+function getAllZoneObjects() {
+}
+function getCurrentCollection() {
+}
 //Handle click on polygon
 var onPolyClick = function (e) {
     console.log(e);
@@ -1971,20 +2003,6 @@ assertTrue(zoneCreator.drawZone(circleZone) === "", "Should handle...");
 assertTrue(zoneCreator.drawZone(polygonZone) === "", "Should handle...");
 assertTrue(zoneCreator.drawZone(squareZone) === "", "Should handle...");
 console.log("All tests executed");
-function storeAudioZone(zone) {
-    var api = axios_1.default.create({ baseURL: 'http://soundofcitiescms.test' });
-    api.post('/audioZone/create', {
-        zone: zone
-    })
-        .then(function (res) {
-        console.log(res);
-    })
-        .catch(function (error) {
-        console.log(error);
-    });
-}
-function getCurrentCollection() {
-}
 
 
 /***/ })

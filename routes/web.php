@@ -22,8 +22,8 @@ Route::get('logout', function (){
 
 
 Route::group(['middleware' => ['web'] ], function () {
-	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-	Route::get('dashboard/{id}', 'DashboardController@index')->name('dashboard');
+	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
+	Route::get('dashboard/{id}', 'CollectionController@index')->name('dashboard');
 
 	//Collection
 	Route::get('/collection/create', 'CollectionController@createForm')->name('create_collection_form');
@@ -33,10 +33,10 @@ Route::group(['middleware' => ['web'] ], function () {
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
 	//AudioZone
-	// Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
-	// Route::get('/audioZone', 'AudioZoneController@index')->name('audioZone');
-	// Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
-	// Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
+	Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
+	Route::get('/audioZone', 'AudioZoneController@index')->name('audioZone');
+	Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
+	Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
 
 	//Upload audio 
 });
