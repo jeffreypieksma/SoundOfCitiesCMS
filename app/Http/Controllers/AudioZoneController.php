@@ -69,16 +69,7 @@ class AudioZoneController extends Controller
                         $zoneCoordinates->lng = $v["lng"];
 
                         $zoneCoordinates->save();
-                    }  
-
-                    // $zoneCoordinates = new ZoneCoordinate;
-                    // $zoneCoordinates->audio_zones_id = $audioZone->id;
-        
-                    // $zoneCoordinates->lat = $value[$key]["lat"];
-                    // $zoneCoordinates->lng = $value[$key]["lng"];
-        
-                    // $zoneCoordinates->save();
-                    
+                    }                      
                 }      
             }
         }

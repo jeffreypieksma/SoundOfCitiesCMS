@@ -50,13 +50,13 @@
          <div id="collection_info" data-id="{{ $collection->id }}" data-title="{{ $collection->title }}" data-created="{{ $collection->created_at }}"></div>
     </div>
 
-    {{-- <div id="testData">
+    <div id="testData">
         @foreach($audioZones as $audioZone)
-            {{$audioZone}}
-            {{ $audioZone->zoneCoordinates }}
+            <p>{{$audioZone}}</p>
+            <small> {{ $audioZone->zoneCoordinates }} </small>
 
         @endforeach
-    </div> --}}
+    </div>
 
     <div class="container-fluid">
       
