@@ -13,6 +13,13 @@ $(document).ready( function () {
 
     $(".dropdown-trigger").dropdown();
 
+    $('#dashboardNavigation').hide();
+    $('#toggleNavigation').click( function() {
+        $('#dashboardNavigation').toggle();
+    });
+
+
+
 
     // var create_form_btn = $('#create_collection_form').hide();
     // $( "#create-collection" ).click(function() {

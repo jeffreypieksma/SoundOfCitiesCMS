@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1836,14 +1836,15 @@ module.exports = function spread(callback) {
 /* 36 */,
 /* 37 */,
 /* 38 */,
-/* 39 */
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(40);
+module.exports = __webpack_require__(41);
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1898,7 +1899,7 @@ map.addControl(new L.Control.Draw({
     }
 }));
 map.on(L.Draw.Event.CREATED, function (e) {
-    console.log(e);
+    //console.log(e);
     var type = e.layerType, layer = e.layer, coords = layer._latlngs, center_point = '', radius = '', color = 'red';
     if (type == 'circle') {
         //getLatLng() works only for circle 

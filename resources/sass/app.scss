@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-//@import 'variables';
+@import 'variables';
 
 // Bootstrap
 //@import '~bootstrap/scss/bootstrap';
@@ -12,23 +12,6 @@ html,body{
     overflow-x:hidden;
 }
 
-
 #nav-main{
     margin-bottom:40px;
-}
-
-#mapid{  height: calc(100vh - 64px); width:100%;}
-
-#create-collection{
-    position: absolute;
-    right:20px;
-    bottom:20px;
-    z-index:99999;
-}
-  
-#saveCollection{
-    position: fixed;
-    right:20px;
-    bottom:20px;
-    z-index:99999;
 }

@@ -18,6 +18,7 @@ mix
 .js('resources/js/AudioZone.ts', 'public/js')
 .js('resources/js/Tests.ts', 'public/js')
 .sass('resources/sass/app.scss', 'public/css')
+.sass('resources/sass/admin.scss', 'public/css')
 
 .webpackConfig({
    module: {
