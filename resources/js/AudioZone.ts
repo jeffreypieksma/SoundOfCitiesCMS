@@ -17,9 +17,6 @@ export class AudioZone {
         this.leafletObj = ''
     }
 
-    addNewAudioZone(){
-
-    }
 
     getCurrentCollectionId(){
         return document.getElementById('collection_info').dataset.id
@@ -42,14 +39,13 @@ export class AudioZone {
         });
     }
 
-    storeAudioZone(vectorZone){
-        let zone = vectorZone;
+    storeAudioZone(audioZone){
         let id = this.getCurrentCollectionId()
-        zone.collection_id = id;
+        audioZone.collection_id = id;
     
         //const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
         axios.post('/audioZone/create', {
-            zone
+            audioZone
         })
         .then(res => {
             let data = res.data;

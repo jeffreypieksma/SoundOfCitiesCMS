@@ -53,7 +53,8 @@ class CollectionController extends Controller
     }
 
     public function getCollectionWithAudioZones(){
-        $collection = Collection::find($id)->audioZones;
+        $audioZones = Collection::find($id)->audioZones;
+        return $audioZones;
     }
     
     public function create(Request $request){

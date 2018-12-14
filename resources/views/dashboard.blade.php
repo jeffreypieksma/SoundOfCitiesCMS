@@ -69,13 +69,13 @@
             </nav>
         </div>
 
-        <div id="testData">
+        {{-- <div id="testData">
             @foreach($audioZones as $audioZone)
                 <p>{{$audioZone}}</p>
                 <small> {{ $audioZone->zoneCoordinates }} </small>
 
             @endforeach
-        </div>
+        </div> --}}
 
         <div class="container-fluid">
         

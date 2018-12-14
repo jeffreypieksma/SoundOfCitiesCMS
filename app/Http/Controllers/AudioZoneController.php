@@ -14,19 +14,26 @@ use DB;
 
 class AudioZoneController extends Controller
 {
-    // public function index() {
-    //     $audioZone = AudioZone::with('zoneCoordinates')->get();
-    // }
 
     public function getZoneWithCoordinates($id) {
         $audioZone = AudioZone::find($id)->zoneCoordinates;
     }
 
-    //Get collection with audio zones ands coordinates
-    //Parameter collection ID 
+    /***
+        Get collection with audio zones ands coordinates
+        Parameter collection ID 
+    ***/
     public function getCollectionWithAudioZones($id) {
-        return $audioZones = Collection::findOrFail($id)->audioZones;
+        $audioZones = Collection::findOrFail($id)->audioZones;
         
+        //Tweak this with laravel relations 
+        foreach( $audioZones as $audioZone ){
+            $coords = AudioZone::find($audioZone->id)->zoneCoordinates;
+            $audioZone['coords'] = $coords;
+        }
+        
+        return $audioZones->toArray();
+        //return $audioZones->toArray();
     }
 
     public function createZones(Request $request) {

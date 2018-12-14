@@ -1862,8 +1862,6 @@ var AudioZone = /** @class */ (function () {
         this.radius = radius;
         this.leafletObj = '';
     }
-    AudioZone.prototype.addNewAudioZone = function () {
-    };
     AudioZone.prototype.getCurrentCollectionId = function () {
         return document.getElementById('collection_info').dataset.id;
     };
@@ -1882,13 +1880,12 @@ var AudioZone = /** @class */ (function () {
             // always executed
         });
     };
-    AudioZone.prototype.storeAudioZone = function (vectorZone) {
-        var zone = vectorZone;
+    AudioZone.prototype.storeAudioZone = function (audioZone) {
         var id = this.getCurrentCollectionId();
-        zone.collection_id = id;
+        audioZone.collection_id = id;
         //const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
         axios_1.default.post('/audioZone/create', {
-            zone: zone
+            audioZone: audioZone
         })
             .then(function (res) {
             var data = res.data;
