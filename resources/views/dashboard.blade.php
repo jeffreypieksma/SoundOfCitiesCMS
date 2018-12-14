@@ -13,13 +13,6 @@
     <script src="{{ asset('js/src/Toolbar.js') }}"></script>
     <script src="{{ asset('js/src/Tooltip.js') }}"></script>
 
-    <script src="{{ asset('js/src/ext/GeometryUtil.js') }}"></script>
-    <script src="{{ asset('js/src/ext/LatLngUtil.js') }}"></script>
-    <script src="{{ asset('js/src/ext/LineUtil.Intersect.js') }}"></script>
-    <script src="{{ asset('js/src/ext/Polygon.Intersect.js') }}"></script>
-    <script src="{{ asset('js/src/ext/Polyline.Intersect.js') }}"></script>
-    <script src="{{ asset('js/src/ext/TouchEvents.js') }}"></script>
-
     <script src="{{ asset('js/src/draw/DrawToolbar.js') }}"></script>
     <script src="{{ asset('js/src/draw/handler/Draw.Feature.js') }}"></script>
     <script src="{{ asset('js/src/draw/handler/Draw.SimpleShape.js') }}"></script>
@@ -38,7 +31,15 @@
     <script src="{{ asset('js/src/edit/handler/Edit.Rectangle.js') }}"></script>
     <script src="{{ asset('js/src/edit/handler/Edit.Marker.js') }}"></script>
     <script src="{{ asset('js/src/edit/handler/Edit.CircleMarker.js') }}"></script>
-    <script src="{{ asset('js/src/edit/handler/Edit.Circle.js') }}"></script>
+    <script src="{{ asset('js/src/edit/handler/Edit.Circle.js') }}"></script> 
+    <script src="{{ asset('js/src/ext/GeometryUtil.js') }}"></script>
+    <script src="{{ asset('js/src/ext/LatLngUtil.js') }}"></script>
+    <script src="{{ asset('js/src/ext/LineUtil.Intersect.js') }}"></script>
+    <script src="{{ asset('js/src/ext/Polygon.Intersect.js') }}"></script>
+    <script src="{{ asset('js/src/ext/Polyline.Intersect.js') }}"></script>
+    <script src="{{ asset('js/src/ext/TouchEvents.js') }}"></script>
+
+    
 
     {{ csrf_field() }}
 
@@ -49,18 +50,20 @@
          <div id="collection_info" data-id="{{ $collection->id }}" data-title="{{ $collection->title }}" data-created="{{ $collection->created_at }}"></div>
     </div>
 
-    <div id="testData">
+    {{-- <div id="testData">
         @foreach($audioZones as $audioZone)
             {{$audioZone}}
             {{ $audioZone->zoneCoordinates }}
 
         @endforeach
-    </div>
+    </div> --}}
 
     <div class="container-fluid">
       
         <div id="mapid"></div>
-        
+        <a class="btn-floating btn-large waves-effect waves-light green" id="saveCollection">
+            <i class="material-icons">save_alt</i>
+        </a>
     </div>
 
 

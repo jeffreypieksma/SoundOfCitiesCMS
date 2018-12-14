@@ -5,15 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-
-//require('./map');
-
-//require('./collection');
-
-//require('./audio');
-
 $(document).ready( function () {
-    console.log('running admin scripts');
 
     $('.modal').modal();
     

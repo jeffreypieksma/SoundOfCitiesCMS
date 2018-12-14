@@ -23,5 +23,12 @@ html,body{
     position: absolute;
     right:20px;
     bottom:20px;
+    z-index:99999;
 }
   
+#saveCollection{
+    position: fixed;
+    right:20px;
+    bottom:20px;
+    z-index:99999;
+}

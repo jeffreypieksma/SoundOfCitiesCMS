@@ -25,7 +25,7 @@
                             <td>  <a href="/dashboard/{{$collection->id}}"> {{ $collection->title }}</a> </td>
                             <td> {{ $collection->created_at}} </td>
                             <td> <a href="/dashboard/{{ $collection->id }}">View</a> </td>
-                            <td> <a href="/dashboard/edit/{{ $collection->id }}">Edit</a> </td>
+                            <td> <a href="/collection/update/{{ $collection->id }}">Edit</a> </td>
 
                             {{-- {{ route('update_collections', ['id' => $collection->id]) }} --}}
                         </tr>

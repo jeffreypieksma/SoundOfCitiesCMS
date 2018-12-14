@@ -22,7 +22,7 @@ class Collection extends Model
         return $this->hasMany('App\AudioZone');
     }
 
-    public function track()
+    public function tracks()
     {
         return $this->hasMany('App\Track');
     }

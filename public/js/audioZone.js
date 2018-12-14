@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
+/******/ 	return __webpack_require__(__webpack_require__.s = 41);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1824,56 +1824,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __webpack_require__(7);
-var AudioZone = /** @class */ (function () {
-    function AudioZone() {
-    }
-    AudioZone.prototype.getCurrentCollectionId = function () {
-        return document.getElementById('collection_info').dataset.id;
-    };
-    AudioZone.prototype.getAudioZones = function () {
-        var id = this.getCurrentCollectionId();
-        axios_1.default.get('/audioZones/1/')
-            .then(function (response) {
-            // handle success
-            console.log(response);
-        })
-            .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-            .then(function () {
-            // always executed
-        });
-    };
-    AudioZone.prototype.storeAudioZone = function (vectorZone) {
-        //console.log(vectorZone)
-        var zone = vectorZone;
-        //const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
-        axios_1.default.post('/audioZone/create', {
-            zone: zone
-        })
-            .then(function (res) {
-            var data = res.data;
-            var zone = new Zone(data.id, vectorZone.type, vectorZone.coords, vectorZone.center_point, vectorZone.radius);
-            console.log(zone);
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
-    };
-    return AudioZone;
-}());
-exports.AudioZone = AudioZone;
-
-
-/***/ }),
+/* 27 */,
 /* 28 */,
 /* 29 */,
 /* 30 */,
@@ -1887,11 +1838,67 @@ exports.AudioZone = AudioZone;
 /* 38 */,
 /* 39 */,
 /* 40 */,
-/* 41 */,
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(42);
+
+
+/***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(27);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __webpack_require__(7);
+var AudioZone = /** @class */ (function () {
+    //Constructor for Leaflet zone creator 
+    function AudioZone(type, coords, center_point, radius, leafletObj) {
+        this.type = type;
+        this.coords = coords;
+        this.center_point = center_point;
+        this.radius = radius;
+        this.leafletObj = '';
+    }
+    AudioZone.prototype.addNewAudioZone = function () {
+    };
+    AudioZone.prototype.getCurrentCollectionId = function () {
+        return document.getElementById('collection_info').dataset.id;
+    };
+    AudioZone.prototype.getAudioZones = function () {
+        var id = this.getCurrentCollectionId();
+        axios_1.default.get('/audioZones/' + id)
+            .then(function (res) {
+            // handle success
+            console.log(res.data);
+        })
+            .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+            .then(function () {
+            // always executed
+        });
+    };
+    AudioZone.prototype.storeAudioZone = function (vectorZone) {
+        var zone = vectorZone;
+        var id = this.getCurrentCollectionId();
+        zone.collection_id = id;
+        //const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
+        axios_1.default.post('/audioZone/create', {
+            zone: zone
+        })
+            .then(function (res) {
+            var data = res.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    return AudioZone;
+}());
+exports.AudioZone = AudioZone;
 
 
 /***/ })

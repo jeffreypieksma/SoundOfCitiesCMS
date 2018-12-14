@@ -29,7 +29,22 @@ class CollectionController extends Controller
         return view('collection.index', compact('collections','user'));
     }
 
-    public function getCollectionData(){
+    
+    public function updateForm($id){
+        //to DO Get audio files 
+        $collection = Collection::findOrFail($id);
+
+        return view('collection.update', compact('collection'));
+    }
+
+    /* Get all collections from logged in user and return this to the view */
+    public function createForm(){
+        $user = Auth::user(['id','name','email']);
+        $userID = Auth::id();
+        return view('collection.create', compact('user'));
+    }
+
+    public function dashboardView($id){
         $collection = Collection::find($id);
 
         //Get current collection with audioZones and coordinates
@@ -39,13 +54,6 @@ class CollectionController extends Controller
 
     public function getCollectionWithAudioZones(){
         $collection = Collection::find($id)->audioZones;
-    }
-
-    /* Get all collections from logged in user and return this to the view */
-    public function createForm(){
-        $user = Auth::user(['id','name','email']);
-        $userID = Auth::id();
-        return view('collection.create', compact('user'));
     }
     
     public function create(Request $request){
@@ -75,9 +83,7 @@ class CollectionController extends Controller
                 $filename = $file->getClientOriginalName();
                 $name = $collection_id. '_' .$filename;
 
-                $path = $file->storeAs(
-                    'audio', $name
-                );
+                $path = $file->storeAs('audio', $name);
 
                 $track = new Track;
                 $track->collection_id = $collection_id;

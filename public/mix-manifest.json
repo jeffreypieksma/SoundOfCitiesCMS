@@ -1,8 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/map.js": "/js/map.js",
     "/js/AudioZone.js": "/js/AudioZone.js",
-    "/js/tests.js": "/js/tests.js",
+    "/js/Tests.js": "/js/Tests.js",
+    "/js/Map.js": "/js/Map.js",
     "/js/admin.js": "/js/admin.js"
 }
