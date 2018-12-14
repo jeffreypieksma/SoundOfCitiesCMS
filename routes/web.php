@@ -36,7 +36,7 @@ Route::group(['middleware' => ['web'] ], function () {
 	//AudioZone
 	Route::post('/audioZones/create', 'AudioZoneController@createZones')->name('create_audioZones');
 	Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
-	Route::get('/audioZones/{id}', 'AudioZoneController@getAudioZones')->name('audioZone');
+	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZone');
 	Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
 	Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
 

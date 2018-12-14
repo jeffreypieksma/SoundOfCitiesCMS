@@ -3,6 +3,11 @@ import { AudioZone } from "./AudioZone"
 
 declare let L: any
 
+let audioZones = [
+
+]
+
+
 //Constructor for Leaflet zone creator 
 // function AudioZone (type, coords, center_point, radius) {
 //     this.type = type
@@ -11,28 +16,9 @@ declare let L: any
 //     this.radius = radius
 // }
 
-let audioZones = [
-
-]
-
-// {
-//     type: 'test 1',
-//     layer: 'leeg ding'
-// },
-// {
-//  type: 'test 2',
-//  layer: 'leeg ding'
-//  },
-//  {
-//      type: 'test 3',
-//      layer: 'leeg ding'
-//  }
-
-// Set up the OSM layer
-let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-
-//Add attribution
-let osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// Set up the Open Street Map URL and attribution
+let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
 let osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib })
 
@@ -76,7 +62,8 @@ map.addControl(new L.Control.Draw({
 }));
 
 map.on(L.Draw.Event.CREATED, function (e) { 
-    console.log(e);
+    //console.log(e);
+
     let type = e.layerType,
         layer = e.layer,
         coords = layer._latlngs,
@@ -84,18 +71,15 @@ map.on(L.Draw.Event.CREATED, function (e) {
         radius = '',
         color  = 'red';
 
-    if (type=='circle') {  
+    if ( type=='circle') {  
 
-        //getLatLng() only for circle 
+        //getLatLng() works only for circle 
         var latLng = layer.getLatLng();  
         radius = layer.getRadius();
         coords = latLng;
 
     } else {   
-        // let latLngs = [
-        //     {'lat': '123', 'lng': '345' },
-        //     {'lat': '678', 'lng': '911' }
-        // ];
+
         for (var i=0; i < coords.length; i++) {
            // console.log('deze'+ coords);
             //vectorZone.coords = coords[i];
@@ -105,14 +89,7 @@ map.on(L.Draw.Event.CREATED, function (e) {
 
         }  
     }
-    // console.log('latLngs '+ layer.getLatLng())
-    // console.log('Coords '+ coords);
 
-    //Set custom properties to layer 
-    // let feature = layer.feature = layer.feature || {}; // Intialize layer.feature
-    // feature.type = feature.type || "Feature"; // Intialize feature.type
-    // let props = feature.properties = feature.properties || {}; // Intialize feature.properties
-    // props.id = 99;
 
     const audioZone = {
         collection_id: getCurrentCollectionId(),
@@ -159,6 +136,24 @@ function storeAudioZone(audioZones){
     })
 }
 
+function getAudioZones( ) {
+    let id = getCurrentCollectionId()
+
+    axios.get('/audioZones/'+id)
+    .then(function (res) {
+        // handle success
+        console.log(res.data)
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error)
+    })
+    .then(function () {
+        // always executed
+    });
+}
+getAudioZones()
+
 //Loop trough all audio zones 
 function loopAudioZones() {
     for (var i=0; i < audioZones.length; i++) {
@@ -169,8 +164,6 @@ function loopAudioZones() {
 function deleteAudioZone(index ) {
     delete audioZones[index]
 }
-
-loopAudioZones()
 
 function drawRectangle(){
 
@@ -221,3 +214,12 @@ var onPolyClick = function(e){
  function getCurrentCollectionId(){
     return document.getElementById('collection_info').dataset.id
 }
+
+// console.log('latLngs '+ layer.getLatLng())
+// console.log('Coords '+ coords);
+
+//Set custom properties to layer 
+// let feature = layer.feature = layer.feature || {}; // Intialize layer.feature
+// feature.type = feature.type || "Feature"; // Intialize feature.type
+// let props = feature.properties = feature.properties || {}; // Intialize feature.properties
+// props.id = 99;

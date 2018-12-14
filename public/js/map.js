@@ -1850,6 +1850,7 @@ module.exports = __webpack_require__(40);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __webpack_require__(7);
+var audioZones = [];
 //Constructor for Leaflet zone creator 
 // function AudioZone (type, coords, center_point, radius) {
 //     this.type = type
@@ -1857,23 +1858,8 @@ var axios_1 = __webpack_require__(7);
 //     this.center_point = center_point
 //     this.radius = radius
 // }
-var audioZones = [];
-// {
-//     type: 'test 1',
-//     layer: 'leeg ding'
-// },
-// {
-//  type: 'test 2',
-//  layer: 'leeg ding'
-//  },
-//  {
-//      type: 'test 3',
-//      layer: 'leeg ding'
-//  }
-// Set up the OSM layer
-var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-//Add attribution
-var osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+// Set up the Open Street Map URL and attribution
+var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 var osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
 var map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 13 });
 // Initialise the FeatureGroup to store editable layers
@@ -1915,16 +1901,12 @@ map.on(L.Draw.Event.CREATED, function (e) {
     console.log(e);
     var type = e.layerType, layer = e.layer, coords = layer._latlngs, center_point = '', radius = '', color = 'red';
     if (type == 'circle') {
-        //getLatLng() only for circle 
+        //getLatLng() works only for circle 
         var latLng = layer.getLatLng();
         radius = layer.getRadius();
         coords = latLng;
     }
     else {
-        // let latLngs = [
-        //     {'lat': '123', 'lng': '345' },
-        //     {'lat': '678', 'lng': '911' }
-        // ];
         for (var i = 0; i < coords.length; i++) {
             // console.log('deze'+ coords);
             //vectorZone.coords = coords[i];
@@ -1933,13 +1915,6 @@ map.on(L.Draw.Event.CREATED, function (e) {
             //console.log('Coords '+ coords);
         }
     }
-    // console.log('latLngs '+ layer.getLatLng())
-    // console.log('Coords '+ coords);
-    //Set custom properties to layer 
-    // let feature = layer.feature = layer.feature || {}; // Intialize layer.feature
-    // feature.type = feature.type || "Feature"; // Intialize feature.type
-    // let props = feature.properties = feature.properties || {}; // Intialize feature.properties
-    // props.id = 99;
     var audioZone = {
         collection_id: getCurrentCollectionId(),
         type: type,
@@ -1976,6 +1951,22 @@ function storeAudioZone(audioZones) {
         console.log(error);
     });
 }
+function getAudioZones() {
+    var id = getCurrentCollectionId();
+    axios_1.default.get('/audioZones/' + id)
+        .then(function (res) {
+        // handle success
+        console.log(res.data);
+    })
+        .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+        .then(function () {
+        // always executed
+    });
+}
+getAudioZones();
 //Loop trough all audio zones 
 function loopAudioZones() {
     for (var i = 0; i < audioZones.length; i++) {
@@ -1985,7 +1976,6 @@ function loopAudioZones() {
 function deleteAudioZone(index) {
     delete audioZones[index];
 }
-loopAudioZones();
 function drawRectangle() {
     L.rectangle([
         ['53.20554188925172', '5.776233673095703'],
@@ -2021,6 +2011,13 @@ vectorZones.on('click', onPolyClick);
 function getCurrentCollectionId() {
     return document.getElementById('collection_info').dataset.id;
 }
+// console.log('latLngs '+ layer.getLatLng())
+// console.log('Coords '+ coords);
+//Set custom properties to layer 
+// let feature = layer.feature = layer.feature || {}; // Intialize layer.feature
+// feature.type = feature.type || "Feature"; // Intialize feature.type
+// let props = feature.properties = feature.properties || {}; // Intialize feature.properties
+// props.id = 99;
 
 
 /***/ })

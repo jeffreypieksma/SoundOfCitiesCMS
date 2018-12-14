@@ -23,11 +23,13 @@ class AudioZoneController extends Controller
     }
 
     //Get collection with audio zones ands coordinates
-    public function getAudioZones(Request $request, $id){
-        $audiosZones = Collection::find($id)->audioZones;
+    //Parameter collection ID 
+    public function getCollectionWithAudioZones($id) {
+        return $audioZones = Collection::findOrFail($id)->audioZones;
+        
     }
 
-    public function createZones(Request $request){
+    public function createZones(Request $request) {
         $audioZones = $request->audioZones;
  
         $validatedData = $request->validate([
@@ -46,27 +48,36 @@ class AudioZoneController extends Controller
             $audioZone->color = $zone['color'];
             $audioZone->visibility = $zone['visibility'];
             $audioZone->save();
-
-            $id = $audioZone->id;
+   
             $coords = $zone['coords'];
+           // dd($coords);
 
             if ( $zone['type'] == 'circle' ) {
+
                 $zoneCoordinates = new ZoneCoordinate;
-                $zoneCoordinates->audio_zones_id = $id;
+                $zoneCoordinates->audio_zones_id = $audioZone->id;
 
                 $zoneCoordinates->lat = $coords['lat'];
                 $zoneCoordinates->lng = $coords['lng'];
                 $zoneCoordinates->save();
             } else {
-                foreach ( $coords as $key => $value ) {
+                foreach ( $coords as $key => $value ) { 
+                    foreach ( $value as $v ){
+                        $zoneCoordinates = new ZoneCoordinate;
+                        $zoneCoordinates->audio_zones_id = $audioZone->id;
+                        $zoneCoordinates->lat = $v["lat"];
+                        $zoneCoordinates->lng = $v["lng"];
 
-                    $zoneCoordinates = new ZoneCoordinate;
-                    $zoneCoordinates->audio_zones_id = $id;
+                        $zoneCoordinates->save();
+                    }  
+
+                    // $zoneCoordinates = new ZoneCoordinate;
+                    // $zoneCoordinates->audio_zones_id = $audioZone->id;
         
-                    $zoneCoordinates->lat = $value[$key]["lat"];
-                    $zoneCoordinates->lng = $value[$key]["lng"];
-    
-                    $zoneCoordinates->save();
+                    // $zoneCoordinates->lat = $value[$key]["lat"];
+                    // $zoneCoordinates->lng = $value[$key]["lng"];
+        
+                    // $zoneCoordinates->save();
                     
                 }      
             }
@@ -113,11 +124,11 @@ class AudioZoneController extends Controller
 
     }
 
-    public function update(){
+    public function update() {
 
     }
 
-    public function delete(){
+    public function delete() {
 
     }
 
