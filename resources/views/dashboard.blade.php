@@ -81,7 +81,7 @@
         
             <div id="mapid"></div>
             <a class="btn-floating btn-large waves-effect waves-light green" id="saveCollection">
-                <i class="material-icons">save_alt</i>
+                <i class="material-icons">save</i>
             </a>
         </div>
 
