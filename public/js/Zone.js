@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 43);
+/******/ 	return __webpack_require__(__webpack_require__.s = 45);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1824,7 +1824,72 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 27 */,
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __webpack_require__(7);
+var Zone = /** @class */ (function () {
+    function Zone() {
+    }
+    Zone.prototype.getCurrentCollectionId = function () {
+        return this.collection_id;
+    };
+    Zone.prototype.setCurrentCollectionId = function () {
+        this.collection_id = parseInt(document.getElementById('collection_info').dataset.id);
+    };
+    Zone.prototype.storeAudioZone = function (audioZones) {
+        audioZones.collection_id = this.getCurrentCollectionId();
+        axios_1.default.post('/audioZones/create', {
+            audioZones: audioZones
+        })
+            .then(function (res) {
+            var data = res.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    Zone.prototype.addAudioFileToZone = function () {
+        console.log('working');
+        var collection_id = this.collection_id;
+        var id = document.getElementById('audio_zone_id').value;
+        var title = document.getElementById('audio_title').value;
+        var audioFile = document.getElementById('audio_file').value;
+        var volumeControl = document.getElementById('audio_volume_control').value;
+        var playonce = document.getElementById('audio_playonce').checked;
+        var loopable = document.getElementById('audio_loopable').checked;
+        var data = [
+            id, title, audioFile, volumeControl, playonce, loopable
+        ];
+        console.log(id, title, audioFile, volumeControl, playonce, loopable);
+        this.addTrackToZone(data);
+    };
+    Zone.prototype.addTrackToZone = function (data) {
+        axios_1.default.post('/audioZones/create', {
+            data: data
+        })
+            .then(function (res) {
+            console.log(res);
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    return Zone;
+}());
+exports.Zone = Zone;
+var ZoneObj = new Zone();
+var addAudioBtn = document.getElementById('add-audio');
+addAudioBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    ZoneObj.addAudioFileToZone();
+});
+
+
+/***/ }),
 /* 28 */,
 /* 29 */,
 /* 30 */,
@@ -1840,69 +1905,12 @@ module.exports = function spread(callback) {
 /* 40 */,
 /* 41 */,
 /* 42 */,
-/* 43 */
+/* 43 */,
+/* 44 */,
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(44);
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __webpack_require__(7);
-var AudioZone = /** @class */ (function () {
-    //Constructor for Leaflet zone creator 
-    function AudioZone(type, coords, center_point, radius, leafletObj) {
-        this.type = type;
-        this.coords = coords;
-        this.center_point = center_point;
-        this.radius = radius;
-        this.leafletObj = '';
-    }
-    AudioZone.prototype.getCurrentCollectionId = function () {
-        return document.getElementById('collection_info').dataset.id;
-    };
-    AudioZone.prototype.getAudioZones = function () {
-        var id = this.getCurrentCollectionId();
-        axios_1.default.get('/audioZones/' + id)
-            .then(function (res) {
-            // handle success
-            console.log(res.data);
-        })
-            .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-            .then(function () {
-            // always executed
-        });
-    };
-    AudioZone.prototype.storeAudioZone = function (audioZone) {
-        console.log('clicked!');
-        var id = this.getCurrentCollectionId();
-        audioZone.collection_id = id;
-        //const api = axios.create({baseURL: 'http://soundofcitiescms.test'})
-        axios_1.default.post('/audioZone/create', {
-            audioZone: audioZone
-        })
-            .then(function (res) {
-            var data = res.data;
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
-    };
-    AudioZone.prototype.addAudioFileToZone = function () {
-        event.preventDefault();
-        console.log('working');
-    };
-    return AudioZone;
-}());
-exports.AudioZone = AudioZone;
+module.exports = __webpack_require__(27);
 
 
 /***/ })

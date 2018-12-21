@@ -43,13 +43,15 @@ class CollectionController extends Controller
         $userID = Auth::id();
         return view('collection.create', compact('user'));
     }
-
+    /*
+        @param = collection_id
+        return = collection with audio zones and files 
+    */
     public function dashboardView($id){
         $collection = Collection::find($id);
-
-        //Get current collection with audioZones and coordinates
+        $audioFiles = Track::whereCollection_id($id)->get();
         $audioZones = Collection::find($id)->audioZones;
-        return View('dashboard', compact('collection','audioZones'));
+        return View('dashboard', compact('collection','audioZones', 'audioFiles'));
     }
 
     public function getCollectionWithAudioZones(){

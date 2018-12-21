@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 40);
+/******/ 	return __webpack_require__(__webpack_require__.s = 41);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1824,7 +1824,72 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 27 */,
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __webpack_require__(7);
+var Zone = /** @class */ (function () {
+    function Zone() {
+    }
+    Zone.prototype.getCurrentCollectionId = function () {
+        return this.collection_id;
+    };
+    Zone.prototype.setCurrentCollectionId = function () {
+        this.collection_id = parseInt(document.getElementById('collection_info').dataset.id);
+    };
+    Zone.prototype.storeAudioZone = function (audioZones) {
+        audioZones.collection_id = this.getCurrentCollectionId();
+        axios_1.default.post('/audioZones/create', {
+            audioZones: audioZones
+        })
+            .then(function (res) {
+            var data = res.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    Zone.prototype.addAudioFileToZone = function () {
+        console.log('working');
+        var collection_id = this.collection_id;
+        var id = document.getElementById('audio_zone_id').value;
+        var title = document.getElementById('audio_title').value;
+        var audioFile = document.getElementById('audio_file').value;
+        var volumeControl = document.getElementById('audio_volume_control').value;
+        var playonce = document.getElementById('audio_playonce').checked;
+        var loopable = document.getElementById('audio_loopable').checked;
+        var data = [
+            id, title, audioFile, volumeControl, playonce, loopable
+        ];
+        console.log(id, title, audioFile, volumeControl, playonce, loopable);
+        this.addTrackToZone(data);
+    };
+    Zone.prototype.addTrackToZone = function (data) {
+        axios_1.default.post('/audioZones/create', {
+            data: data
+        })
+            .then(function (res) {
+            console.log(res);
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    return Zone;
+}());
+exports.Zone = Zone;
+var ZoneObj = new Zone();
+var addAudioBtn = document.getElementById('add-audio');
+addAudioBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    ZoneObj.addAudioFileToZone();
+});
+
+
+/***/ }),
 /* 28 */,
 /* 29 */,
 /* 30 */,
@@ -1837,20 +1902,23 @@ module.exports = function spread(callback) {
 /* 37 */,
 /* 38 */,
 /* 39 */,
-/* 40 */
+/* 40 */,
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(41);
+module.exports = __webpack_require__(42);
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __webpack_require__(7);
+var Zone_1 = __webpack_require__(27);
+var ZoneObj = new Zone_1.Zone();
 var audioZones = [];
 // Set up the Open Street Map URL and attribution
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -1921,28 +1989,29 @@ map.on(L.Draw.Event.CREATED, function (e) {
         color: color
     };
     audioZones.push(audioZone);
-    console.log(audioZones);
+    //console.log(audioZones);
     // Add item to vector layer 
     vectorZones.addLayer(layer);
 });
 /*** Store all the audio zones to DB  ***/
-var saveButton = document.getElementById('saveCollection');
-saveButton.addEventListener('click', function () {
-    storeAudioZone(audioZones);
+var saveBtn = document.getElementById('saveCollection');
+saveBtn.addEventListener('click', function () {
+    //storeAudioZone(audioZones);  
+    ZoneObj.storeAudioZone(audioZones);
 });
-function storeAudioZone(audioZones) {
-    var id = getCurrentCollectionId();
-    audioZones.collection_id = id;
-    axios_1.default.post('/audioZones/create', {
-        audioZones: audioZones
-    })
-        .then(function (res) {
-        var data = res.data;
-    })
-        .catch(function (error) {
-        console.log(error);
-    });
-}
+// function storeAudioZone(audioZones) {
+//     let id = getCurrentCollectionId()
+//     audioZones.collection_id = id;
+//     axios.post('/audioZones/create', {
+//         audioZones
+//     })
+//     .then(res => {
+//         let data = res.data;
+//     })
+//     .catch(error => {
+//         console.log(error)
+//     })
+// }
 function getAudioZones() {
     var id = getCurrentCollectionId();
     var list = {};
@@ -1960,30 +2029,59 @@ function getAudioZones() {
     return list;
 }
 getAudioZones();
-// function setAudioZoneData(data) {
-//     return data;
-// }
-// doSomething();
 function drawZones(data) {
     var audioZones = data;
-    console.log(audioZones);
+    //console.log(audioZones)
     for (var i = 0; i < audioZones.length; i++) {
         var shape = audioZones[i].shape_type;
         var radius = audioZones[i].radius;
         var coords_1 = audioZones[i].coords;
         var color = audioZones[i].color;
-        console.log(coords_1);
         switch (audioZones[i].shape_type) {
             case 'circle':
                 drawCircle(coords_1, radius, color);
-                break;
-            case 'polygon':
-                drawPolygon(coords_1, color);
                 break;
             default:
                 drawPolygon(coords_1, color);
         }
     }
+}
+function drawCircle(coords, radius, color) {
+    var lat = coords[0].lat;
+    var lng = coords[0].lng;
+    L.circle([lat, lng], { radius: radius }).addTo(vectorZones);
+}
+function drawPolygon(coords, color) {
+    console.log('draw polygon');
+    //console.log(coords)
+    var data = [];
+    for (var i = 0; i < coords.length; i++) {
+        var lat = coords[i].lat;
+        var lng = coords[i].lng;
+        data.push([lat, lng]);
+    }
+    L.polygon(data, { color: 'red' }).addTo(vectorZones);
+}
+// create popup contents
+var customPopup = "<h6>Add Audio </h6>";
+// specify popup options 
+var customOptions = {
+    'maxWidth': '600',
+    'className': 'custom popup audioPopup'
+};
+vectorZones.on("click", function (e) {
+    var layer = e.layer;
+    var type = e.layerType;
+    //console.log(e)
+    layer.bindPopup(customPopup, customOptions).openPopup();
+});
+//Handle click on polygon
+var onPolyClick = function (e) {
+    console.log('Polygon clicked ' + e);
+};
+vectorZones.on('click', onPolyClick);
+function getCurrentCollectionId() {
+    return document.getElementById('collection_info').dataset.id;
 }
 //Loop trough all audio zones 
 function loopAudioZones() {
@@ -1994,52 +2092,6 @@ function loopAudioZones() {
 function deleteAudioZone(index) {
     delete audioZones[index];
 }
-function drawRectangle() {
-    L.rectangle([
-        ['53.20554188925172', '5.776233673095703'],
-        ['53.209751772083315', '5.776233673095703'],
-        ['53.209751772083315', '5.790996551513673'],
-        ['53.20554188925172', '5.790996551513673']
-    ]).addTo(vectorZones);
-}
-drawRectangle();
-function drawCircle(coords, radius, color) {
-    L.circle(['53.204823087432416', '5.7575225830078125'], { radius: 161.0649398300031 }).addTo(vectorZones);
-}
-function drawPolygon(coords, color) {
-    var latlngs = [
-        ['53.19577614208885', '5.780868530273438'],
-        ['53.19577614208885', '5.796661376953126'],
-        [' 53.192900207296766', '5.787391662597657']
-    ];
-    L.polygon(latlngs, { color: 'red' }).addTo(vectorZones);
-}
-//Handle click on polygon
-var onPolyClick = function (e) {
-    console.log('Polygon clicked ' + e);
-};
-vectorZones.on('click', onPolyClick);
-function getCurrentCollectionId() {
-    return document.getElementById('collection_info').dataset.id;
-}
-// vectorZones.setStyle({
-//      color: 'red',
-//      fillColor: 'blue'
-//  });
-//Constructor for Leaflet zone creator 
-// function AudioZone (type, coords, center_point, radius) {
-//     this.type = type
-//     this.coords = coords
-//     this.center_point = center_point
-//     this.radius = radius
-// }
-// console.log('latLngs '+ layer.getLatLng())
-// console.log('Coords '+ coords);
-//Set custom properties to layer 
-// let feature = layer.feature = layer.feature || {}; // Intialize layer.feature
-// feature.type = feature.type || "Feature"; // Intialize feature.type
-// let props = feature.properties = feature.properties || {}; // Intialize feature.properties
-// props.id = 99;
 
 
 /***/ })

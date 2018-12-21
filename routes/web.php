@@ -20,7 +20,9 @@ Route::get('logout', function (){
 	return redirect('/login');
 });
 
-Route::group(['middleware' => ['web'] ], function () {
+
+
+Route::group(['middleware' => ['auth'] ], function () {
 	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
 	Route::get('dashboard/{id}', 'CollectionController@dashboardView')->name('map');
 	
@@ -40,8 +42,14 @@ Route::group(['middleware' => ['web'] ], function () {
 	Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
 	Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
 
+	Route::get('/test/{id}', 'AudioZoneController@getAudioZoneWithCoords')->name('audioZoneTest');
+
 	//Upload audio 
 });
+
+//->middleware('auth');
+
+
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web'] ], function () {

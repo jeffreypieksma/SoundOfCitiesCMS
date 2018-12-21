@@ -69,21 +69,32 @@
             </nav>
         </div>
 
-        {{-- <div id="testData">
-            @foreach($audioZones as $audioZone)
-                <p>{{$audioZone}}</p>
-                <small> {{ $audioZone->zoneCoordinates }} </small>
-
-            @endforeach
-        </div> --}}
-
         <div class="container-fluid">
-        
-            <div id="mapid"></div>
+            {{-- Init the map  --}}
+            <div id="mapid" class="animated fadeIn faster"></div>
+
             <a class="btn-floating btn-large waves-effect waves-light green" id="saveCollection">
                 <i class="material-icons">save</i>
             </a>
+
         </div>
+
+        <div id="audioZone-popup">
+            @include('modals.audio')
+        </div>
+
+        <div id="layers" class="animated fadeInRight fast">
+            <ul class="layer">
+                @foreach($audioZones as $audioZone)
+                    <li data-audioZone-id="{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger triggerModal" id="triggerModal">
+                       
+                        <a href="#{{ $audioZone->id }}"> Layer # {{ $audioZone->id }} </a>
+                    </li>
+                @endforeach
+            </div>
+        </ul>
+
+       
 
     </div>
 
@@ -95,4 +106,5 @@
     <script src="{{ asset('js/map.js') }}"></script>
     <script src="{{ asset('js/audioZone.js') }}"></script>
     <script src="{{ asset('js/tests.js') }}"></script>
+
 @endsection

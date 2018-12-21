@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { AudioZone } from "./AudioZone"
+import { Zone } from "./Zone"
+
+let ZoneObj = new Zone();
 
 declare let L: any
 
@@ -97,33 +99,34 @@ map.on(L.Draw.Event.CREATED, function (e) {
     }
 
     audioZones.push(audioZone);
-    console.log(audioZones);
+    //console.log(audioZones);
         
     // Add item to vector layer 
     vectorZones.addLayer(layer);
 });
 
 /*** Store all the audio zones to DB  ***/
-const saveButton: HTMLElement = document.getElementById('saveCollection');
+const saveBtn: HTMLElement = document.getElementById('saveCollection');
 
-saveButton.addEventListener('click', function () {
-    storeAudioZone(audioZones);  
+saveBtn.addEventListener('click', function () {
+    //storeAudioZone(audioZones);  
+    ZoneObj.storeAudioZone( audioZones )
 });
 
-function storeAudioZone(audioZones){
-    let id = getCurrentCollectionId()
-    audioZones.collection_id = id;
+// function storeAudioZone(audioZones) {
+//     let id = getCurrentCollectionId()
+//     audioZones.collection_id = id;
 
-    axios.post('/audioZones/create', {
-        audioZones
-    })
-    .then(res => {
-        let data = res.data;
-    })
-    .catch(error => {
-        console.log(error)
-    })
-}
+//     axios.post('/audioZones/create', {
+//         audioZones
+//     })
+//     .then(res => {
+//         let data = res.data;
+//     })
+//     .catch(error => {
+//         console.log(error)
+//     })
+// }
 
 function getAudioZones( ) {
     let id = getCurrentCollectionId()
@@ -145,16 +148,10 @@ function getAudioZones( ) {
 }
 getAudioZones()
 
-// function setAudioZoneData(data) {
-//     return data;
-// }
-
-// doSomething();
-
 function drawZones(data) {
-    let audioZones = data
+    const audioZones = data
 
-    console.log(audioZones)
+    //console.log(audioZones)
 
     for (var i=0; i < audioZones.length; i++) {
         const shape = audioZones[i].shape_type
@@ -162,13 +159,9 @@ function drawZones(data) {
         const coords = audioZones[i].coords
         const color = audioZones[i].color
 
-        console.log(coords)
         switch(audioZones[i].shape_type) {
             case 'circle':
                 drawCircle(coords, radius, color )
-            break;
-            case 'polygon':
-                drawPolygon(coords, color )
             break;
             default:
                 drawPolygon(coords, color )
@@ -177,6 +170,60 @@ function drawZones(data) {
     }
 
  
+}
+
+function drawCircle(coords, radius, color) {
+    const lat = coords[0].lat
+    const lng = coords[0].lng
+    L.circle([lat, lng], {radius: radius} ).addTo(vectorZones)
+}
+
+
+function drawPolygon(coords, color ) {
+    console.log('draw polygon');
+    //console.log(coords)
+
+    let data = []
+
+    for( let i = 0; i<coords.length; i++ ) {
+        let lat =  coords[i].lat
+        let lng =  coords[i].lng
+        data.push([lat,lng])    
+    }
+
+    L.polygon(data, {color: 'red' }).addTo(vectorZones);
+}
+
+// create popup contents
+let customPopup = "<h6>Add Audio </h6>";
+    
+// specify popup options 
+let customOptions =
+{
+'maxWidth': '600',
+'className' : 'custom popup audioPopup'
+}
+
+vectorZones.on("click", function (e) {
+    let layer = e.layer 
+    let type = e.layerType
+    //console.log(e)
+    layer.bindPopup(customPopup,customOptions).openPopup();
+});
+
+
+
+//Handle click on polygon
+var onPolyClick = function(e) {
+    
+    console.log('Polygon clicked '+ e);
+ 
+};
+ 
+vectorZones.on('click', onPolyClick);
+
+function getCurrentCollectionId() {
+    return document.getElementById('collection_info').dataset.id
 }
 
 //Loop trough all audio zones 
@@ -189,66 +236,3 @@ function loopAudioZones() {
 function deleteAudioZone(index ) {
     delete audioZones[index]
 }
-
-function drawRectangle(){
-
-    L.rectangle([
-        ['53.20554188925172','5.776233673095703'],
-        ['53.209751772083315', '5.776233673095703'],
-        ['53.209751772083315', '5.790996551513673'],
-        ['53.20554188925172','5.790996551513673']
-
-    ]).addTo(vectorZones)
-
-}
-
-drawRectangle()
-
-function drawCircle(coords, radius, color){
-    L.circle(['53.204823087432416', '5.7575225830078125'], {radius: 161.0649398300031} ).addTo(vectorZones);
-}
-
-
-function drawPolygon(coords, color ){
-    var latlngs =[
-        ['53.19577614208885','5.780868530273438'],
-        ['53.19577614208885','5.796661376953126'],
-        [' 53.192900207296766','5.787391662597657']
-    ];
-
-    L.polygon(latlngs, {color: 'red' }).addTo(vectorZones);
-}
-
-//Handle click on polygon
-var onPolyClick = function(e){
-    console.log('Polygon clicked '+ e);
- 
-};
- 
- vectorZones.on('click', onPolyClick);
-
- function getCurrentCollectionId(){
-    return document.getElementById('collection_info').dataset.id
-}
-
-   // vectorZones.setStyle({
-    //      color: 'red',
-    //      fillColor: 'blue'
-    //  });
-
-//Constructor for Leaflet zone creator 
-// function AudioZone (type, coords, center_point, radius) {
-//     this.type = type
-//     this.coords = coords
-//     this.center_point = center_point
-//     this.radius = radius
-// }
-
-// console.log('latLngs '+ layer.getLatLng())
-// console.log('Coords '+ coords);
-
-//Set custom properties to layer 
-// let feature = layer.feature = layer.feature || {}; // Intialize layer.feature
-// feature.type = feature.type || "Feature"; // Intialize feature.type
-// let props = feature.properties = feature.properties || {}; // Intialize feature.properties
-// props.id = 99;
