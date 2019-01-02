@@ -20,8 +20,8 @@ class CreateAudioZoneEffects extends Migration
             $table->float('fadeIn')->nullable();
             $table->float('fadeOut')->nullable();
             $table->float('volume'); 
-            $table->smallInteger('loopable');
-            $table->smallInteger('playonce');
+            $table->smallInteger('loopable')->nullable();
+            $table->smallInteger('playonce')->nullable();
         });
 
         Schema::table('audio_zone_effects', function (Blueprint $table) {

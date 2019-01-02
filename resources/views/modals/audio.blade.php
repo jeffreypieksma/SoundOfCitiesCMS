@@ -3,7 +3,8 @@
     
     <div class="modal-content">
         <h4>{{ __('app.audio_title') }}</h4>
-        <form method="POST" action="" id="audio-form">
+        <form method="POST" id="audio-form">
+            {{ csrf_field() }}
             <input type="hidden" name="audio_zone_id" value="1" id="audio_zone_id" />
 {{-- 
             <div class="row">

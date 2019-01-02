@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth'] ], function () {
 	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
 	Route::get('dashboard/{id}', 'CollectionController@dashboardView')->name('map');
 	
-	//Collection
+	//CollectionController
 	Route::get('/collections', 'CollectionController@index')->name('collections');
 	Route::get('collection/create', 'CollectionController@createForm')->name('create_collection_form');
 	Route::get('collection/update/{id}', 'CollectionController@updateForm')->name('update_collection_form');
@@ -35,14 +35,17 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::put('/collection/update/{id}', 'CollectionController@update')->name('update_collections');
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
-	//AudioZone
+	//AudioZoneController
 	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZone');
 	Route::post('/audioZones/track/create', 'AudioZoneController@addTrackToZone')->name('addTrack_audioZones');
 	Route::post('/audioZones/create', 'AudioZoneController@createZones')->name('create_audioZones');
-	Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
+	//Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
 	
 	Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
 	Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
+
+	//AudioController
+	Route::post('/audio/effects/create', 'AudioController@addEffectsToAudio')->name('add_effects_to_audio');
 
 });
 

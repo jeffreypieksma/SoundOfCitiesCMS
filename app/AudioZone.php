@@ -30,7 +30,7 @@ class AudioZone extends Model
 
     public function tracks()
     {
-        return $this->hasMany('App\Tracks');
+        return $this->hasMany('App\Track');
     }
 
 }

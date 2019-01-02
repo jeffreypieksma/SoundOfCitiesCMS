@@ -31,7 +31,7 @@ export class Zone {
         let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
 
         //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
-        let audioFile = (<HTMLInputElement>document.getElementById('audio_file')).value
+        let track_id = (<HTMLInputElement>document.getElementById('audio_file')).value
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
         let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
         let fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
@@ -39,9 +39,9 @@ export class Zone {
         let playonce = (<HTMLInputElement>document.getElementById('audio_playonce')).checked
         let loopable = (<HTMLInputElement>document.getElementById('audio_loopable')).checked
 
-        const data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable };
+        const data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable };
 
-        console.log(audio_zone_id, audioFile, volumeControl, playonce, loopable)
+        console.log(audio_zone_id, track_id, volumeControl, playonce, loopable)
 
         this.addTrackToZone(data)
    
@@ -49,7 +49,7 @@ export class Zone {
 
     addTrackToZone(data) {
 
-        axios.post('/audioZones/track/create', {
+        axios.post('/audio/effects/create', {
             data
         })
         .then(res => {
