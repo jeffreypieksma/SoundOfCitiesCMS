@@ -15,16 +15,18 @@ class CreateAudioZoneEffects extends Migration
     {
         Schema::create('audio_zone_effects', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('track_id');
             $table->unsignedInteger('audio_zone_id');
-            $table->float('fadeinpoint')->nullable();
-            $table->float('fadeoutpoint')->nullable();
+            $table->float('fadeIn')->nullable();
+            $table->float('fadeOut')->nullable();
             $table->float('volume'); 
             $table->smallInteger('loopable');
             $table->smallInteger('playonce');
         });
 
         Schema::table('audio_zone_effects', function (Blueprint $table) {
-            $table->foreign('audio_zone_id')->references('id')->on('audio_zones')->onDelete('cascade');       
+            $table->foreign('audio_zone_id')->references('id')->on('audio_zones')->onDelete('cascade');
+            $table->foreign('track_id')->references('id')->on('tracks')->onDelete('cascade');       
         });
     }
 
