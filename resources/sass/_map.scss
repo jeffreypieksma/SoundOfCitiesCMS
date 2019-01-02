@@ -1,0 +1,58 @@
+
+html,
+body {
+  overflow-x: hidden;
+}
+#nav-main {
+  margin-bottom: 40px;
+}
+
+#mapid {
+  height: calc(100vh - 64px);
+  width: 85%;
+  width:100%;
+  float: left;
+}
+
+#mapid .fullwidth {
+  width: 100%;
+}
+
+#layers {
+  width: 15%;
+  float: right;
+ 
+  height: calc(100vh - 64px);
+  background-color: #333;
+  color: #fff;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+
+}
+#layers.active{
+    z-index:9999;
+    position: fixed;
+    right:0;
+}
+.ui-layers-icon{
+    background-image: url("/icons/ui_layers.png");
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+}
+
+#layers ul li {
+  padding: 20px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#layers ul li:first-child{
+  border-top:1px solid #ccc;
+}
+
+#layers ul li:hover {
+  color: #f1f1f1;
+  cursor: pointer;
+}

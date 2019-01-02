@@ -50,9 +50,12 @@
         </div>
 
         <div id="toggleNavigation">
-            <a class="btn-floating  waves-effect waves-light green">
-                <i class="material-icons">settings</i>
+            <a class="btn-floating  waves-effect waves-light background-accent">
+            <div class="ui-layers-icon" ></div>
+                {{-- <i class="material-icons">settings</i> --}}
+                
             </a>
+            
         </div>
 
         <div id="dashboardNavigation">
@@ -60,10 +63,10 @@
                 <div class="nav-wrapper">
                     <a href="#!" class="brand-logo"><i class="material-icons"></i>Resonance SoundScape</a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-                        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-                        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-                        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+                        <li><a href="/"><i class="material-icons">1</i></a></li>
+                        <li><a href="/"><i class="material-icons">2</i></a></li>
+                        <li><a href="/"><i class="material-icons">3</i></a></li>
+                        <li><a href="/"><i class="material-icons">4</i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -73,7 +76,7 @@
             {{-- Init the map  --}}
             <div id="mapid" class="animated fadeIn faster"></div>
 
-            <a class="btn-floating btn-large waves-effect waves-light green" id="saveCollection">
+            <a class="btn-floating btn-large waves-effect waves-light background-accent" id="saveCollection">
                 <i class="material-icons">save</i>
             </a>
 

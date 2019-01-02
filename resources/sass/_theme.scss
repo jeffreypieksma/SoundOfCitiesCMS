@@ -1,0 +1,48 @@
+html body{
+    //purple color
+    .color-primary{
+      color: $primary;
+    }
+  
+    //orange
+    .color-secondary{
+      color: $secondary;
+    }
+  
+    //orange
+    .color-accent{
+      color: $accent;
+    }
+  
+    .color-white{
+      color: $white;
+    }
+  
+    .color-black{
+      color: $white;
+    }
+  
+    //purple
+    .background-primary{
+      background: $primary;
+    }
+  
+    //orange
+    .background-secondary{
+      background: $secondary;
+    }
+  
+    //orange
+    .background-accent{
+      background: $accent;
+    }
+  
+    .background-white{
+      background: $white;
+    }
+  
+    .background-black{
+      background: $white;
+    }
+  }
+  

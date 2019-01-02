@@ -59,7 +59,7 @@
     </div>
 
 
-  <a class="btn-floating btn-large waves-effect waves-light green" id="create-collection"><i class="material-icons">add_circle</i></a>
+  <a class="btn-floating btn-large waves-effect waves-light background-accent" id="create-collection"><i class="material-icons">add_circle</i></a>
 
 @endsection
 

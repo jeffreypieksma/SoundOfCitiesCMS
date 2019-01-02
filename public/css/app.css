@@ -1,4 +1,84 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);html,
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'FuturaBook', 'sans-serif';
+}
+
+p,
+span {
+  font-family: 'Open Sans', 'sans-serif';
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@font-face {
+  font-family: "FuturaBook";
+  src: url("/fonts/Futura Book.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "AnotherFlight";
+  src: url("/fonts/Another Flight.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "FuturaStdBook";
+  src: url("/fonts/Futura Std Book.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FuturaTotBook";
+  src: url("/fonts/Futura TOT Book.ttf") format("truetype");
+}
+
+nav .nav-wrapper {
+  background-color: #553F92 !important;
+}
+
+html body .color-primary {
+  color: #553F92;
+}
+
+html body .color-secondary {
+  color: #F59F1F;
+}
+
+html body .color-accent {
+  color: #DC1F86;
+}
+
+html body .color-white {
+  color: #FFFFFF;
+}
+
+html body .color-black {
+  color: #FFFFFF;
+}
+
+html body .background-primary {
+  background: #553F92;
+}
+
+html body .background-secondary {
+  background: #F59F1F;
+}
+
+html body .background-accent {
+  background: #DC1F86;
+}
+
+html body .background-white {
+  background: #FFFFFF;
+}
+
+html body .background-black {
+  background: #FFFFFF;
+}
+
+html,
 body {
   overflow-x: hidden;
 }

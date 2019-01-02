@@ -1,67 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);html,
-body {
-  overflow-x: hidden;
-}
+// Variables
+@import 'variables';
 
-#nav-main {
-  margin-bottom: 40px;
-}
+//Fonts 
+@import 'fonts';
 
-#mapid {
-  height: calc(100vh - 64px);
-  width: 85%;
-  float: left;
-}
+@import 'theme';
 
-#mapid .fullwidth {
-  width: 100%;
-}
+//Header
+@import 'header';
 
-#layers {
-  width: 15%;
-  float: right;
-  height: calc(100vh - 64px);
-  background-color: #333;
-  color: #fff;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: auto;
+//Main map
+@import 'map';
 
-}
-
-#layers ul li {
-  padding: 20px 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-#layers ul li:first-child{
-  border-top:1px solid #ccc;
-}
-
-#layers ul li:hover {
-  color: #f1f1f1;
-  cursor: pointer;
-}
-
-#create-collection {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  z-index: 99999;
-}
-
-#saveCollection {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 99999;
-}
-
-#toggleNavigation {
-  position: fixed;
-  right: 20px;
-  top: 120px;
-  z-index: 9999;
-}
-
+//collection
+@import 'collection';

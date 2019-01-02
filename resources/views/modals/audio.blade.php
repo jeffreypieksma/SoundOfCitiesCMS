@@ -2,7 +2,8 @@
 <div id="audio-modal" class="modal">
     
     <div class="modal-content">
-        <h4>{{ __('app.audio_title') }}</h4>
+        <h4 class="color-primary">{{ __('app.audio_title') }}</h4>
+        <p class="subtitle">{{ __('app.select_audio') }}</p>
         <form method="POST" id="audio-form">
             {{ csrf_field() }}
             <input type="hidden" name="audio_zone_id" value="1" id="audio_zone_id" />
@@ -73,8 +74,9 @@
 
             <div class="row">
                 <div class="input-field col s6">                         
-                    <button class="btn waves-effect waves-light" type="submit" id="add-audio" name="action">{{ __('app.save') }}
-                        <i class="material-icons right">send</i>
+                    <button class="btn waves-effect waves-light background-primary color-white text-center" type="submit" id="add-audio" name="action">
+                        {{ __('app.save') }}
+                        <i class="material-icons left">save</i>
                     </button>
 
                 </div>

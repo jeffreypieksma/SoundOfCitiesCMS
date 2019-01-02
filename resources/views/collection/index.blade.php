@@ -50,7 +50,7 @@
         @endif
 
     </div>
-    <a class="btn-floating btn-large waves-effect waves-light" id="create-collection" href="{{ route('create_collection_form') }}">
+    <a class="btn-floating btn-large waves-effect waves-light background-accent" id="create-collection" href="{{ route('create_collection_form') }}">
         <i class="material-icons">add</i>
     </a>
 
