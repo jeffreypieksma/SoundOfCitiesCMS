@@ -133,11 +133,12 @@ class AudioZoneController extends Controller
 
         $track = Track::find($track_id);
 
-        $track->audio_zones_id= $data['audio_zone_id'];
-        //$track->audioFile = $data['audioFile'];
+        $track->audio_zone_id= $data['audio_zone_id'];
+        $track->fadeinpoint = $data['fadeIn'];
+        $track->fadeoutpoint = $data['fadeOut'];
         $track->playonce = $data['playonce'];
         $track->loopable = $data['loopable'];
-        $track->volumeControl = $data['volumeControl'];
+        $track->volume = $data['volumeControl'];
 
         $track->save();
 

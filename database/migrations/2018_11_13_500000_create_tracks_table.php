@@ -19,11 +19,7 @@ class CreateTracksTable extends Migration
             $table->unsignedInteger('collection_id');
             $table->string('audio_url');
             $table->float('length')->nullable();
-            $table->float('fadeinpoint')->nullable();
-            $table->float('fadeoutpoint')->nullable();
-            $table->float('volume')->nullable(); 
-            $table->smallInteger('loopable')->nullable();
-            $table->smallInteger('playonce')->nullable();
+
         });
 
         Schema::table('tracks', function (Blueprint $table) {

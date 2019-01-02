@@ -33,11 +33,13 @@ export class Zone {
         //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
         let audioFile = (<HTMLInputElement>document.getElementById('audio_file')).value
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
+        let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
+        let fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
 
         let playonce = (<HTMLInputElement>document.getElementById('audio_playonce')).checked
         let loopable = (<HTMLInputElement>document.getElementById('audio_loopable')).checked
 
-        const data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, playonce: playonce, loopable:loopable };
+        const data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable };
 
         console.log(audio_zone_id, audioFile, volumeControl, playonce, loopable)
 

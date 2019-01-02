@@ -1858,9 +1858,11 @@ var Zone = /** @class */ (function () {
         //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
         var audioFile = document.getElementById('audio_file').value;
         var volumeControl = document.getElementById('audio_volume_control').value;
+        var fadeIn = document.getElementById('audio_fadeIn').value;
+        var fadeOut = document.getElementById('audio_fadeOut').value;
         var playonce = document.getElementById('audio_playonce').checked;
         var loopable = document.getElementById('audio_loopable').checked;
-        var data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, playonce: playonce, loopable: loopable };
+        var data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable: loopable };
         console.log(audio_zone_id, audioFile, volumeControl, playonce, loopable);
         this.addTrackToZone(data);
     };
