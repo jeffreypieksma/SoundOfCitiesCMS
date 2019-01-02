@@ -1852,23 +1852,20 @@ var Zone = /** @class */ (function () {
             console.log(error);
         });
     };
-    Zone.prototype.addAudioFileToZone = function () {
-        console.log('working');
+    Zone.prototype.addAudioToZone = function () {
         var collection_id = this.collection_id;
-        var id = document.getElementById('audio_zone_id').value;
-        var title = document.getElementById('audio_title').value;
+        var audio_zone_id = document.getElementById('audio_zone_id').value;
+        //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
         var audioFile = document.getElementById('audio_file').value;
         var volumeControl = document.getElementById('audio_volume_control').value;
         var playonce = document.getElementById('audio_playonce').checked;
         var loopable = document.getElementById('audio_loopable').checked;
-        var data = [
-            id, title, audioFile, volumeControl, playonce, loopable
-        ];
-        console.log(id, title, audioFile, volumeControl, playonce, loopable);
+        var data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, playonce: playonce, loopable: loopable };
+        console.log(audio_zone_id, audioFile, volumeControl, playonce, loopable);
         this.addTrackToZone(data);
     };
     Zone.prototype.addTrackToZone = function (data) {
-        axios_1.default.post('/audioZones/create', {
+        axios_1.default.post('/audioZones/track/create', {
             data: data
         })
             .then(function (res) {
@@ -1881,12 +1878,21 @@ var Zone = /** @class */ (function () {
     return Zone;
 }());
 exports.Zone = Zone;
-var ZoneObj = new Zone();
-var addAudioBtn = document.getElementById('add-audio');
-addAudioBtn.addEventListener('click', function (event) {
-    event.preventDefault();
-    ZoneObj.addAudioFileToZone();
+window.onload = function () {
+    var ZoneObj = new Zone();
+    var addAudioBtn = document.getElementById('add-audio');
+    addAudioBtn.addEventListener('click', function (event) {
+        console.log('audio btn');
+        event.preventDefault();
+        ZoneObj.addAudioToZone();
+    });
+};
+$(".modal-trigger").on('click', function () {
+    console.log('yup');
 });
+function test() {
+    alert('haai');
+}
 
 
 /***/ }),

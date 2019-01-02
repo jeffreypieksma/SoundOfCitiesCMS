@@ -26,23 +26,20 @@ export class Zone {
         })
     }
 
-    addAudioFileToZone() {     
-        console.log('working')
+    addAudioToZone() {     
         const collection_id = this.collection_id;
-        let id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
+        let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
 
-        let title = (<HTMLInputElement>document.getElementById('audio_title')).value
+        //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
         let audioFile = (<HTMLInputElement>document.getElementById('audio_file')).value
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
 
         let playonce = (<HTMLInputElement>document.getElementById('audio_playonce')).checked
         let loopable = (<HTMLInputElement>document.getElementById('audio_loopable')).checked
 
-        let data = [
-           id, title, audioFile, volumeControl, playonce, loopable
-        ]
+        const data = { audio_zone_id: audio_zone_id, audioFile: audioFile, volumeControl: volumeControl, playonce: playonce, loopable:loopable };
 
-        console.log(id, title, audioFile, volumeControl, playonce, loopable)
+        console.log(audio_zone_id, audioFile, volumeControl, playonce, loopable)
 
         this.addTrackToZone(data)
    
@@ -50,7 +47,7 @@ export class Zone {
 
     addTrackToZone(data) {
 
-        axios.post('/audioZones/create', {
+        axios.post('/audioZones/track/create', {
             data
         })
         .then(res => {
@@ -63,13 +60,27 @@ export class Zone {
     
 }
 
-let ZoneObj = new Zone()
+window.onload = function () {  
 
-const addAudioBtn: HTMLElement = document.getElementById('add-audio')
+    let ZoneObj = new Zone()
 
-addAudioBtn.addEventListener('click', function (event) {
-    event.preventDefault()
+    const addAudioBtn: HTMLElement = document.getElementById('add-audio')
 
-    ZoneObj.addAudioFileToZone()
+    addAudioBtn.addEventListener('click', function (event) {
+        console.log('audio btn')
+        event.preventDefault()
 
+        ZoneObj.addAudioToZone()
+
+    });
+  
+}
+
+
+$(".modal-trigger").on('click', function(){
+    console.log('yup')
 });
+
+function test(){
+alert('haai')
+}

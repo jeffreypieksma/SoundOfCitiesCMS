@@ -36,15 +36,14 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
 	//AudioZone
+	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZone');
+	Route::post('/audioZones/track/create', 'AudioZoneController@addTrackToZone')->name('addTrack_audioZones');
 	Route::post('/audioZones/create', 'AudioZoneController@createZones')->name('create_audioZones');
 	Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
-	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZone');
+	
 	Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
 	Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
 
-	Route::get('/test/{id}', 'AudioZoneController@getAudioZoneWithCoords')->name('audioZoneTest');
-
-	//Upload audio 
 });
 
 //->middleware('auth');

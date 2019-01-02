@@ -10,6 +10,8 @@ use Validator;
 use App\Collection;
 use App\AudioZone;
 use App\ZoneCoordinate;
+use App\Track;
+
 use DB;
 
 class AudioZoneController extends Controller
@@ -120,6 +122,24 @@ class AudioZoneController extends Controller
         //return $audioZone;
         //$audioZone->zoneCoordinates()->create($coords);
 
+
+    }
+
+    public function addTrackToZone(Request $request) {
+        //TO DO validate and check user has this track
+        $data = $request['data'];
+
+        $track_id = $data['audioFile'];
+
+        $track = Track::find($track_id);
+
+        $track->audio_zones_id= $data['audio_zone_id'];
+        //$track->audioFile = $data['audioFile'];
+        $track->playonce = $data['playonce'];
+        $track->loopable = $data['loopable'];
+        $track->volumeControl = $data['volumeControl'];
+
+        $track->save();
 
     }
 

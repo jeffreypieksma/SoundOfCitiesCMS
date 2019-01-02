@@ -86,13 +86,13 @@
         <div id="layers" class="animated fadeInRight fast">
             <ul class="layer">
                 @foreach($audioZones as $audioZone)
-                    <li data-audioZone-id="{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger triggerModal" id="triggerModal">
+                    <li data-audioZone-id="{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger" id="triggerModal" click="test()">
                        
                         <a href="#{{ $audioZone->id }}"> Layer # {{ $audioZone->id }} </a>
                     </li>
                 @endforeach
-            </div>
-        </ul>
+            </ul>
+        </div>
 
        
 

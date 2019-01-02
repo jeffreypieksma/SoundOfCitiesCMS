@@ -49,6 +49,7 @@ class CollectionController extends Controller
     */
     public function dashboardView($id){
         $collection = Collection::find($id);
+        //to do check collection with user id 
         $audioFiles = Track::whereCollection_id($id)->get();
         $audioZones = Collection::find($id)->audioZones;
         return View('dashboard', compact('collection','audioZones', 'audioFiles'));
