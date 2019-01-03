@@ -17,9 +17,11 @@
             @endif
         </div>
         
-        <form method="POST" action="{{ route('create_collection') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('update_collections') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
-            {{-- <meta name="csrf" value="{{ csrf_token() }}"> --}}
+            
+            <input type="hidden" name="id" value="{{ $collection->id }}" />
+
             <div class="row">
                 <div class="input-field col s6">
                     <input id="collection_title" type="text" name="title" class="validate" value="{{ $collection->title}}">
@@ -33,8 +35,16 @@
                     <label for="collection_description">{{ __('collection.description') }}</label>
                 </div>
             </div>
+           
+            <ul>
 
-            {{ $collection->tracks }}     
+                @foreach($collection->tracks as $track)
+                     <li> {{ $track->name }} </li> 
+                @endforeach
+
+            </ul>
+               
+        
 
              <div class="row">
                 <div class="file-field input-field col s6">

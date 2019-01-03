@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::get('collection/update/{id}', 'CollectionController@updateForm')->name('update_collection_form');
 
 	Route::post('/collection/create', 'CollectionController@create')->name('create_collection');
-	Route::put('/collection/update/{id}', 'CollectionController@update')->name('update_collections');
+	Route::post('/collection/update', 'CollectionController@update')->name('update_collections');
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
 	//AudioZoneController

@@ -19,17 +19,16 @@
         
         <form method="POST" action="{{ route('create_collection') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
-            {{-- <meta name="csrf" value="{{ csrf_token() }}"> --}}
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="collection_title" type="text" name="title" class="validate">
+                    <input id="collection_title" type="text" name="title" class="validate" value="{{ old('title') }}" required>
                     <label for="collection_title">{{ __('collection.title') }}</label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="collection_description" type="text" name="description" class="validate">
+                    <input id="collection_description" type="text" name="description" class="validate" value="{{ old('description') }}">
                     <label for="collection_description">{{ __('collection.description') }}</label>
                 </div>
             </div>     
@@ -39,7 +38,7 @@
                     <div class="btn">
                         <span>Upload multiple audio files</span>
                 
-                        <input type="file" name="audio[]" id="audio-files" multiple/>
+                        <input type="file" name="audio[]" id="audio-files" multiple required/>
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">

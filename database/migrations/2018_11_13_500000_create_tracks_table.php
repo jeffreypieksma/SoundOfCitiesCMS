@@ -18,6 +18,7 @@ class CreateTracksTable extends Migration
             $table->unsignedInteger('audio_zone_id')->nullable();
             $table->unsignedInteger('collection_id');
             $table->string('audio_url');
+            $table->string('name');
             $table->float('length')->nullable();
 
         });
