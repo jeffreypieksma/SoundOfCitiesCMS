@@ -33,7 +33,7 @@ class CollectionController extends Controller
     }
 
     
-    public function updateForm($id){
+    public function updateForm($id) {
         //to DO Get audio files 
         $collection = Collection::findOrFail($id);
 
@@ -41,29 +41,40 @@ class CollectionController extends Controller
     }
 
     /* Get all collections from logged in user and return this to the view */
-    public function createForm(){
+    public function createForm() {
         $user = Auth::user(['id','name','email']);
         $userID = Auth::id();
         return view('collection.create', compact('user'));
     }
+
     /*
         @param = collection_id
         return = collection with audio zones and files 
     */
-    public function dashboardView($id){
-        $collection = Collection::find($id);
-        //to do check collection with user id 
-        $audioFiles = Track::whereCollection_id($id)->get();
-        $audioZones = Collection::find($id)->audioZones;
-        return View('dashboard', compact('collection','audioZones', 'audioFiles'));
+    public function dashboardView($id) {
+        $userID = Auth::id();
+
+        $check = Collection::whereUser_id($userID)->get();
+
+        if ($check->isEmpty()) {
+            abort(403, 'Unauthorized action');
+        } else {
+            $collection = Collection::find($id);
+            $audioFiles = Track::whereCollection_id($id)->get();
+            $audioZones = Collection::find($id)->audioZones;
+
+            return View('dashboard', compact('collection','audioZones', 'audioFiles'));
+        }
+
+
     }
 
-    public function getCollectionWithAudioZones(){
+    public function getCollectionWithAudioZones() {
         $audioZones = Collection::find($id)->audioZones;
         return $audioZones;
     }
     
-    public function create(Request $request){
+    public function create(Request $request) {
         $user = Auth::user(['id','name','email']);
         $userID = Auth::id();
 
