@@ -14,7 +14,8 @@ const mix = require('laravel-mix');
 mix
 .js('resources/js/app.js', 'public/js')
 .js('resources/js/admin.js', 'public/js')
-.js('resources/js/Map.ts', 'public/js')
+//.js('resources/js/Map.ts', 'public/js')
+.js('resources/js/Map2.ts', 'public/js')
 .js('resources/js/AudioZone.ts', 'public/js')
 .js('resources/js/Zone.ts', 'public/js')
 .js('resources/js/Tests.ts', 'public/js')

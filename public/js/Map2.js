@@ -1935,167 +1935,154 @@ module.exports = __webpack_require__(42);
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __webpack_require__(7);
 var Zone_1 = __webpack_require__(27);
-var ZoneObj = new Zone_1.Zone();
-var audioZones = [];
-// Set up the Open Street Map URL and attribution
-var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-var osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
 var map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 13 });
-// Initialise the FeatureGroup to store editable layers
-var vectorZones = L.featureGroup().addTo(map);
-var controlLayer = L.control.layers({
-    'osm': osm.addTo(map),
-    'google': L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', { attribution: 'Google' })
-}, {
-    'vector zones': vectorZones,
-}, { position: 'topright', collapsed: false
-});
-controlLayer.addTo(map);
-//Add controls with options to control 
-map.addControl(new L.Control.Draw({
-    position: 'topleft',
-    edit: {
-        featureGroup: vectorZones,
-        poly: {
-            allowIntersection: false
-        }
-    },
-    draw: {
-        polygon: {
-            allowIntersection: false,
-            showArea: true,
-            drawError: {
-                color: '#e1e100',
-                message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-            },
-            shapeOptions: {
-                color: '#97009c'
-            }
-        },
-        marker: false,
-        circlemarker: false,
+var Map = /** @class */ (function () {
+    function Map() {
+        this.ZoneObj = new Zone_1.Zone();
+        this.vectorZones = L.featureGroup().addTo(map);
+        this.audioZones = [];
+        //getAudioZones()
     }
-}));
-map.on(L.Draw.Event.CREATED, function (e) {
-    //console.log(e);
-    var type = e.layerType, layer = e.layer, coords = layer._latlngs, center_point = '', radius = '', color = '', label = '', visibility = 1;
-    if (type == 'circle') {
-        //getLatLng() works only for circle 
-        var latLng = layer.getLatLng();
-        radius = layer.getRadius();
-        coords = latLng;
-    }
-    else {
-        for (var i = 0; i < coords.length; i++) {
-            // console.log('deze'+ coords);
-            //vectorZone.coords = coords[i];
-            //coords = coords[i];
-            //audioZone.coords = coords[i];
-            //console.log('Coords '+ coords);
-        }
-    }
-    var audioZone = {
-        collection_id: getCurrentCollectionId(),
-        type: type,
-        layer: '',
-        coords: coords,
-        radius: radius,
-        center_point: center_point,
-        visibility: visibility,
-        label: label,
-        color: color
+    Map.prototype.initMap = function () {
+        // Set up the Open Street Map URL and attribution
+        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        var osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
+        //let map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 13 })
+        // Initialise the FeatureGroup to store editable layers
+        //let vectorZones = L.featureGroup().addTo(this.map);
+        var controlLayer = L.control.layers({
+            'osm': osm.addTo(map),
+            'google': L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', { attribution: 'Google' })
+        }, {
+            'vector zones': this.vectorZones,
+        }, { position: 'topright', collapsed: false
+        });
+        controlLayer.addTo(map);
     };
-    audioZones.push(audioZone);
-    //console.log(audioZones);
-    // Add item to vector layer 
-    vectorZones.addLayer(layer);
-});
-/*** Store all the audio zones to DB  ***/
-var saveBtn = document.getElementById('saveCollection');
-saveBtn.addEventListener('click', function () {
-    //storeAudioZone(audioZones);  
-    ZoneObj.storeAudioZone(audioZones);
-});
-function getAudioZones() {
-    var id = getCurrentCollectionId();
-    var list = {};
-    var data = axios_1.default.get('/audioZones/' + id)
-        .then(function (res) {
-        // handle success
-        //console.log(res.data);
-        //return res.data;
-        drawZones(res.data);
-    })
-        .catch(function (error) {
-        // handle error
-        console.log(error);
-    });
-    return list;
-}
-getAudioZones();
-function drawZones(data) {
-    var audioZones = data;
-    //console.log(audioZones)
-    for (var i = 0; i < audioZones.length; i++) {
-        var shape = audioZones[i].shape_type;
-        var radius = audioZones[i].radius;
-        var coords_1 = audioZones[i].coords;
-        var color = audioZones[i].color;
-        switch (audioZones[i].shape_type) {
-            case 'circle':
-                drawCircle(coords_1, radius, color);
-                break;
-            default:
-                drawPolygon(coords_1, color);
+    Map.prototype.drawMapControl = function () {
+        //Add controls with options to control 
+        map.addControl(new L.Control.Draw({
+            position: 'topleft',
+            edit: {
+                featureGroup: this.vectorZones,
+                poly: {
+                    allowIntersection: false
+                }
+            },
+            draw: {
+                polygon: {
+                    allowIntersection: false,
+                    showArea: true,
+                    drawError: {
+                        color: '#e1e100',
+                        message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+                    },
+                    shapeOptions: {
+                        color: '#97009c'
+                    }
+                },
+                marker: false,
+                circlemarker: false,
+            }
+        }));
+    };
+    Map.prototype.getCurrentCollectionId = function () {
+        return document.getElementById('collection_info').dataset.id;
+    };
+    Map.prototype.drawZones = function (data) {
+        var audioZones = data;
+        //console.log(audioZones)
+        for (var i = 0; i < audioZones.length; i++) {
+            var shape = audioZones[i].shape_type;
+            var radius = audioZones[i].radius;
+            var coords_1 = audioZones[i].coords;
+            var color = audioZones[i].color;
+            switch (audioZones[i].shape_type) {
+                case 'circle':
+                    this.drawCircle(coords_1, radius, color);
+                    break;
+                default:
+                    this.drawPolygon(coords_1, color);
+            }
         }
-    }
-}
-function drawCircle(coords, radius, color) {
-    var lat = coords[0].lat;
-    var lng = coords[0].lng;
-    L.circle([lat, lng], { radius: radius }).addTo(vectorZones);
-}
-function drawPolygon(coords, color) {
-    console.log('draw polygon');
-    //console.log(coords)
-    var data = [];
-    for (var i = 0; i < coords.length; i++) {
-        var lat = coords[i].lat;
-        var lng = coords[i].lng;
-        data.push([lat, lng]);
-    }
-    L.polygon(data, { color: 'red' }).addTo(vectorZones);
-}
-// create popup contents
-var customPopup = "<h6>Add Audio </h6>";
-// specify popup options 
-var customOptions = {
-    'maxWidth': '600',
-    'className': 'custom popup audioPopup'
+    };
+    Map.prototype.drawCircle = function (coords, radius, color) {
+        var lat = coords[0].lat;
+        var lng = coords[0].lng;
+        L.circle([lat, lng], { radius: radius }).addTo(this.vectorZones);
+    };
+    Map.prototype.drawPolygon = function (coords, color) {
+        console.log('draw polygon');
+        //console.log(coords)
+        var data = [];
+        for (var i = 0; i < coords.length; i++) {
+            var lat = coords[i].lat;
+            var lng = coords[i].lng;
+            data.push([lat, lng]);
+        }
+        L.polygon(data, { color: 'red' }).addTo(this.vectorZones);
+    };
+    Map.prototype.getAudioZones = function () {
+        var id = this.getCurrentCollectionId();
+        var list = {};
+        var data = axios_1.default.get('/audioZones/' + id)
+            .then(function (res) {
+            this.drawZones(res.data);
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return list;
+    };
+    return Map;
+}());
+exports.Map = Map;
+window.onload = function () {
+    var ZoneObj = new Zone_1.Zone();
+    var MapObj = new Map();
+    //Draw audioZones on map 
+    MapObj.getAudioZones();
+    map.on(L.Draw.Event.CREATED, function (e) {
+        //console.log(e);
+        var type = e.layerType, layer = e.layer, coords = layer._latlngs, center_point = '', radius = '', color = '', label = '', visibility = 1;
+        if (type == 'circle') {
+            //getLatLng() works only for circle 
+            var latLng = layer.getLatLng();
+            radius = layer.getRadius();
+            coords = latLng;
+        }
+        else {
+            for (var i = 0; i < coords.length; i++) {
+                // console.log('deze'+ coords);
+                //vectorZone.coords = coords[i];
+                //coords = coords[i];
+                //audioZone.coords = coords[i];
+                //console.log('Coords '+ coords);
+            }
+        }
+        var audioZone = {
+            collection_id: map.getCurrentCollectionId(),
+            type: type,
+            layer: '',
+            coords: coords,
+            radius: radius,
+            center_point: center_point,
+            visibility: visibility,
+            label: label,
+            color: color
+        };
+        map.audioZones.push(audioZone);
+        //console.log(audioZones);
+        // Add item to vector layer 
+        map.vectorZones.addLayer(layer);
+    });
+    /*** Store all the audio zones to DB  ***/
+    var saveBtn = document.getElementById('saveCollection');
+    saveBtn.addEventListener('click', function () {
+        //storeAudioZone(audioZones);  
+        ZoneObj.storeAudioZone(map.audioZones);
+    });
 };
-vectorZones.on("click", function (e) {
-    var layer = e.layer;
-    var type = e.layerType;
-    //console.log(e)
-    layer.bindPopup(customPopup, customOptions).openPopup();
-});
-//Handle click on polygon
-var onPolyClick = function (e) {
-    console.log('Polygon clicked ' + e);
-};
-vectorZones.on('click', onPolyClick);
-function getCurrentCollectionId() {
-    return document.getElementById('collection_info').dataset.id;
-}
-//Loop trough all audio zones 
-function loopAudioZones() {
-    for (var i = 0; i < audioZones.length; i++) {
-        console.log(audioZones[i].type);
-    }
-}
-function deleteAudioZone(index) {
-    delete audioZones[index];
-}
 
 
 /***/ })
