@@ -5,9 +5,8 @@
 @endsection
 
 @section('content')
-
     <div class="container">
-        <h3 class="collection-intro">Welcome {{ $user->name }} </h3>
+        <h3 class="collection-intro">{{ __('app.welcome') }} {{ $user->name }} </h3>
 
         @if($collections->isEmpty())
             <div id="emptyState">

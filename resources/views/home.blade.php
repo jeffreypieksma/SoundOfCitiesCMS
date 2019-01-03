@@ -31,6 +31,12 @@
             <div>
         </div>
     </div>
+    <section id="">
+        <h1>testing language </h1>
+
+         @include('includes.languageSwitcher')
+
+    </section>
 
     <style>
         .full-height{

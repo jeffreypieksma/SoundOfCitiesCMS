@@ -20,7 +20,12 @@ Route::get('logout', function (){
 	return redirect('/login');
 });
 
+Route::get('locale/{locale}', function ($locale) {
+	Session::put('locale', $locale);
+	return redirect()->back();
+});
 
+//Route::post('translations/switchLocale}', ['as' => 'translations.switch', 'uses' => 'Translation\TranslationController@switchLocale']);
 
 Route::group(['middleware' => ['auth'] ], function () {
 	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');

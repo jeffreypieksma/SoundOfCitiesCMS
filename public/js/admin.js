@@ -88,6 +88,7 @@ $(document).ready(function () {
     $('.modal').modal();
 
     $('.sidenav').sidenav();
+    $('select').formSelect();
 
     $(".dropdown-trigger").dropdown();
 

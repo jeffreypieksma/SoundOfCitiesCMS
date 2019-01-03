@@ -7,7 +7,7 @@ return [
     | App Language Lines
     |--------------------------------------------------------------------------
     */
-
+    'test' => 'English',
     'title' => 'Title',
     'description' => 'Description',
     'dashboard' => 'Dashboard',

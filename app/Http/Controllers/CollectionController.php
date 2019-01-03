@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Storage;
 
 class CollectionController extends Controller
 {
+    public function __construct() {
+        \App::setLocale('en');
+    }
 
     public function index(){
         $user = Auth::user(['id','name','email']);
