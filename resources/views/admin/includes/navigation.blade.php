@@ -4,17 +4,27 @@
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       
       <ul class="right hide-on-med-and-down">
-        <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="{{ route('dashboard') }}">{{ __('app.dashboard') }}</a></li>
-        {{-- <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="/admin/users/">Users</a></li> --}}
+        {{-- <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="{{ route('dashboard') }}">{{ __('app.dashboard') }}</a></li> --}}
+        <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="{{ route('collections') }}">{{ __('app.collections') }}</a></li>
+        
+        <li>
+            <a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ session('locale') }}
+            <i class="material-icons right">arrow_drop_down</i></a>
+        </li>
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/locale/en" class="{{ session('locale') === "en" ? "active" : "" }}">English</a></li>
+            <li><a href="/locale/nl" class="{{ session('locale') === "nl" ? "active" : "" }}">Nederlands</a></li>
+        </ul>
+
         @guest
             <li class="{{ $current_route_name == 'login' ? 'active' : '' }}"><a href="{{ route('login') }}">{{ __('app.login') }}</a></li>
             <li class="{{ $current_route_name == 'register' ? 'active' : '' }}"><a href="{{ route('register') }}">{{ __('app.register') }}</a></li>
         @else
             <li>
-                <a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ Auth::user()->name }}
+                <a class="dropdown-trigger" href="#!" data-target="dropdown2">{{ Auth::user()->name }}
                 <i class="material-icons right">arrow_drop_down</i></a>
             </li>
-            <ul id="dropdown1" class="dropdown-content">
+            <ul id="dropdown2" class="dropdown-content">
                 <li><a href="{{ route('logout') }}">{{ __('app.logout') }}</a></li>
             </ul>
         @endguest
