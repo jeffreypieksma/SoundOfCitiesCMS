@@ -1854,8 +1854,9 @@ var Zone = /** @class */ (function () {
     };
     Zone.prototype.addAudioToZone = function () {
         var collection_id = this.collection_id;
-        var audio_zone_id = document.getElementById('audio_zone_id').value;
-        //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
+        var audio_zone_id = window.location.hash.substr(1);
+        console.log('audio_zone_id ' + audio_zone_id);
+        //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
         var track_id = document.getElementById('audio_file').value;
         var volumeControl = document.getElementById('audio_volume_control').value;
         var fadeIn = document.getElementById('audio_fadeIn').value;
@@ -1884,17 +1885,25 @@ window.onload = function () {
     var ZoneObj = new Zone();
     var addAudioBtn = document.getElementById('add-audio');
     addAudioBtn.addEventListener('click', function (event) {
-        console.log('audio btn');
+        var audioPopup = document.getElementById('audio-modal');
+        audioPopup.classList.remove('open');
         event.preventDefault();
+        console.log('audio btn');
         ZoneObj.addAudioToZone();
     });
+    $(".layer-item").on('click', function (event) {
+        var audioPopup = document.getElementById('audio-modal');
+        audioPopup.classList.remove('close');
+        audioPopup.classList.add('open');
+        this.classList.add("active");
+    });
+    var cancel_modal = document.getElementById('cancel-modal');
+    cancel_modal.addEventListener('click', function (event) {
+        event.preventDefault();
+        var audioPopup = document.getElementById('audio-modal');
+        audioPopup.classList.add('close');
+    });
 };
-$(".modal-trigger").on('click', function () {
-    console.log('yup');
-});
-function test() {
-    alert('haai');
-}
 
 
 /***/ }),

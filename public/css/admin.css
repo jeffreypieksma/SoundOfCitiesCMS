@@ -51,7 +51,7 @@ html body .color-white {
 }
 
 html body .color-black {
-  color: #FFFFFF;
+  color: #2B2626;
 }
 
 html body .background-primary {
@@ -71,7 +71,7 @@ html body .background-white {
 }
 
 html body .background-black {
-  background: #FFFFFF;
+  background: #2B2626;
 }
 
 nav .nav-wrapper {
@@ -101,8 +101,9 @@ body {
 #layers {
   width: 15%;
   float: right;
+  padding: 20px;
   height: calc(100vh - 64px);
-  background-color: #333;
+  background-color: #fff;
   color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -142,6 +143,27 @@ body {
 #layers ul li:hover {
   color: #f1f1f1;
   cursor: pointer;
+}
+
+.audioPopup {
+  display: none;
+  position: fixed;
+  background: #fff;
+  left: 100px;
+  padding: 20px;
+  width: 40%;
+  height: 100%;
+  bottom: 0;
+  top: 64px;
+  overflow: auto;
+}
+
+.audioPopup.open {
+  display: block;
+}
+
+.audioPopup.close {
+  display: none;
 }
 
 #create-collection {

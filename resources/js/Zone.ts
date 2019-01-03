@@ -27,10 +27,12 @@ export class Zone {
     }
 
     addAudioToZone() {     
-        const collection_id = this.collection_id;
-        let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
+        const collection_id = this.collection_id; 
+        const audio_zone_id = window.location.hash.substr(1);
 
-        //let title = (<HTMLInputElement>document.getElementById('audio_title')).value
+        console.log('audio_zone_id '+ audio_zone_id);
+
+        //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
         let track_id = (<HTMLInputElement>document.getElementById('audio_file')).value
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
         let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
@@ -69,20 +71,29 @@ window.onload = function () {
     const addAudioBtn: HTMLElement = document.getElementById('add-audio')
 
     addAudioBtn.addEventListener('click', function (event) {
-        console.log('audio btn')
+        const audioPopup: HTMLElement = document.getElementById('audio-modal')
+        audioPopup.classList.remove('open')
         event.preventDefault()
+        console.log('audio btn')
+       
 
         ZoneObj.addAudioToZone()
 
     });
+
+    $(".layer-item").on('click', function(event){
+        const audioPopup: HTMLElement = document.getElementById('audio-modal')
+        audioPopup.classList.remove('close')
+        audioPopup.classList.add('open')
+        this.classList.add("active")
+    });
+    
+    const cancel_modal: HTMLElement = document.getElementById('cancel-modal')
+    
+    cancel_modal.addEventListener('click', function (event) {
+        event.preventDefault()
+        const audioPopup: HTMLElement = document.getElementById('audio-modal')
+        audioPopup.classList.add('close')
+    });
   
-}
-
-
-$(".modal-trigger").on('click', function(){
-    console.log('yup')
-});
-
-function test(){
-alert('haai')
 }

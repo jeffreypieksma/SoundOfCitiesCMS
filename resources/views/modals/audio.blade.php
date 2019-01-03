@@ -1,5 +1,5 @@
 <!--Audio modal Structure -->
-<div id="audio-modal" class="modal">
+<div id="audio-modal" class="audioPopup">
     
     <div class="modal-content">
         <h4 class="color-primary">{{ __('app.audio_title') }}</h4>
@@ -7,13 +7,6 @@
         <form method="POST" id="audio-form">
             {{ csrf_field() }}
             <input type="hidden" name="audio_zone_id" value="1" id="audio_zone_id" />
-{{-- 
-            <div class="row">
-                <div class="input-field col s6">
-                    <input type="text" name="title" class="validate" id="audio_title">
-                    <label for="title">{{ __('audio.modal_tile') }}</label>
-                </div>
-            </div> --}}
             
             <div class="row">      
                 <span>{{ __('audio.select_audio_file') }}</span>
@@ -80,6 +73,14 @@
                     </button>
 
                 </div>
+                <div class="input-field col s6">                         
+                    <button class="btn waves-effect waves-light background-secondary color-white text-center" id="cancel-modal">
+                        {{ __('app.cancel') }}
+                        <i class="material-icons left">cancel</i>
+                    </button>
+
+                </div>
+               
             </div>
         </form>
 

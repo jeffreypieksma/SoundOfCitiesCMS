@@ -58,7 +58,7 @@
             
         </div>
 
-        <div id="dashboardNavigation">
+        {{-- <div id="dashboardNavigation">
             <nav>
                 <div class="nav-wrapper">
                     <a href="#!" class="brand-logo"><i class="material-icons"></i>Resonance SoundScape</a>
@@ -70,7 +70,7 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div> --}}
 
         <div class="container-fluid">
             {{-- Init the map  --}}
@@ -86,12 +86,14 @@
             @include('modals.audio')
         </div>
 
-        <div id="layers" class="animated fadeInRight fast">
+        <div id="layers" class="animated fadeInRight fast active">
             <ul class="layer">
+                <h3 class="color-primary">Layers</h3>
                 @foreach($audioZones as $audioZone)
-                    <li data-audioZone-id="{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger" id="triggerModal" click="test()">
-                       
-                        <a href="#{{ $audioZone->id }}"> Layer # {{ $audioZone->id }} </a>
+                    <li data-audioZone-id="{{ $audioZone->id }}" id="layer-item" class="layer-item">
+    
+                        <a href="#{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger"> Layer # {{ $audioZone->id }} </a>
+                         <i class="material-icons color-black">remove_circle</i>
                     </li>
                 @endforeach
             </ul>
