@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 45);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1824,7 +1824,27 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 27 */
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(41);
+
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1843,8 +1863,11 @@ var Zone = /** @class */ (function () {
     Zone.prototype.getAudioZoneId = function () {
         return this.audio_zone_id;
     };
-    Zone.prototype.setAudioZoneId = function () {
-        this.audio_zone_id = parseInt(window.location.hash.substr(1));
+    Zone.prototype.setAudioZoneId = function (audio_zone_id) {
+        this.audio_zone_id = parseInt(audio_zone_id);
+    };
+    Zone.prototype.getAudioEffectData = function () {
+        return this.audioEffectData;
     };
     Zone.prototype.storeAudioZone = function (audioZones) {
         audioZones.collection_id = this.getCurrentCollectionId();
@@ -1858,9 +1881,13 @@ var Zone = /** @class */ (function () {
             console.log(error);
         });
     };
+    /**
+         @toDo get selected audio file
+    **/
     Zone.prototype.addAudioToZone = function () {
         var collection_id = this.collection_id;
         var audio_zone_id = this.getAudioZoneId();
+        console.log('Audio Zone ID: ' + audio_zone_id);
         //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
         var track_id = document.getElementById('audio_file').value;
         var volumeControl = document.getElementById('audio_volume_control').value;
@@ -1884,13 +1911,27 @@ var Zone = /** @class */ (function () {
         });
     };
     Zone.prototype.getAudioEffects = function (id) {
-        axios_1.default.post('/audio/effects/get/' + id, {})
+        var _this = this;
+        axios_1.default.get('/audio/effects/' + id)
             .then(function (res) {
-            console.log(res);
+            if (res.data)
+                _this.setFormData(res.data);
         })
             .catch(function (error) {
             console.log(error);
         });
+    };
+    /**
+         @toDo set audio file selected
+    **/
+    Zone.prototype.setFormData = function (data) {
+        console.log(data);
+        document.getElementById('audio_file').value = data.track_id;
+        document.getElementById('audio_volume_control').value = data.volumeControl;
+        document.getElementById('audio_fadeIn').value = data.fadeIn;
+        document.getElementById('audio_fadeOut').value = data.fadeOut;
+        document.getElementById('audio_playonce').checked = data.playonce;
+        document.getElementById('audio_loopable').checked = data.loopable;
     };
     return Zone;
 }());
@@ -1903,10 +1944,12 @@ window.onload = function () {
         ZoneObj.addAudioToZone();
     });
     $(".layer-item").on('click', function (event) {
+        //Get ID from data attribute
         var audio_zone_id = $(this).attr("data-id");
-        console.log('ID: ' + audio_zone_id);
-        //Check for excisting form data 
-        ZoneObj.getAudioEffects(audio_zone_id);
+        ZoneObj.setAudioZoneId(audio_zone_id);
+        //Get audio effect from DB 
+        var data = ZoneObj.getAudioEffects(audio_zone_id);
+        console.log(data);
         $("#audio-modal").toggle();
     });
     var cancel_modal = document.getElementById('cancel-modal');
@@ -1915,30 +1958,6 @@ window.onload = function () {
         $("#audio-modal").toggle();
     });
 };
-
-
-/***/ }),
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(27);
 
 
 /***/ })

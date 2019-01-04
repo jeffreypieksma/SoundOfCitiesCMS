@@ -53,6 +53,16 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div id="toggleNavigation">
             <a class="btn-floating  waves-effect waves-light background-accent">
                 <div class="ui-layers-icon" ></div>
@@ -74,14 +84,14 @@
             @include('modals.audio')
         </div>
 
-        <div id="layers" class="animated fadeInRight fast active">
+        <div id="layers" class="animated fadeInRight fast active box-shadow-inset">
             <ul class="layer">
-                <h3 class="color-primary">Layers</h3>
+                <h3 class="color-primary text-center">Layers</h3>
                 @foreach($audioZones as $audioZone)
                     <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">
                         <li>
-                            Layer # {{ $audioZone->id }}
-                            <i class="material-icons color-black remove-layer">remove_circle</i>
+                            <span class="title">Layer # {{ $audioZone->id }}</span>
+                            <span class="remove"><i class="material-icons color-black remove-layer">remove_circle</i></span>
                         </li>
                     </a>
                 @endforeach

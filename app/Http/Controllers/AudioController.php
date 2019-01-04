@@ -22,8 +22,7 @@ class AudioController extends Controller
         
         $data = $request['data'];
 
-        //Needs more testing
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'data.track_id' => 'required|integer',
             'data.audio_zone_id' => 'required|integer',
             'data.fadeIn' => 'numeric|integer',
@@ -31,7 +30,24 @@ class AudioController extends Controller
             'data.playonce' => 'boolean',
             'data.loopable' => 'boolean',
             'data.volume' => 'numeric|integer'
-        ]);          
+        ]);
+
+        if ($validator->fails()) {
+            //return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            //return redirect()->back()->with('status', 'Succes');
+        }
+
+        //Needs more testing
+        // $validatedData = $request->validate([
+        //     'data.track_id' => 'required|integer',
+        //     'data.audio_zone_id' => 'required|integer',
+        //     'data.fadeIn' => 'numeric|integer',
+        //     'data.fadeOut' => 'numeric|integer',
+        //     'data.playonce' => 'boolean',
+        //     'data.loopable' => 'boolean',
+        //     'data.volume' => 'numeric|integer'
+        // ]);          
         
         //If there's a model matching the audio_zone_id update the model. 
         //if no matching model excists, create one. 
@@ -52,4 +68,9 @@ class AudioController extends Controller
         );
 
     }
+
+    public function getAudioEffect($id) {
+        return AudioZoneEffects::whereAudio_zone_id($id)->first();
+    }
+
 }

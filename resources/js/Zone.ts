@@ -4,6 +4,7 @@ export class Zone {
 
     collection_id: number;
     audio_zone_id: number;
+    audioEffectData: any;
 
     getCurrentCollectionId() {
         return this.collection_id
@@ -17,8 +18,12 @@ export class Zone {
         return this.audio_zone_id
     }
 
-    setAudioZoneId() {
-        this.audio_zone_id = parseInt(window.location.hash.substr(1));
+    setAudioZoneId(audio_zone_id) {
+        this.audio_zone_id = parseInt(audio_zone_id)
+    }
+
+    getAudioEffectData() {
+        return this.audioEffectData;
     }
 
     storeAudioZone(audioZones) {
@@ -35,9 +40,14 @@ export class Zone {
         })
     }
 
+    /**
+         @toDo get selected audio file 
+    **/
     addAudioToZone() {     
         const collection_id = this.collection_id
         const audio_zone_id = this.getAudioZoneId()
+
+        console.log('Audio Zone ID: '+ audio_zone_id)
 
         //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
         let track_id = (<HTMLInputElement>document.getElementById('audio_file')).value
@@ -71,15 +81,30 @@ export class Zone {
 
     getAudioEffects(id) {
 
-        axios.post('/audio/effects/get/'+id, {
-  
-        })
+        axios.get('/audio/effects/'+id)
         .then(res => {
-            console.log(res)
+            if(res.data) this.setFormData(res.data)
+            
         })
         .catch(error => {
             console.log(error)
         })
+    }
+
+    /**
+         @toDo set audio file selected 
+    **/
+    setFormData(data) {
+        console.log(data);
+
+        (<HTMLInputElement>document.getElementById('audio_file')).value = data.track_id;
+
+        (<HTMLInputElement>document.getElementById('audio_volume_control')).value = data.volumeControl;
+        (<HTMLInputElement>document.getElementById('audio_fadeIn')).value = data.fadeIn;
+        (<HTMLInputElement>document.getElementById('audio_fadeOut')).value =  data.fadeOut;
+        (<HTMLInputElement>document.getElementById('audio_playonce')).checked = data.playonce;
+        (<HTMLInputElement>document.getElementById('audio_loopable')).checked = data.loopable;
+
     }
     
 }
@@ -97,20 +122,19 @@ window.onload = function () {
     });
 
     $(".layer-item").on('click', function(event){ 
+        //Get ID from data attribute
         const audio_zone_id = $(this).attr("data-id")
-        console.log('ID: '+ audio_zone_id)
+        ZoneObj.setAudioZoneId(audio_zone_id)
 
-        //Check for excisting form data 
-
-        ZoneObj.getAudioEffects(audio_zone_id)
-
+        //Get audio effect from DB 
+        let data = ZoneObj.getAudioEffects(audio_zone_id)
+        console.log(data)
 
         $( "#audio-modal" ).toggle()
        
     });
     
     const cancel_modal: HTMLElement = document.getElementById('cancel-modal')
-    
     cancel_modal.addEventListener('click', function (event) {
         event.preventDefault()
         $( "#audio-modal" ).toggle();

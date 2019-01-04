@@ -23,7 +23,6 @@ body {
 #layers {
   width: 15%;
   float: right;
-  padding: 20px;
   height: calc(100vh - 64px);
   background-color: #fff;
   color: #fff;
@@ -38,26 +37,42 @@ body {
     position: fixed;
     right:0;
 }
-.ui-layers-icon{
-    background-image: url("/icons/ui_layers.png");
-    width: 40px;
-    height: 40px;
-    background-repeat: no-repeat;
+.ui-layers-icon {
+  background-image: url("/icons/ui_layers.png");
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
 }
 
 #layers ul li {
-  padding: 20px 10px;
-  border-bottom: 1px solid #ccc;
+  padding-left: 10px;
+  height:50px;
+  vertical-align: middle;
+  line-height: 50px;
+  //border-bottom: 1px solid #ccc;
 }
 
-#layers ul li:first-child{
-  border-top:1px solid #ccc;
+#layers ul li:first-child {
+  //border-top: 1px solid;
 }
 
-#layers ul li:hover {
-  color: #f1f1f1;
+#layers ul li:hover{
+  color: #000;
   cursor: pointer;
+  background-color:#f1f1f1;
 }
+
+#layers .layer-item .title {
+ font-size:1.3rem;
+  color:#553F92;
+}
+
+#layers .layer-item .remove {
+  position: absolute;
+  right:20px;
+  margin-top:15px;
+}
+ 
 
 .audioPopup{
   display: none;

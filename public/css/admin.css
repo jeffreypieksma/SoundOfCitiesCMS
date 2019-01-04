@@ -74,6 +74,15 @@ html body .background-black {
   background: #2B2626;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.box-shadow-inset {
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 nav .nav-wrapper {
   background-color: #553F92 !important;
 }
@@ -105,7 +114,6 @@ body {
 #layers {
   width: 15%;
   float: right;
-  padding: 20px;
   height: calc(100vh - 64px);
   background-color: #fff;
   color: #fff;
@@ -136,17 +144,27 @@ body {
 }
 
 #layers ul li {
-  padding: 20px 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-#layers ul li:first-child {
-  border-top: 1px solid #ccc;
+  padding-left: 10px;
+  height: 50px;
+  vertical-align: middle;
+  line-height: 50px;
 }
 
 #layers ul li:hover {
-  color: #f1f1f1;
+  color: #000;
   cursor: pointer;
+  background-color: #f1f1f1;
+}
+
+#layers .layer-item .title {
+  font-size: 1.3rem;
+  color: #553F92;
+}
+
+#layers .layer-item .remove {
+  position: absolute;
+  right: 20px;
+  margin-top: 15px;
 }
 
 .audioPopup {

@@ -1,12 +1,11 @@
 <!--Audio modal Structure -->
-<div id="audio-modal" class="audioPopup">
+<div id="audio-modal" class="audioPopup box-shadow-inset">
     
     <div class="modal-content">
         <h4 class="color-primary">{{ __('app.audio_title') }}</h4>
         <p class="subtitle">{{ __('app.select_audio') }}</p>
         <form method="POST" id="audio-form">
             {{ csrf_field() }}
-            <input type="hidden" name="audio_zone_id" value="1" id="audio_zone_id" />
             
             <div class="row">      
                 <span>{{ __('audio.select_audio_file') }}</span>
@@ -18,8 +17,7 @@
                                 <input type="radio" class="with-gap" name="audioFile" value="{{ $audioFile->id }}" id="audio_file" />
                                 <span for="audioFile">{{ $audioFile->audio_url }}</span>
     
-                            </label>   
-                            
+                            </label>             
                         </li>
                     @endforeach
                     
@@ -86,7 +84,7 @@
 
     </div>
 
-    <div class="modal-footer">
+    {{-- <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">{{ __('app.cancel') }}</a>
-    </div>
+    </div> --}}
 </div>

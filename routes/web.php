@@ -41,7 +41,8 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
 	//AudioZoneController
-	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZone');
+	
+	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZones');
 	Route::post('/audioZones/track/create', 'AudioZoneController@addTrackToZone')->name('addTrack_audioZones');
 	Route::post('/audioZones/create', 'AudioZoneController@createZones')->name('create_audioZones');
 	//Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth'] ], function () {
 
 	//AudioController
 	Route::post('/audio/effects/create', 'AudioController@addEffectsToAudio')->name('add_effects_to_audio');
+	Route::get('/audio/effects/{id}', 'AudioController@getAudioEffect')->name('get_audio_effects');
 
 });
 
