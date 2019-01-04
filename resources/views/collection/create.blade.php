@@ -22,21 +22,21 @@
             <div class="row">
                 <div class="input-field col s6">
                     <input id="collection_title" type="text" name="title" class="validate" value="{{ old('title') }}" required>
-                    <label for="collection_title">{{ __('collection.title') }}</label>
+                    <label for="collection_title">{{ __('app.collection_title') }}</label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s6">
                     <input id="collection_description" type="text" name="description" class="validate" value="{{ old('description') }}">
-                    <label for="collection_description">{{ __('collection.description') }}</label>
+                    <label for="collection_description">{{ __('app.collection_description') }}</label>
                 </div>
             </div>     
 
              <div class="row">
                 <div class="file-field input-field col s6">
                     <div class="btn">
-                        <span>Upload multiple audio files</span>
+                        <span>{{ __('app.upload_audio_files') }}</span>
                 
                         <input type="file" name="audio[]" id="audio-files" multiple required/>
                     </div>
@@ -64,6 +64,6 @@
 
 @section('scripts')
 
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <script src="{{ asset('js/admin.js') }}"></script>
+    
 @endsection

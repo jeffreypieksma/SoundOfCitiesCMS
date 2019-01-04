@@ -49,7 +49,7 @@
              <div class="row">
                 <div class="file-field input-field col s6">
                     <div class="btn">
-                        <span>Upload multiple audio files</span>
+                        <span>{{ __('app.upload_audio_files') }}</span>
                 
                         <input type="file" name="audio[]" id="audio-files" multiple/>
                     </div>

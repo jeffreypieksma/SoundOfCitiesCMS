@@ -34,8 +34,8 @@
                             <tr>
                                 <td>  <a href="/dashboard/{{$collection->id}}"> {{ $collection->title }}</a> </td>
                                 <td> {{ $collection->created_at}} </td>
-                                <td> <a href="/dashboard/{{ $collection->id }}">View</a> </td>
-                                <td> <a href="/collection/update/{{ $collection->id }}">Edit</a> </td>
+                                <td> <a href="/dashboard/{{ $collection->id }}">{{ __('app.view') }}</a> </td>
+                                <td> <a href="/collection/update/{{ $collection->id }}">{{ __('app.edit') }}</a> </td>
 
                                 {{-- {{ route('update_collections', ['id' => $collection->id]) }} --}}
                             </tr>
@@ -57,6 +57,6 @@
 
 @section('scripts')
 
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <script src="{{ asset('js/admin.js') }}"></script>
+    
 @endsection

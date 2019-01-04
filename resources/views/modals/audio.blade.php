@@ -8,7 +8,7 @@
             {{ csrf_field() }}
             
             <div class="row">      
-                <span>{{ __('audio.select_audio_file') }}</span>
+                <span>{{ __('app.select_audio_file') }}</span>
                 <ul class="select-audio-file-list">
                    
                     @foreach($audioFiles as $audioFile)
@@ -26,7 +26,7 @@
 
             <div class="row">
                
-                <span>{{ __('audio.volume_control') }}</span>
+                <span>{{ __('app.volume_control') }}</span>
                 <p class="range-field">
                     <input type="range" id="audio_volume_control" min="0" max="100" />
                 </p>
@@ -34,14 +34,14 @@
 
             <div class="row">
                <div class="col s6">
-                    <span>{{ __('audio.fadeIn') }}</span>
+                    <span>{{ __('app.fadeIn') }}</span>
                     <p class="range-field">
                         <input type="range" id="audio_fadeIn" min="0" max="100" />
                     </p>
                 </div>
                 <div class="col s6">
                 
-                    <span>{{ __('audio.fadeOut') }}</span>
+                    <span>{{ __('app.fadeOut') }}</span>
                     <p class="range-field">
                         <input type="range" id="audio_fadeOut" min="0" max="100" />
                     </p>
@@ -51,14 +51,14 @@
             <div class="row">
                 <label>
                     <input type="checkbox" class="filled-in" id="audio_loopable" />
-                    <span>{{ __('audio.loopable') }}</span>
+                    <span>{{ __('app.loopable') }}</span>
                 </label>
             </div>
 
             <div class="row">
                 <label>
                     <input type="checkbox" class="filled-in" id="audio_playonce" />
-                    <span>{{ __('audio.playonce') }}</span>
+                    <span>{{ __('app.playonce') }}</span>
                 </label>
             </div>
      

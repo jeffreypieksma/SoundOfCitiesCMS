@@ -86,12 +86,15 @@
 
         <div id="layers" class="animated fadeInRight fast active box-shadow-inset">
             <ul class="layer">
-                <h3 class="color-primary text-center">Layers</h3>
+                <h3 class="color-primary text-center">{{ __('app.layers') }}</h3>
                 @foreach($audioZones as $audioZone)
                     <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">
                         <li>
-                            <span class="title">Layer # {{ $audioZone->id }}</span>
-                            <span class="remove"><i class="material-icons color-black remove-layer">remove_circle</i></span>
+                            <span class="title">{{ __('app.layer') }} {{ $audioZone->id }}</span>
+                            <span class="remove tooltip">
+                                <i class="material-icons color-black remove-layer">remove_circle</i>
+                                 <span class="tooltiptext">{{ __('app.tooltip_remove_layer') }}</span>
+                            </span>
                         </li>
                     </a>
                 @endforeach
