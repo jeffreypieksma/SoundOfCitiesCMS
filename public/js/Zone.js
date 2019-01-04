@@ -1840,6 +1840,12 @@ var Zone = /** @class */ (function () {
     Zone.prototype.setCurrentCollectionId = function () {
         this.collection_id = parseInt(document.getElementById('collection_info').dataset.id);
     };
+    Zone.prototype.getAudioZoneId = function () {
+        return this.audio_zone_id;
+    };
+    Zone.prototype.setAudioZoneId = function () {
+        this.audio_zone_id = parseInt(window.location.hash.substr(1));
+    };
     Zone.prototype.storeAudioZone = function (audioZones) {
         audioZones.collection_id = this.getCurrentCollectionId();
         axios_1.default.post('/audioZones/create', {
@@ -1854,8 +1860,7 @@ var Zone = /** @class */ (function () {
     };
     Zone.prototype.addAudioToZone = function () {
         var collection_id = this.collection_id;
-        var audio_zone_id = window.location.hash.substr(1);
-        console.log('audio_zone_id ' + audio_zone_id);
+        var audio_zone_id = this.getAudioZoneId();
         //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
         var track_id = document.getElementById('audio_file').value;
         var volumeControl = document.getElementById('audio_volume_control').value;
@@ -1878,6 +1883,15 @@ var Zone = /** @class */ (function () {
             console.log(error);
         });
     };
+    Zone.prototype.getAudioEffects = function (id) {
+        axios_1.default.post('/audio/effects/get/' + id, {})
+            .then(function (res) {
+            console.log(res);
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
     return Zone;
 }());
 exports.Zone = Zone;
@@ -1885,23 +1899,20 @@ window.onload = function () {
     var ZoneObj = new Zone();
     var addAudioBtn = document.getElementById('add-audio');
     addAudioBtn.addEventListener('click', function (event) {
-        var audioPopup = document.getElementById('audio-modal');
-        audioPopup.classList.remove('open');
         event.preventDefault();
-        console.log('audio btn');
         ZoneObj.addAudioToZone();
     });
     $(".layer-item").on('click', function (event) {
-        var audioPopup = document.getElementById('audio-modal');
-        audioPopup.classList.remove('close');
-        audioPopup.classList.add('open');
-        this.classList.add("active");
+        var audio_zone_id = $(this).attr("data-id");
+        console.log('ID: ' + audio_zone_id);
+        //Check for excisting form data 
+        ZoneObj.getAudioEffects(audio_zone_id);
+        $("#audio-modal").toggle();
     });
     var cancel_modal = document.getElementById('cancel-modal');
     cancel_modal.addEventListener('click', function (event) {
         event.preventDefault();
-        var audioPopup = document.getElementById('audio-modal');
-        audioPopup.classList.add('close');
+        $("#audio-modal").toggle();
     });
 };
 

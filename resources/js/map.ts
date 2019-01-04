@@ -185,7 +185,6 @@ vectorZones.on("click", function (e) {
     layer.bindPopup(customPopup,customOptions).openPopup();
 });
 
-
 // //Loop trough all audio zones 
 // function loopAudioZones() {
 //     for (var i=0; i < audioZones.length; i++) {

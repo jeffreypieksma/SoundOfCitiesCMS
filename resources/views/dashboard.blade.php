@@ -78,11 +78,12 @@
             <ul class="layer">
                 <h3 class="color-primary">Layers</h3>
                 @foreach($audioZones as $audioZone)
-                    <li data-audioZone-id="{{ $audioZone->id }}" id="layer-item" class="layer-item">
-    
-                        <a href="#{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger"> Layer # {{ $audioZone->id }} </a>
-                        <i class="material-icons color-black remove-layer">remove_circle</i>
-                    </li>
+                    <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">
+                        <li>
+                            Layer # {{ $audioZone->id }}
+                            <i class="material-icons color-black remove-layer">remove_circle</i>
+                        </li>
+                    </a>
                 @endforeach
             </ul>
         </div>  
@@ -95,7 +96,7 @@
 
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
-    <script src="{{ asset('js/audioZone.js') }}"></script>
+    <script src="{{ asset('js/Zone.js') }}"></script>
     <script src="{{ asset('js/tests.js') }}"></script>
 
 @endsection

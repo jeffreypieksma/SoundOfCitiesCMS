@@ -40,7 +40,6 @@ class AudioZoneController extends Controller
     public function createZones(Request $request) {
         $audioZones = $request->audioZones;
 
-
         if( count($audioZones) > 0 ) {
 
             $validatedData = $request->validate([
@@ -83,11 +82,10 @@ class AudioZoneController extends Controller
                         }                      
                     }      
                 }
-            }
-           // return redirect('dashboard')->with('status', 'Profile updated!');
-
-            return redirect()->route('map', [$zone['collection_id']])->with('status', 'Updated map');
+            } 
         }
+        return redirect()->route('map', [$zone['collection_id']])->with('status', 'Updated map');
+
     }
 
     /*

@@ -3,6 +3,7 @@ import axios from 'axios'
 export class Zone {
 
     collection_id: number;
+    audio_zone_id: number;
 
     getCurrentCollectionId() {
         return this.collection_id
@@ -10,6 +11,14 @@ export class Zone {
 
     setCurrentCollectionId() {
         this.collection_id = parseInt(document.getElementById('collection_info').dataset.id)
+    }
+
+    getAudioZoneId() {
+        return this.audio_zone_id
+    }
+
+    setAudioZoneId() {
+        this.audio_zone_id = parseInt(window.location.hash.substr(1));
     }
 
     storeAudioZone(audioZones) {
@@ -27,10 +36,8 @@ export class Zone {
     }
 
     addAudioToZone() {     
-        const collection_id = this.collection_id; 
-        const audio_zone_id = window.location.hash.substr(1);
-
-        console.log('audio_zone_id '+ audio_zone_id);
+        const collection_id = this.collection_id
+        const audio_zone_id = this.getAudioZoneId()
 
         //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
         let track_id = (<HTMLInputElement>document.getElementById('audio_file')).value
@@ -61,39 +68,53 @@ export class Zone {
             console.log(error)
         })
     }
+
+    getAudioEffects(id) {
+
+        axios.post('/audio/effects/get/'+id, {
+  
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
     
 }
-
 window.onload = function () {  
+
 
     let ZoneObj = new Zone()
 
     const addAudioBtn: HTMLElement = document.getElementById('add-audio')
-
     addAudioBtn.addEventListener('click', function (event) {
-        const audioPopup: HTMLElement = document.getElementById('audio-modal')
-        audioPopup.classList.remove('open')
         event.preventDefault()
-        console.log('audio btn')
-       
-
+        
         ZoneObj.addAudioToZone()
 
     });
 
-    $(".layer-item").on('click', function(event){
-        const audioPopup: HTMLElement = document.getElementById('audio-modal')
-        audioPopup.classList.remove('close')
-        audioPopup.classList.add('open')
-        this.classList.add("active")
+    $(".layer-item").on('click', function(event){ 
+        const audio_zone_id = $(this).attr("data-id")
+        console.log('ID: '+ audio_zone_id)
+
+        //Check for excisting form data 
+
+        ZoneObj.getAudioEffects(audio_zone_id)
+
+
+        $( "#audio-modal" ).toggle()
+       
     });
     
     const cancel_modal: HTMLElement = document.getElementById('cancel-modal')
     
     cancel_modal.addEventListener('click', function (event) {
         event.preventDefault()
-        const audioPopup: HTMLElement = document.getElementById('audio-modal')
-        audioPopup.classList.add('close')
+        $( "#audio-modal" ).toggle();
+    
     });
   
 }
