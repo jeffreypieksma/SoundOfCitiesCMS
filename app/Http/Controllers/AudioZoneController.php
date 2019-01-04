@@ -12,6 +12,7 @@ use App\AudioZone;
 use App\ZoneCoordinate;
 use App\Track;
 use DB;
+use Redirect;
 
 class AudioZoneController extends Controller
 {
@@ -38,92 +39,99 @@ class AudioZoneController extends Controller
 
     public function createZones(Request $request) {
         $audioZones = $request->audioZones;
- 
-        $validatedData = $request->validate([
-            'audioZones.collection_id.*' => 'required|integer',
-            'audioZones.type.*' => 'required|string',
-            'audioZones.layer.*' => 'required|string',
-            'zone.audioZones.coords.*' => 'required|array',
-        ]);
+
+
+        if( count($audioZones) > 0 ) {
+
+            $validatedData = $request->validate([
+                'audioZones.collection_id.*' => 'required|integer',
+                'audioZones.type.*' => 'required|string',
+                'audioZones.layer.*' => 'required|string',
+                'zone.audioZones.coords.*' => 'required|array',
+            ]);
+            
+            foreach($audioZones as $zone) {
+                $audioZone = new AudioZone;
+                $audioZone->collection_id =  $zone['collection_id'];
+                $audioZone->shape_type = $zone['type'];
+                $audioZone->radius = $zone['radius'];
+                $audioZone->label = $zone['label'];
+                $audioZone->color = $zone['color'];
+                $audioZone->visibility = $zone['visibility'];
+                $audioZone->save();
         
-        foreach($audioZones as $zone) {
-            $audioZone = new AudioZone;
-            $audioZone->collection_id =  $zone['collection_id'];
-            $audioZone->shape_type = $zone['type'];
-            $audioZone->radius = $zone['radius'];
-            $audioZone->label = $zone['label'];
-            $audioZone->color = $zone['color'];
-            $audioZone->visibility = $zone['visibility'];
-            $audioZone->save();
-   
-            $coords = $zone['coords'];
+                $coords = $zone['coords'];
 
-            if ( $zone['type'] == 'circle' ) {
+                if ( $zone['type'] == 'circle' ) {
 
-                $zoneCoordinates = new ZoneCoordinate;
-                $zoneCoordinates->audio_zones_id = $audioZone->id;
+                    $zoneCoordinates = new ZoneCoordinate;
+                    $zoneCoordinates->audio_zones_id = $audioZone->id;
 
-                $zoneCoordinates->lat = $coords['lat'];
-                $zoneCoordinates->lng = $coords['lng'];
-                $zoneCoordinates->save();
-            } else {
-                foreach ( $coords as $key => $value ) { 
-                    foreach ( $value as $v ){
-                        $zoneCoordinates = new ZoneCoordinate;
-                        $zoneCoordinates->audio_zones_id = $audioZone->id;
-                        $zoneCoordinates->lat = $v["lat"];
-                        $zoneCoordinates->lng = $v["lng"];
+                    $zoneCoordinates->lat = $coords['lat'];
+                    $zoneCoordinates->lng = $coords['lng'];
+                    $zoneCoordinates->save();
 
-                        $zoneCoordinates->save();
-                    }                      
-                }      
+                } else {
+                    foreach ( $coords as $key => $value ) { 
+                        foreach ( $value as $v ){
+                            $zoneCoordinates = new ZoneCoordinate;
+                            $zoneCoordinates->audio_zones_id = $audioZone->id;
+                            $zoneCoordinates->lat = $v["lat"];
+                            $zoneCoordinates->lng = $v["lng"];
+
+                            $zoneCoordinates->save();
+                        }                      
+                    }      
+                }
             }
+           // return redirect('dashboard')->with('status', 'Profile updated!');
+
+            return redirect()->route('map', [$zone['collection_id']])->with('status', 'Updated map');
         }
-        return redirect()->route('map', [$zone['collection_id']]);
     }
 
     /*
         Old 
     */
-    public function create(Request $request) {
+    // public function create(Request $request) {
        
-        $validatedData = $request->validate([
-            'zone.type' => 'required|string',
-            'zone.collection_id' => 'required|integer',
-        ]);
+    //     $validatedData = $request->validate([
+    //         'zone.type' => 'required|string',
+    //         'zone.collection_id' => 'required|integer',
+    //     ]);
 
-        $audioZone = new AudioZone;
-        $audioZone->collection_id = $request->zone['collection_id'];
-        $type =  $request->zone['type'];
-        $audioZone->shape_type = $type;
-        $coords = $request->zone['coords'];
-        $audioZone->save();
+    //     $audioZone = new AudioZone;
+    //     $audioZone->collection_id = $request->zone['collection_id'];
+    //     $type =  $request->zone['type'];
+    //     $audioZone->shape_type = $type;
+    //     $coords = $request->zone['coords'];
+    //     $audioZone->save();
     
-        if($type==='circle'){
-            $zoneCoordinates = new ZoneCoordinate;
-            $zoneCoordinates->audio_zones_id = $audioZone->id;
-            $zoneCoordinates->lat = $coords['lat'];
-            $zoneCoordinates->lng = $coords['lng'];
-            $zoneCoordinates->save();
-        }else{
-            foreach($coords as $key => $value) {
-                $zoneCoordinates = new ZoneCoordinate;
-                $zoneCoordinates->audio_zones_id = $audioZone->id;
+    //     if($type==='circle'){
+    //         $zoneCoordinates = new ZoneCoordinate;
+    //         $zoneCoordinates->audio_zones_id = $audioZone->id;
+    //         $zoneCoordinates->lat = $coords['lat'];
+    //         $zoneCoordinates->lng = $coords['lng'];
+    //         $zoneCoordinates->save();
+    //     }else{
+    //         foreach($coords as $key => $value) {
+    //             $zoneCoordinates = new ZoneCoordinate;
+    //             $zoneCoordinates->audio_zones_id = $audioZone->id;
     
-                $zoneCoordinates->lat = $value["lat"];
-                $zoneCoordinates->lng = $value["lng"];
+    //             $zoneCoordinates->lat = $value["lat"];
+    //             $zoneCoordinates->lng = $value["lng"];
     
-                $zoneCoordinates->save();
+    //             $zoneCoordinates->save();
                     
-            }
-        }
+    //         }
+    //     }
        
-        return $audioZone;
-        //return $audioZone;
-        //$audioZone->zoneCoordinates()->create($coords);
+    //     return $audioZone;
+    //     //return $audioZone;
+    //     //$audioZone->zoneCoordinates()->create($coords);
 
 
-    }
+    // }
 
     public function update() {
 
@@ -134,16 +142,3 @@ class AudioZoneController extends Controller
     }
 
 }
-
-// DB::transaction(function() {   
-            
-//     try {
-
-//     } catch (QueryException $e) {   
-//         DB::rollback();
-
-//     }catch (\Exception $e) {
-//         //Something else went wrong. 
-//     }
-
-// });

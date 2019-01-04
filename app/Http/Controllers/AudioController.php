@@ -21,6 +21,7 @@ class AudioController extends Controller
     public function addEffectsToAudio(Request $request) {
         
         $data = $request['data'];
+
         //Needs more testing
         $validatedData = $request->validate([
             'data.track_id' => 'required|integer',
@@ -30,16 +31,14 @@ class AudioController extends Controller
             'data.playonce' => 'boolean',
             'data.loopable' => 'boolean',
             'data.volume' => 'numeric|integer'
-        ]);  
-        
+        ]);          
         
         //If there's a model matching the audio_zone_id update the model. 
         //if no matching model excists, create one. 
+
         
         $audioZoneEffect = AudioZoneEffects::updateOrCreate(
-            [
-                'audio_zone_id' => $data['audio_zone_id']
-            ],
+            ['audio_zone_id' => $data['audio_zone_id']],
             [
                 'track_id' => $data['track_id'],
                 'audio_zone_id' => $data['audio_zone_id'],
@@ -47,7 +46,8 @@ class AudioController extends Controller
                 'fadeOut' =>  $data['fadeOut'],
                 'playonce' => $data['playonce'],
                 'loopable' => $data['loopable'],
-                'volume' => $data['volumeControl']
+                'volume' => $data['volumeControl'],
+ 
             ]
         );
 

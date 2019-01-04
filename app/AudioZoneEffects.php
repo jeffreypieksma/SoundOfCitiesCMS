@@ -8,7 +8,7 @@ class AudioZoneEffects extends Model
 {
     protected $table = 'audio_zone_effects';
 
-    protected $fillable = ['fadeIn', 'fadeOut', 'volume', 'playonce', 'loopable'];
+    protected $fillable = ['track_id', 'audio_zone_id', 'fadeIn', 'fadeOut', 'volume', 'playonce', 'loopable'];
 
     public $timestamps = false;
 

@@ -39,8 +39,6 @@
     <script src="{{ asset('js/src/ext/Polyline.Intersect.js') }}"></script>
     <script src="{{ asset('js/src/ext/TouchEvents.js') }}"></script> 
 
-    {{ csrf_field() }}
-
 @endsection
 
 @section('content')
@@ -49,28 +47,18 @@
             <div id="collection_info" data-id="{{ $collection->id }}" data-title="{{ $collection->title }}" data-created="{{ $collection->created_at }}"></div>
         </div>
 
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
         <div id="toggleNavigation">
             <a class="btn-floating  waves-effect waves-light background-accent">
-            <div class="ui-layers-icon" ></div>
-                {{-- <i class="material-icons">settings</i> --}}
-                
-            </a>
-            
+                <div class="ui-layers-icon" ></div>
+                {{-- <i class="material-icons">settings</i> --}}     
+            </a>         
         </div>
-
-        {{-- <div id="dashboardNavigation">
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo"><i class="material-icons"></i>Resonance SoundScape</a>
-                    <ul class="right hide-on-med-and-down">
-                        <li><a href="/"><i class="material-icons">1</i></a></li>
-                        <li><a href="/"><i class="material-icons">2</i></a></li>
-                        <li><a href="/"><i class="material-icons">3</i></a></li>
-                        <li><a href="/"><i class="material-icons">4</i></a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div> --}}
 
         <div class="container-fluid">
             {{-- Init the map  --}}
@@ -93,15 +81,13 @@
                     <li data-audioZone-id="{{ $audioZone->id }}" id="layer-item" class="layer-item">
     
                         <a href="#{{ $audioZone->id }}" data-target="audio-modal" class="modal-trigger"> Layer # {{ $audioZone->id }} </a>
-                         <i class="material-icons color-black">remove_circle</i>
+                        <i class="material-icons color-black remove-layer">remove_circle</i>
                     </li>
                 @endforeach
             </ul>
-        </div>
+        </div>  
 
-       
-
-    </div>
+    </section>
 
 @endsection
 

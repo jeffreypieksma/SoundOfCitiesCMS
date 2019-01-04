@@ -42,6 +42,9 @@ function drawMapControl() {
             }
         },
         draw: {
+            polyline: false,
+            marker: false,
+            circlemarker: false,
             polygon: {
                 allowIntersection: false, // Restricts shapes to simple polygons
                 showArea: true,
@@ -50,11 +53,10 @@ function drawMapControl() {
                     message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
                 },
                 shapeOptions: {
-                    color: '#97009c'
+                    color: '#553F92'
                 }
             },
-            marker: false,
-            circlemarker: false,
+        
         }
     }));
 

@@ -18,6 +18,8 @@ body {
   width: 100%;
 }
 
+.leaflet-draw-toolbar .leaflet-draw-draw-polyline{display: none; }
+
 #layers {
   width: 15%;
   float: right;
