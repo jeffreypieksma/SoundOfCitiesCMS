@@ -18,6 +18,9 @@ use App\AudioZone;
 class AudioController extends Controller
 {
     
+    /*
+        @todo check audio files 
+    **/
     public function addEffectsToAudio(Request $request) {
         
         $data = $request['data'];
@@ -33,40 +36,26 @@ class AudioController extends Controller
         ]);
 
         if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
             //return redirect()->back()->withErrors($validator)->withInput();
         }else{
-            //return redirect()->back()->with('status', 'Succes');
-        }
-
-        //Needs more testing
-        // $validatedData = $request->validate([
-        //     'data.track_id' => 'required|integer',
-        //     'data.audio_zone_id' => 'required|integer',
-        //     'data.fadeIn' => 'numeric|integer',
-        //     'data.fadeOut' => 'numeric|integer',
-        //     'data.playonce' => 'boolean',
-        //     'data.loopable' => 'boolean',
-        //     'data.volume' => 'numeric|integer'
-        // ]);          
+            //If there's a model matching the audio_zone_id update the model. 
+            //if no matching model excists, create one.      
+            $audioZoneEffect = AudioZoneEffects::updateOrCreate(
+                ['audio_zone_id' => $data['audio_zone_id']],
+                [
+                    'track_id' => $data['track_id'],
+                    'audio_zone_id' => $data['audio_zone_id'],
+                    'fadeIn' => $data['fadeIn'],
+                    'fadeOut' =>  $data['fadeOut'],
+                    'playonce' => $data['playonce'],
+                    'loopable' => $data['loopable'],
+                    'volume' => $data['volumeControl'],
+    
+                ]
+            );
+        }     
         
-        //If there's a model matching the audio_zone_id update the model. 
-        //if no matching model excists, create one. 
-
-        
-        $audioZoneEffect = AudioZoneEffects::updateOrCreate(
-            ['audio_zone_id' => $data['audio_zone_id']],
-            [
-                'track_id' => $data['track_id'],
-                'audio_zone_id' => $data['audio_zone_id'],
-                'fadeIn' => $data['fadeIn'],
-                'fadeOut' =>  $data['fadeOut'],
-                'playonce' => $data['playonce'],
-                'loopable' => $data['loopable'],
-                'volume' => $data['volumeControl'],
- 
-            ]
-        );
-
     }
 
     public function getAudioEffect($id) {
