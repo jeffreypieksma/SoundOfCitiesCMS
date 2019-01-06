@@ -1,7 +1,7 @@
 <nav id="nav-main">
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">{{ config('app.name', '') }}</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       
       <ul class="right hide-on-med-and-down">
         <li  class="{{ $current_route_name == '' ? 'active' : '' }}"><a href="/">Home</a></li>
@@ -23,16 +23,10 @@
       </ul>
     </div>
 
-    <ul class="sidenav" id="mobile-demo">
+    <ul class="sidenav" id="mobile">
         @auth
             <li><a href=""><b>Welcome: {{Auth::user()->name }} </b></a></li>
             <li class="divider"></li>
         @endauth
-    
-        
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
     </ul>
 </nav>
