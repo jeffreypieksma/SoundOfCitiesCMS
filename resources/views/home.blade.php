@@ -18,7 +18,11 @@
                             <li><a href="#app-features">App Features</a></li>
                             <li><a href="#app-cta">App</a></li>
                             <li><a href="#soundScaper">soundScaper</a></li>
-                            <li class="register-btn"><a href="/register"><span>Register</span></a></li>
+                            @if (Auth::check())
+                                 <li class="register-btn"><a href="/admin"><span>Dashboard</span></a></li>
+                            @else
+                             <li class="register-btn"><a href="/register"><span>Register</span></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
