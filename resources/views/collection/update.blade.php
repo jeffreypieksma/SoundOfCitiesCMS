@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container" id="create_collection_form" >
+    <div class="container" id="create_collection_form">
         <div id="error-wrapper">
             @if (count($errors) > 0)
                 <ul>
@@ -60,19 +60,22 @@
             </div>
 
              <div class="row">
-                <div class="input-field col s6">                         
+                <div class="input-field col s3">                         
                     <button class="btn waves-effect waves-light" type="submit" id="store-collection" name="action">{{ __('app.save') }}
                         <i class="material-icons right">send</i>
                     </button>
-
+                </div>
+                <div class="input-field col s3">  
+                    <a href="{{ route('collections') }}">
+                        <button class="btn waves-effect waves-light background-secondary color-white text-center">                
+                            {{ __('app.cancel') }}
+                            <i class="material-icons left">cancel</i>         
+                        </button>
+                    </a>
                 </div>
             </div>
         </form>
     </div>
-
-
-  <a class="btn-floating btn-large waves-effect waves-light green" id="create-collection"><i class="material-icons">add_circle</i></a>
-
 @endsection
 
 @section('scripts')

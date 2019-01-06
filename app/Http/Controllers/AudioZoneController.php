@@ -87,18 +87,11 @@ class AudioZoneController extends Controller {
                             }                      
                         }      
                     }
-                } 
-            }
-
-            // $validatedData = $request->validate([
-            //     'audioZones.collection_id.*' => 'required|integer',
-            //     'audioZones.type.*' => 'required|string',
-            //     'audioZones.layer.*' => 'required|string',
-            //     'zone.audioZones.coords.*' => 'required|array',
-            // ]);
-            
-            
+                }         
+            }   
         }
+        return response()->json('succes', 200);
+             
 
         //return redirect()->route('map', [$zone['collection_id']])->with('status', 'Updated map');
 
