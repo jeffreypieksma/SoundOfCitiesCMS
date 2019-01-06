@@ -1,0 +1,29 @@
+section{
+    position: relative;
+}
+
+.full-height{
+    min-height:100vh;
+}
+
+.half-height{
+    min-height:50vh;
+}
+
+.flex{
+    display:flex;
+}
+
+.vertical-center{      
+    justify-content: center;
+}
+
+.horizontal-center{
+    align-items: center;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

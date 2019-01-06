@@ -38,6 +38,21 @@ nav .nav-wrapper {
   background-color: #553F92 !important;
 }
 
+#nav-main {
+  margin-bottom: 40px;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+
+html body h1 {
+  margin: 0px;
+}
+
 html body .color-primary {
   color: #553F92;
 }
@@ -126,12 +141,223 @@ html body .background-black {
   opacity: 1;
 }
 
-html,
-body {
-  overflow-x: hidden;
+nav .register-btn span {
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-#nav-main {
-  margin-bottom: 40px;
+nav .brand-logo {
+  margin-left: 10px;
+}
+
+nav .register-btn:hover span {
+  background-color: #fff;
+  color: #553F92;
+}
+
+.sidenav-overlay {
+  background-color: transparent !important;
+}
+
+.content-bottom {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.content-bottom .icon {
+  font-size: 3rem;
+  color: #333;
+}
+
+section#banner {
+  background-color: #DC1F86;
+  padding-top: 40px;
+  background-color: #ddd;
+  min-height: calc(100vh - 64px);
+}
+
+section#banner .btn {
+  height: 45px;
+  line-height: 45px;
+  vertical-align: middle;
+  position: relative;
+  padding-top: 3px;
+  border-radius: 5px;
+}
+
+section#banner .btn:hover {
+  background-color: #553F92;
+}
+
+@media (min-width: 1281px) {
+  section#banner .box-left {
+    position: absolute;
+    top: 30%;
+  }
+
+  section#banner .box-right {
+    position: absolute;
+    top: 20%;
+  }
+
+  section#banner .hero-intro {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  section#banner {
+    height: 100vh !important;
+  }
+
+  section#banner img {
+    width: 50%;
+    float: left;
+  }
+}
+
+section#app-features {
+  background-color: #F59F1F;
+  background-color: #fff;
+  padding-top: 40px;
+}
+
+section#app-features .icon-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+section#app-features .icon-box img {
+  max-height: 100px;
+  height: 100px;
+}
+
+section#app-features .icon-box .icon-text {
+  color: #333;
+  font-size: 1.2rem;
+  display: block;
+  font-family: FuturaStdBook;
+}
+
+section#app-features .subtitle {
+  font-size: 1.2rem;
+}
+
+section#app-cta {
+  min-height: 100vh !important;
+  padding-top: 40px;
+  background-color: #DC1F86;
+}
+
+section#app-cta .btn {
+  margin-top: 60px;
+  height: 45px;
+  line-height: 45px;
+  vertical-align: middle;
+  position: relative;
+  padding-top: 3px;
+  border-radius: 5px;
+}
+
+section#app-cta .btn:hover {
+  background-color: #553F92;
+}
+
+section#soundScaper {
+  background-color: #553F92;
+  padding-top: 40px;
+}
+
+section#soundScaper .button {
+  margin-top: 60px;
+  width: 200px;
+}
+
+section#soundScaper .button:hover {
+  background-color: #DC1F86;
+}
+
+footer section#footer {
+  background-color: #2B2626;
+  padding-top: 40px;
+}
+
+footer section#footer h3 {
+  font-size: 1.4rem;
+}
+
+footer section#footer .s3 {
+  border: 1px solid #fff;
+}
+
+footer section#footer ul,
+footer section#footer li,
+footer section#footer a {
+  color: #fff;
+}
+
+footer section#footer a:hover {
+  color: #DC1F86;
+}
+
+footer section#footer #footer-bottom {
+  color: #f1f1f1;
+}
+
+@media (min-width: 1281px) {
+  footer section#footer #footer-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+section {
+  position: relative;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+.half-height {
+  min-height: 50vh;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.vertical-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.horizontal-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 

@@ -14787,9 +14787,10 @@ __webpack_require__(32);
 
 $(document).ready(function () {
 
-  $('.sidenav').sidenav();
-  $(".dropdown-trigger").dropdown();
-  $('select').formSelect();
+    $('.sidenav').sidenav();
+    $(".dropdown-trigger").dropdown();
+    $('select').formSelect();
+    $('.scrollspy').scrollSpy();
 });
 
 /***/ }),

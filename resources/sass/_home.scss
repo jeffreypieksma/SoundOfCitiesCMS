@@ -1,0 +1,182 @@
+
+nav .register-btn span{
+    border:1px solid #fff;
+    padding:5px 10px;
+    border-radius:5px;
+}
+
+nav .brand-logo {
+    margin-left: 10px;
+}
+
+nav .register-btn:hover span{
+    background-color:#fff;
+    color:#553F92;
+}
+
+.sidenav-overlay {
+
+    background-color: transparent !important;
+
+}
+
+.content-bottom{
+    position: absolute;
+    text-align: center;
+    left:0;
+    right:0;
+    bottom:0;
+  }
+  
+  .content-bottom .icon{
+    font-size:3rem;
+    color:#333;
+  }
+
+
+
+section#banner{
+    background-color:$accent;
+    padding-top:40px;
+    background-color:#ddd;
+    min-height:calc(100vh - 64px);
+    
+    .btn{
+        height: 45px;
+        line-height: 45px;
+        vertical-align: middle;
+        position: relative;
+        padding-top: 3px;
+        border-radius:5px;
+    }
+    .btn:hover{
+        background-color:$primary;
+    }
+
+    @media (min-width: 1281px) {
+
+        .box-left{
+            position: absolute;
+             top:30%;
+        }
+        
+        .box-right{
+            position: absolute;
+            top:20%;
+        }
+
+        .hero-intro{
+            font-size:1.2rem;
+            margin-top:20px;
+            margin-bottom:40px;
+        }
+
+    }
+
+    @media (max-width: 768px)  {
+        height:100vh !important;
+        img{
+            width: 50%;
+            float: left;
+        }
+    
+    }
+      
+
+    
+}
+
+
+section#app-features{
+    background-color:$secondary;
+    background-color:#fff;
+    padding-top:40px;
+    .icon-box{
+        text-align: center;
+        margin-bottom:20px;
+      }
+      
+      .icon-box img{
+        max-height: 100px;
+        height:100px;
+      }
+      
+      .icon-box .icon-text{
+        color:#333;
+        font-size:1.2rem;
+        display: block;
+        font-family: FuturaStdBook;
+      }
+
+      .subtitle{
+        font-size:1.2rem;
+      }
+}
+
+section#app-cta{
+    min-height:100vh !important;
+    padding-top:40px;
+    background-color:$accent;
+
+    .btn{
+        margin-top: 60px;
+        height: 45px;
+        line-height: 45px;
+        vertical-align: middle;
+        position: relative;
+        padding-top: 3px;
+        border-radius:5px;
+    }
+    .btn:hover{
+        background-color:$primary;
+    }
+}
+
+section#soundScaper{
+    background-color:$primary;
+    padding-top:40px;
+
+    .button{
+        margin-top:60px;
+        width:200px;
+    }
+    .button:hover{
+        background-color:$accent;
+    }
+}
+
+footer {
+
+    section#footer{
+        background-color:$black;
+        padding-top:40px;
+
+        h3{
+            font-size:1.4rem;  
+        }
+
+        .s3{
+            border:1px solid #fff;
+        }
+
+        ul, li, a{ color:#fff; }
+        a:hover{ color: $accent; }
+
+        #footer-bottom{
+          
+            color:#f1f1f1;
+        }
+
+        @media (min-width: 1281px) {
+            #footer-bottom{
+                position:absolute;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+
+        }
+
+    }
+
+}

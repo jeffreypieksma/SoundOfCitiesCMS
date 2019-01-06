@@ -9,14 +9,9 @@
 
 @import 'theme';
 
+@import 'home';
+
+@import 'layout'
+
 // Bootstrap
 //@import '~bootstrap/scss/bootstrap';
-
-
-html,body{
-    overflow-x:hidden;
-}
-
-#nav-main{
-    margin-bottom:40px;
-}
