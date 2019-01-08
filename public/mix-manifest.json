@@ -2,7 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
-    "/js/Zone.js": "/js/Zone.js",
+    "/js/Map.js": "/js/Map.js",
+    "/js/AudioZone.js": "/js/AudioZone.js",
     "/js/Tests.js": "/js/Tests.js",
     "/js/admin.js": "/js/admin.js"
 }

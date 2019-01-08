@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { Zone } from "./Zone"
+import { AudioZone } from "./AudioZone";
 
-let ZoneObj = new Zone();
+let ZoneObj = new AudioZone();
 
 declare let L: any
 
@@ -65,7 +65,6 @@ function drawMapControl() {
 drawMapControl()
 
 map.on(L.Draw.Event.CREATED, function (e) { 
-    //console.log(e);
 
     let type = e.layerType,
         layer = e.layer,
@@ -74,10 +73,20 @@ map.on(L.Draw.Event.CREATED, function (e) {
         radius = '',
         color  = '',
         label = '',
-        visibility = 1;
+        visibility = 1,
+        latLng = '';
+
+    if(type == 'circle') {
+
+        latLng = e.latlng || e.layer.getLatLng();
+        radius = layer.getRadius();
+
+    } else {    
+        latLng = e.latlngs || e.layer.getLatLngs();
+    }
+
+    //let latLng = layer.getLatLng();  
     
-    let latLng = layer.getLatLng();  
-    radius = layer.getRadius();
     coords = latLng;
 
     const audioZone = {
@@ -159,16 +168,16 @@ function drawZones(data) {
     }
 }
 
-window.onload = function () {  
-    /*** Store all the audio zones to DB  ***/
-    const saveBtn: HTMLElement = document.getElementById('saveCollection');
+/*** Store all the audio zones into the database and reload the page  ***/
+const saveBtn: HTMLElement = document.getElementById('saveCollection');
 
-    saveBtn.addEventListener('click', function () {
-        //storeAudioZone(audioZones);  
-        ZoneObj.storeAudioZone( audioZones )
-    });
+saveBtn.addEventListener('click', function () {    
+    ZoneObj.storeAudioZones(audioZones)  
+    document.location.reload(true)
+    
+});
 
-}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 

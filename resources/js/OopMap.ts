@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Zone } from "./Zone"
+import { AudioZone } from "./AudioZone"
 
 declare let L: any
 
@@ -7,7 +7,7 @@ let map = new L.Map('mapid', { center: new L.LatLng(53.201233, 5.799913), zoom: 
 
 export class Map {
 
-    private ZoneObj = new Zone()
+    private ZoneObj = new AudioZone()
 
     private vectorZones = L.featureGroup().addTo(map);
 
@@ -132,7 +132,7 @@ export class Map {
 }
 
 window.onload = function () {  
-    let ZoneObj = new Zone()
+    let ZoneObj = new AudioZone()
     let MapObj = new Map();
 
     //Draw audioZones on map 
@@ -194,6 +194,6 @@ window.onload = function () {
     
     saveBtn.addEventListener('click', function () {
         //storeAudioZone(audioZones);  
-        ZoneObj.storeAudioZone( map.audioZones )
+        ZoneObj.storeAudioZones( map.audioZones )
     });
 }

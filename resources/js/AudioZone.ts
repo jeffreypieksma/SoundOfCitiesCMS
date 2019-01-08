@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export class Zone {
+export class AudioZone {
 
     collection_id: number;
     audio_zone_id: number;
@@ -26,7 +26,7 @@ export class Zone {
         return this.audioEffectData;
     }
 
-    storeAudioZone(audioZones) {
+    storeAudioZones(audioZones) {
         audioZones.collection_id = this.getCurrentCollectionId()
     
         axios.post('/audioZones/create', {
@@ -47,10 +47,9 @@ export class Zone {
         const collection_id = this.collection_id
         const audio_zone_id = this.getAudioZoneId()
 
-        console.log('Audio Zone ID: '+ audio_zone_id)
+        let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
 
-        //let audio_zone_id = (<HTMLInputElement>document.getElementById('audio_zone_id')).value
-        let track_id = (<HTMLInputElement>document.getElementById('audio_file')).value
+        console.log('Track_id: '+ track_id)
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
         let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
         let fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
@@ -83,8 +82,13 @@ export class Zone {
 
         axios.get('/audio/effects/'+id)
         .then(res => {
-            if(res.data) this.setFormData(res.data)
-            
+
+            if(res.data) {
+                this.setFormData(res.data)
+            } else {
+                this.clearFormData()
+            }
+
         })
         .catch(error => {
             console.log(error)
@@ -95,9 +99,10 @@ export class Zone {
          @toDo set audio file selected 
     **/
     setFormData(data) {
-        console.log(data);
 
-        (<HTMLInputElement>document.getElementById('audio_file')).value = data.track_id;
+        if( data.track_id ) {
+            $("input[name='audioFile'][value="+ data.track_id +"]").prop('checked', true) 
+        } 
 
         (<HTMLInputElement>document.getElementById('audio_volume_control')).value = data.volumeControl;
         (<HTMLInputElement>document.getElementById('audio_fadeIn')).value = data.fadeIn;
@@ -106,12 +111,23 @@ export class Zone {
         (<HTMLInputElement>document.getElementById('audio_loopable')).checked = data.loopable;
 
     }
+
+    clearFormData() {
+
+        $("input[name='audioFile']").prop('checked', false);
+
+        (<HTMLInputElement>document.getElementById('audio_volume_control')).value = '';
+        (<HTMLInputElement>document.getElementById('audio_fadeIn')).value = '';
+        (<HTMLInputElement>document.getElementById('audio_fadeOut')).value =  '';
+        (<HTMLInputElement>document.getElementById('audio_playonce')).checked = false;
+        (<HTMLInputElement>document.getElementById('audio_loopable')).checked = false;
+    }
     
 }
 window.onload = function () {  
 
 
-    let ZoneObj = new Zone()
+    let ZoneObj = new AudioZone()
 
     const addAudioBtn: HTMLElement = document.getElementById('add-audio')
     addAudioBtn.addEventListener('click', function (event) {
@@ -126,10 +142,9 @@ window.onload = function () {
         const audio_zone_id = $(this).attr("data-id")
         ZoneObj.setAudioZoneId(audio_zone_id)
 
-        //Get audio effect from DB 
-        let data = ZoneObj.getAudioEffects(audio_zone_id)
-        console.log(data)
-
+        //Get audio effect from database 
+        ZoneObj.getAudioEffects(audio_zone_id)
+        
         $( "#audio-modal" ).toggle()
        
     });

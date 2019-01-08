@@ -77,7 +77,7 @@
             <a class="btn-floating btn-large waves-effect waves-light background-accent" id="saveCollection">
                 <i class="material-icons">save</i>
             </a>
-
+            
         </div>
 
         <div id="audioZone-popup">
@@ -109,7 +109,7 @@
 
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
-    <script src="{{ asset('js/Zone.js') }}"></script>
+    <script src="{{ asset('js/AudioZone.js') }}"></script>
     <script src="{{ asset('js/tests.js') }}"></script>
 
 @endsection
