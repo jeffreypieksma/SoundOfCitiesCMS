@@ -20,9 +20,14 @@ class Track extends Model
         return $this->belongsTo('App\Collection');
     }
 
+    // public function AudioZoneEffects()
+    // {
+    //     return $this->hasMany('App\AudioZoneEffects', 'audio_zone_id');
+    // }
+
     public function AudioZoneEffects()
     {
-        return $this->hasMany('App\AudioZoneEffects', 'audio_zone_id');
+        return $this->belongsTo('App\AudioZoneEffects', 'audio_zone_id');
     }
 
 

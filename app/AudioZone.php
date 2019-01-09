@@ -28,9 +28,18 @@ class AudioZone extends Model
         return $this->hasMany('App\Hotspot');
     }
 
+    // public function tracks()
+    // {
+    //     return $this->hasMany('App\Track');
+    // }
+
     public function tracks()
     {
-        return $this->hasMany('App\Track');
+        return $this->belongsTo('App\Track');
+    }
+
+    public function audioZoneEffects() {
+        return $this->hasMany('App\AudioZoneEffects');
     }
 
 }

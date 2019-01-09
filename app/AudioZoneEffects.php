@@ -12,9 +12,14 @@ class AudioZoneEffects extends Model
 
     public $timestamps = false;
 
-    // public function track()
-    // {
-    //     return $this->belongsTo('App\Track');
-    // }
+    public function track()
+    {
+        return $this->belongsTo('App\Track');
+    }
+
+    public function audioZone() 
+    {
+        return $this->belongsTo('App\AudioZone');
+    }
 
 }

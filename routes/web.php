@@ -25,7 +25,7 @@ Route::get('locale/{locale}', function ($locale) {
 	return redirect()->back();
 });
 
-//Route::post('translations/switchLocale}', ['as' => 'translations.switch', 'uses' => 'Translation\TranslationController@switchLocale']);
+Route::get('collection/export/{id}', 'CollectionController@export')->name('export');
 
 Route::group(['middleware' => ['auth'] ], function () {
 	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
