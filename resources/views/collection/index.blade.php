@@ -26,6 +26,7 @@
                     <th>{{ __('app.created_at') }}</th>
                     <th>{{ __('app.view') }}</th>
                     <th>{{ __('app.edit') }}</th>
+                    <th>{{ __('app.export') }}</th>
                 </tr>
                 </thead>
 
@@ -36,7 +37,7 @@
                                 <td> {{ $collection->created_at}} </td>
                                 <td> <a href="/dashboard/{{ $collection->id }}">{{ __('app.view') }}</a> </td>
                                 <td> <a href="/collection/update/{{ $collection->id }}">{{ __('app.edit') }}</a> </td>
-
+                                <td> <a href="/collection/export/{{ $collection->id }}">{{ __('app.export') }}</a> </td>
                                 {{-- {{ route('update_collections', ['id' => $collection->id]) }} --}}
                             </tr>
                         @endforeach    

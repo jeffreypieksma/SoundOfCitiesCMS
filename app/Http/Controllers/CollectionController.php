@@ -189,17 +189,20 @@ class CollectionController extends Controller
             $audioZone['coords'] = $coords;
             
             $audioZoneEffect = AudioZone::find($audioZone->id)->audioZoneEffects;
-
+            
             if(count($audioZoneEffect) > 0 ) {
-                $audioZone['effects'] = $audioZoneEffect;
 
                 $track_id = $audioZoneEffect[0]->track_id;
-                $track = Track::find($track_id);
+                $track = Track::find($track_id);   
                 $filename = $track->name;
                 $audio_url = $track->audio_url;
 
+                /* Add effects and tracks to the audioZone */
+                $audioZone['effects'] = $audioZoneEffect;
+                $audioZone['tracks'] = $track;
+
+                /* Check the collection folder and copy this to the public folder */
                 $exists = Storage::disk('local')->exists("{$folder}/{$audio_url}");
-           
                 if(!$exists) { 
                     Storage::copy("{$audio_url}", "{$folder}/{$audio_url}");
                 }

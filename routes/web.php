@@ -25,8 +25,6 @@ Route::get('locale/{locale}', function ($locale) {
 	return redirect()->back();
 });
 
-Route::get('collection/export/{id}', 'CollectionController@export')->name('export');
-
 Route::group(['middleware' => ['auth'] ], function () {
 	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
 	Route::get('dashboard/{id}', 'CollectionController@dashboardView')->name('map');
@@ -40,8 +38,9 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::post('/collection/update', 'CollectionController@update')->name('update_collections');
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
+	Route::get('collection/export/{id}', 'CollectionController@export')->name('export');
+
 	//AudioZoneController
-	
 	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZones');
 	Route::post('/audioZones/track/create', 'AudioZoneController@addTrackToZone')->name('addTrack_audioZones');
 	Route::post('/audioZones/create', 'AudioZoneController@createZones')->name('create_audioZones');
