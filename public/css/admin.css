@@ -247,6 +247,30 @@ body {
   display: none;
 }
 
+#messageWrapper {
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff;
+  display: none;
+}
+
+#messageWrapper.active {
+  display: block;
+}
+
+#messageWrapper .alert {
+  height: 100%;
+}
+
+#messageWrapper .alert-success {
+  background-color: green;
+}
+
+#messageWrapper .alert-danger {
+  background-color: red;
+}
+
 #create-collection {
   position: absolute;
   right: 20px;

@@ -1849,6 +1849,9 @@ var AudioZone = /** @class */ (function () {
     AudioZone.prototype.getAudioEffectData = function () {
         return this.audioEffectData;
     };
+    /*
+        Store all audio zones to database
+    */
     AudioZone.prototype.storeAudioZones = function (audioZones) {
         audioZones.collection_id = this.getCurrentCollectionId();
         axios_1.default.post('/audioZones/create', {
@@ -1861,23 +1864,24 @@ var AudioZone = /** @class */ (function () {
             console.log(error);
         });
     };
-    /**
-         @toDo get selected audio file
-    **/
+    /*
+        Get audio form value from HTML
+    */
     AudioZone.prototype.addAudioToZone = function () {
-        var collection_id = this.collection_id;
+        //const collection_id = this.collection_id
         var audio_zone_id = this.getAudioZoneId();
         var track_id = document.querySelector('input[name="audioFile"]:checked').value;
-        console.log('Track_id: ' + track_id);
         var volumeControl = document.getElementById('audio_volume_control').value;
         var fadeIn = document.getElementById('audio_fadeIn').value;
         var fadeOut = document.getElementById('audio_fadeOut').value;
         var playonce = document.getElementById('audio_playonce').checked;
         var loopable = document.getElementById('audio_loopable').checked;
         var data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable: loopable };
-        console.log(audio_zone_id, track_id, volumeControl, playonce, loopable);
         this.addTrackToZone(data);
     };
+    /*
+        Store audio effects to database
+    */
     AudioZone.prototype.addTrackToZone = function (data) {
         axios_1.default.post('/audio/effects/create', {
             data: data
@@ -1889,6 +1893,9 @@ var AudioZone = /** @class */ (function () {
             console.log(error);
         });
     };
+    /*
+        Get audio effects from database and set html form data
+    */
     AudioZone.prototype.getAudioEffects = function (id) {
         var _this = this;
         axios_1.default.get('/audio/effects/' + id)
@@ -1904,9 +1911,23 @@ var AudioZone = /** @class */ (function () {
             console.log(error);
         });
     };
-    /**
-         @toDo set audio file selected
-    **/
+    AudioZone.prototype.deleteAudioZone = function (id) {
+        var _this = this;
+        axios_1.default.delete('/audioZone/delete', {
+            data: { 'id': id }
+        })
+            .then(function (res) {
+            console.log(res);
+            _this.showSuccesMessage(res.data);
+        })
+            .catch(function (error) {
+            console.log(error);
+            _this.showSuccesMessage(error);
+        });
+    };
+    /*
+        Set audio popup effect form data
+    */
     AudioZone.prototype.setFormData = function (data) {
         if (data.track_id) {
             $("input[name='audioFile'][value=" + data.track_id + "]").prop('checked', true);
@@ -1925,6 +1946,14 @@ var AudioZone = /** @class */ (function () {
         document.getElementById('audio_playonce').checked = false;
         document.getElementById('audio_loopable').checked = false;
     };
+    AudioZone.prototype.showSuccesMessage = function (message) {
+        console.log('Succes ' + message);
+        document.getElementById('succesMessage').innerHTML = message;
+    };
+    AudioZone.prototype.showErrorMessage = function (message) {
+        console.log('Error ' + message);
+        document.getElementById('errorMessage').innerHTML = message;
+    };
     return AudioZone;
 }());
 exports.AudioZone = AudioZone;
@@ -1935,14 +1964,26 @@ window.onload = function () {
         event.preventDefault();
         ZoneObj.addAudioToZone();
     });
-    $(".layer-item").on('click', function (event) {
-        //Get ID from data attribute
+    /*
+        Get data attribute from HTML and toggle audio popup.
+    */
+    $(".layer-item .title").on('click', function () {
         var audio_zone_id = $(this).attr("data-id");
         ZoneObj.setAudioZoneId(audio_zone_id);
         //Get audio effect from database 
         ZoneObj.getAudioEffects(audio_zone_id);
         $("#audio-modal").toggle();
     });
+    /*
+        Get data attribute from HTML and delete layer from DB.
+    */
+    $(".layer-item .remove").on('click', function () {
+        var audio_zone_id = $(this).attr("data-id");
+        ZoneObj.deleteAudioZone(audio_zone_id);
+    });
+    /*
+        Close audio popup
+    */
     var cancel_modal = document.getElementById('cancel-modal');
     cancel_modal.addEventListener('click', function (event) {
         event.preventDefault();

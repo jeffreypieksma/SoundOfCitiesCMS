@@ -97,4 +97,21 @@ class AudioZoneController extends Controller {
 
     }
 
+    /*
+        @Todo delete audio files and relations
+        Delete AudioZone with zoneCoordinates, AudioEffects and tracks. 
+    */
+    public function delete(Request $request) {
+        $id = $request->id;
+
+        $audioZone = AudioZone::destroy($id);
+
+        if($audioZone) {
+            return response()->json('succes', 200);
+        }else{
+            return response()->json('Error', 500);
+        }
+
+    }
+
 }

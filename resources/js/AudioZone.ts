@@ -26,6 +26,9 @@ export class AudioZone {
         return this.audioEffectData;
     }
 
+    /*
+        Store all audio zones to database
+    */
     storeAudioZones(audioZones) {
         audioZones.collection_id = this.getCurrentCollectionId()
     
@@ -40,16 +43,15 @@ export class AudioZone {
         })
     }
 
-    /**
-         @toDo get selected audio file 
-    **/
+    /*
+        Get audio form value from HTML 
+    */
     addAudioToZone() {     
-        const collection_id = this.collection_id
+        //const collection_id = this.collection_id
         const audio_zone_id = this.getAudioZoneId()
 
         let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
 
-        console.log('Track_id: '+ track_id)
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
         let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
         let fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
@@ -57,14 +59,14 @@ export class AudioZone {
         let playonce = (<HTMLInputElement>document.getElementById('audio_playonce')).checked
         let loopable = (<HTMLInputElement>document.getElementById('audio_loopable')).checked
 
-        const data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable };
-
-        console.log(audio_zone_id, track_id, volumeControl, playonce, loopable)
+        const data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable }
 
         this.addTrackToZone(data)
    
     }
-
+    /*
+        Store audio effects to database
+    */
     addTrackToZone(data) {
 
         axios.post('/audio/effects/create', {
@@ -77,7 +79,9 @@ export class AudioZone {
             console.log(error)
         })
     }
-
+    /*
+        Get audio effects from database and set html form data 
+    */
     getAudioEffects(id) {
 
         axios.get('/audio/effects/'+id)
@@ -95,9 +99,23 @@ export class AudioZone {
         })
     }
 
-    /**
-         @toDo set audio file selected 
-    **/
+    deleteAudioZone(id) {
+        axios.delete('/audioZone/delete', {
+            data: {  'id' : id }
+        })
+        .then(res => {
+            console.log(res)
+            this.showSuccesMessage(res.data)
+        })
+        .catch(error => {
+            console.log(error)
+            this.showSuccesMessage(error)
+        })
+    }
+
+    /*
+        Set audio popup effect form data 
+    */
     setFormData(data) {
 
         if( data.track_id ) {
@@ -122,10 +140,21 @@ export class AudioZone {
         (<HTMLInputElement>document.getElementById('audio_playonce')).checked = false;
         (<HTMLInputElement>document.getElementById('audio_loopable')).checked = false;
     }
+
+    showSuccesMessage(message) {
+        console.log('Succes ' + message);
+        (<HTMLInputElement>document.getElementById('succesMessage')).innerHTML  = message;
+    }
+
+    showErrorMessage(message) {
+
+        console.log('Error '+ message);
+
+        (<HTMLInputElement>document.getElementById('errorMessage')).innerHTML  = message;
+    }
     
 }
 window.onload = function () {  
-
 
     let ZoneObj = new AudioZone()
 
@@ -137,8 +166,10 @@ window.onload = function () {
 
     });
 
-    $(".layer-item").on('click', function(event){ 
-        //Get ID from data attribute
+    /*
+        Get data attribute from HTML and toggle audio popup. 
+    */
+    $(".layer-item .title").on('click', function() { 
         const audio_zone_id = $(this).attr("data-id")
         ZoneObj.setAudioZoneId(audio_zone_id)
 
@@ -148,7 +179,19 @@ window.onload = function () {
         $( "#audio-modal" ).toggle()
        
     });
-    
+
+    /*
+        Get data attribute from HTML and delete layer from DB. 
+    */
+    $(".layer-item .remove").on('click', function() { 
+        const audio_zone_id = $(this).attr("data-id")
+        ZoneObj.deleteAudioZone(audio_zone_id)
+       
+    });
+
+    /*
+        Close audio popup 
+    */
     const cancel_modal: HTMLElement = document.getElementById('cancel-modal')
     cancel_modal.addEventListener('click', function (event) {
         event.preventDefault()

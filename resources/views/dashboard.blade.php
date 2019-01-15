@@ -47,21 +47,14 @@
             <div id="collection_info" data-id="{{ $collection->id }}" data-title="{{ $collection->title }}" data-created="{{ $collection->created_at }}"></div>
         </div>
 
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
+        <div id="messageWrapper">
+            <div id="errorMessage" class="alert alert-danger">
+                
             </div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div id="succesMessage" class="alert alert-success">
+                
             </div>
-        @endif
+        </div>
 
         <div id="toggleNavigation">
             <a class="btn-floating  waves-effect waves-light background-accent">
@@ -90,17 +83,21 @@
                 @foreach($audioZones as $audioZone)
                     <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">
                         <li>
-                            <span class="title">{{ __('app.layer') }} {{ $audioZone->id }}</span>
-                            <span class="remove tooltip">
+                            <span class="title" data-id="{{ $audioZone->id }}">{{ __('app.layer') }}
+                                {{ $audioZone->id }}
+                            </span>
+                            <span class="remove tooltip" data-id="{{ $audioZone->id }}" onclick="return confirm('Are you sure?')">
                                 <i class="material-icons color-black remove-layer">remove_circle</i>
                                  <span class="tooltiptext">{{ __('app.tooltip_remove_layer') }}</span>
                             </span>
+                            {{-- <a href="{{ route('delete_audioZone', ['id' => $audioZone->id])}}" 
+                                onclick="return confirm('Are you sure') ">Verwijder
+                            </a> --}}
                         </li>
                     </a>
                 @endforeach
             </ul>
         </div>  
-
     </section>
 
 @endsection
@@ -113,3 +110,19 @@
     <script src="{{ asset('js/tests.js') }}"></script>
 
 @endsection
+
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

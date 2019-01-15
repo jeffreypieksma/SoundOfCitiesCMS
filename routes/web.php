@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth'] ], function () {
 	//Route::post('/audioZone/create', 'AudioZoneController@create')->name('create_audioZone');
 	
 	Route::put('/audioZone', 'AudioZoneController@update')->name('update_audioZone');
-	Route::delete('/audioZone', 'AudioZoneController@delete')->name('delete_audioZone');
+	Route::delete('/audioZone/delete', 'AudioZoneController@delete')->name('delete_audioZone');
 
 	//AudioController
 	Route::post('/audio/effects/create', 'AudioController@addEffectsToAudio')->name('add_effects_to_audio');
