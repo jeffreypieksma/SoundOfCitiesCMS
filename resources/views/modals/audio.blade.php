@@ -3,7 +3,7 @@
     
     <div class="modal-content">
         <h4 class="color-primary">{{ __('app.audio_title') }}</h4>
-        <p class="subtitle">{{ __('app.select_audio') }}</p>
+        {{-- <p class="subtitle">{{ __('app.select_audio') }}</p> --}}
         <form method="POST" id="audio-form">
             {{ csrf_field() }}
             
@@ -15,7 +15,7 @@
                         <li>
                             <label>
                                 <input type="radio" class="with-gap" name="audioFile" value="{{ $audioFile->id }}" id="audio_file" />
-                                <span for="audioFile">{{ $audioFile->audio_url }}</span>
+                                <span for="audioFile">{{ $audioFile->name }}</span>
     
                             </label>             
                         </li>

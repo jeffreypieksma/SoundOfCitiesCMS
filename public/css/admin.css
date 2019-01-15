@@ -230,10 +230,10 @@ body {
   display: none;
   position: fixed;
   background: #fff;
+  height: calc(100vh - 64px);
   left: 100px;
   padding: 20px;
   width: 40%;
-  height: 100%;
   bottom: 0;
   top: 64px;
   overflow: auto;
