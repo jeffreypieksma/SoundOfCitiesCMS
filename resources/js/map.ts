@@ -172,44 +172,11 @@ function drawZones(data) {
 const saveBtn: HTMLElement = document.getElementById('saveCollection');
 
 saveBtn.addEventListener('click', function () {    
-    ZoneObj.storeAudioZones(audioZones)  
+    ZoneObj.storeAudioZones(audioZones) 
+    setTimeout(reload, 1000); 
+  
+});
+
+function reload() {
     document.location.reload(true)
-    
-});
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// create popup contents
-let customPopup = "<h6>Add Audio </h6>";
-    
-// specify popup options 
-let customOptions = {'maxWidth': '600', 'className' : 'custom popup audioPopup'}
-
-vectorZones.on("click", function (e) {
-    let layer = e.layer 
-    let type = e.layerType
-    console.log(e)
-    layer.bindPopup(customPopup,customOptions).openPopup();
-});
-
-// //Loop trough all audio zones 
-// function loopAudioZones() {
-//     for (var i=0; i < audioZones.length; i++) {
-//         console.log(audioZones[i].type)
-//     }
-// }
-
-// function deleteAudioZone(index ) {
-//     delete audioZones[index]
-// }
-
-// //Handle click on polygon
-// var onPolyClick = function(e) {
-    
-//     console.log('Polygon clicked '+ e);
- 
-// };
- 
-// vectorZones.on('click', onPolyClick);
+}
