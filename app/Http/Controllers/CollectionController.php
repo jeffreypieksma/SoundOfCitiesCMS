@@ -189,10 +189,11 @@ class CollectionController extends Controller
             $audioZone['coords'] = $coords;
             
             $audioZoneEffect = AudioZone::find($audioZone->id)->audioZoneEffects;
-            
-            if(count($audioZoneEffect) > 0 ) {
 
+            if(count($audioZoneEffect) > 0 ) {
+                    
                 $track_id = $audioZoneEffect[0]->track_id;
+
                 $track = Track::find($track_id);   
                 $filename = $track->name;
                 $audio_url = $track->audio_url;
@@ -221,5 +222,19 @@ class CollectionController extends Controller
             return response()->download(public_path("{$folder}.zip"));
         }
 
+    }
+
+    /*
+        @param collection_id
+        Download zip from server to mobile app
+    
+    */
+
+    public function import($id) {
+        $folder = "collection_{$id}";
+        
+        if(file_exists(public_path("{$folder}.zip"))) {
+            return response()->download(public_path("{$folder}.zip"));
+        }
     }
 }

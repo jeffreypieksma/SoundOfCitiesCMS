@@ -1935,7 +1935,7 @@ window.onload = function () {
         event.preventDefault();
         ZoneObj.addAudioToZone();
     });
-    $(".layer-item .title").on('click', function () {
+    $(".layer-item").on('click', function (event) {
         //Get ID from data attribute
         var audio_zone_id = $(this).attr("data-id");
         ZoneObj.setAudioZoneId(audio_zone_id);

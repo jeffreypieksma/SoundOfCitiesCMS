@@ -38,7 +38,8 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::post('/collection/update', 'CollectionController@update')->name('update_collections');
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
 
-	Route::get('collection/export/{id}', 'CollectionController@export')->name('export');
+	Route::get('collection/import/{id}', 'CollectionController@import')->name('import_collection');
+	Route::get('collection/export/{id}', 'CollectionController@export')->name('export_collection');
 
 	//AudioZoneController
 	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZones');
