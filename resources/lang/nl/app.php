@@ -15,6 +15,7 @@ return [
     'edit' => 'Wijzigen',
     'delete' => 'Verwijderen',
     'save' => 'Opslaan',
+    'export' => 'Export',
     'logout' => 'Logout',
     'login' => 'Login',
     'register' => 'Registeren',
@@ -29,6 +30,8 @@ return [
 
     'collection_title' => 'Collectie Title',
     'collection_description' => 'Collectie Beschrijving',
+    'collection_no_results' => 'Er zijn nog geen collecties aangemaakt',
+    'create_new_collection' => 'Nieuwe collectie',
 
     'audio_title' => 'Audio toevoegen aan zone',
     'select_audio' => 'Selecteer een audio bestand',

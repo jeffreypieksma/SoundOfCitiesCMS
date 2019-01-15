@@ -10,9 +10,9 @@
 
         @if($collections->isEmpty())
             <div id="emptyState">
-                <p>{{ __('collection.no_results') }}</p>
+                <p>{{ __('app.collection_no_results') }}</p>
                 <a href="{{ route('create_collection_form') }}">       
-                    <button class="btn waves-effect waves-light" type="submit" name="action">{{ __('collection.create_new_collection') }}
+                    <button class="btn waves-effect waves-light" type="submit" name="action">{{ __('app.create_new_collection') }}
                         <i class="material-icons right">send</i>
                     </button>
                 </a>
