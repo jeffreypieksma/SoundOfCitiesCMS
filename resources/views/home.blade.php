@@ -141,7 +141,7 @@
                     
                 </div>
                 <div class="col m12 s12">
-                    <a href="/admin" class="btn button large background-secondary">Try now!</a>
+                    <a href="/login" class="btn button large background-secondary">Try now!</a>
                 </div>
             </div>
         </div>   
@@ -183,7 +183,12 @@
                         <h3 class="color-white">Resonance SoundScape</h3>
                         <ul>
                             <li><img src="{{ asset('images/logo-resonance.png')  }}" alt="" width="200px" height=""></li>
-                            <li><a href="/admin">Login</a></li>
+                            {{-- <li><a href="/admin">Login</a></li> --}}
+                            @if (Auth::check())
+                                <li><a href="/admin"><span>Dashboard</span></a></li>
+                            @else
+                                <li><a href="/login"><span>Login</span></a></li>
+                            @endif
                             <li></li>
                         </ul>
                     </div>
