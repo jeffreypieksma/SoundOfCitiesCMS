@@ -157,8 +157,9 @@ nav .register-btn span {
   border-radius: 5px;
 }
 
-nav .brand-logo {
-  margin-left: 10px;
+nav .nav-wrapper {
+  margin: 0 auto;
+  max-width: 1280px;
 }
 
 nav .register-btn:hover span {
@@ -170,18 +171,11 @@ nav .register-btn:hover span {
   background-color: transparent !important;
 }
 
-.content-bottom {
-  position: absolute;
-  text-align: center;
-  left: 0;
-  right: 0;
-  bottom: 0;
+/*
+nav .brand-logo {
+    margin-left: 10px;
 }
-
-.content-bottom .icon {
-  font-size: 3rem;
-  color: #333;
-}
+*/
 
 section#banner {
   background-color: #f6f1ff;
@@ -201,6 +195,10 @@ section#banner .btn:hover {
   background-color: #553F92;
 }
 
+section#banner p {
+  font-size: 1.2rem;
+}
+
 @media (min-width: 1281px) {
   section#banner .box-left {
     position: absolute;
@@ -213,7 +211,6 @@ section#banner .btn:hover {
   }
 
   section#banner .hero-intro {
-    font-size: 1.2rem;
     margin-top: 20px;
     margin-bottom: 40px;
   }
@@ -286,6 +283,21 @@ section#soundScaper .button {
 
 section#soundScaper .button:hover {
   background-color: #DC1F86;
+}
+
+/* Arrow down positions */
+
+section .content-bottom {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+section .content-bottom .icon {
+  font-size: 3rem;
+  color: #333;
 }
 
 footer section#footer {

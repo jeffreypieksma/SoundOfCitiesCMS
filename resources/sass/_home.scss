@@ -1,13 +1,13 @@
-
 nav .register-btn span{
     border:1px solid #fff;
     padding:5px 10px;
     border-radius:5px;
 }
 
-nav .brand-logo {
-    margin-left: 10px;
-}
+nav .nav-wrapper{
+    margin: 0 auto;
+    max-width: 1280px;
+} 
 
 nav .register-btn:hover span{
     background-color:#fff;
@@ -15,24 +15,14 @@ nav .register-btn:hover span{
 }
 
 .sidenav-overlay {
-
     background-color: transparent !important;
-
 }
 
-.content-bottom{
-    position: absolute;
-    text-align: center;
-    left:0;
-    right:0;
-    bottom:0;
-  }
-  
-  .content-bottom .icon{
-    font-size:3rem;
-    color:#333;
-  }
-
+/*
+nav .brand-logo {
+    margin-left: 10px;
+}
+*/
 section#banner{
     background-color:#f6f1ff;
     min-height:calc(100vh - 64px);
@@ -48,6 +38,7 @@ section#banner{
     .btn:hover{
         background-color:$primary;
     }
+    p{ font-size:1.2rem; }
 
     @media (min-width: 1281px) {
 
@@ -62,7 +53,6 @@ section#banner{
         }
 
         .hero-intro{
-            font-size:1.2rem;
             margin-top:20px;
             margin-bottom:40px;
         }
@@ -135,6 +125,22 @@ section#soundScaper{
     }
     .button:hover{
         background-color:$accent;
+    }
+}
+
+/* Arrow down positions */
+section {
+    .content-bottom{
+        position: absolute;
+        text-align: center;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+    
+    .content-bottom .icon{
+        font-size:3rem;
+        color:#333;
     }
 }
 

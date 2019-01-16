@@ -8,7 +8,7 @@
 @section('content')
     <section id="header">
         <div class="navbar-fixed">
-            <nav>
+            <nav class="background-primary">
                 <div class="nav-wrapper">
                     <div class="nav-container">
                         <a href="#!" class="brand-logo">Resonance</a>
@@ -17,7 +17,7 @@
                             <li><a href="#banner">Resonance</a></li>
                             <li><a href="#app-features">App Features</a></li>
                             {{-- <li><a href="#app-cta">App</a></li> --}}
-                            <li><a href="#soundScaper">soundScaper</a></li>
+                            <li><a href="#soundScaper">Soundscapes</a></li>
                             @if (Auth::check())
                                  <li class="register-btn"><a href="/admin"><span>Dashboard</span></a></li>
                             @else
@@ -50,7 +50,7 @@
                     <div class="box-left">
                         <h1 class="hero-title color-primary">Resonance</h1>
                         <div class="hero-intro" style="">
-                            <p>Play unique music on different locations with our mobile iOs App! 
+                            <p>Play unique sounds on different locations with our brand new iOs App! 
                             
                             </p>
                         </div>
@@ -87,7 +87,7 @@
                     <ul class="icons app-functions">
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/navigate-function.png')  }}" alt="">
-                            <span class="icon-text">Navigate</span>
+                            <span class="icon-text">Navigate trough unique locations</span>
                         </li>
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/track_function.png')  }}" alt="">
@@ -102,11 +102,11 @@
                     <ul class="icons app-functions">
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/walk-function.png')  }}" alt="">
-                            <span class="icon-text">Free walk</span>
+                            <span class="icon-text">Free walk routes</span>
                         </li>
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/camera-function.png')  }}" alt="">
-                            <span class="icon-text">Camera</span>
+                            <span class="icon-text">Capture locations</span>
                         </li>
                     </ul>
                 </div>
@@ -141,12 +141,17 @@
             <div class="row text-center">
                 <div class="col m12 s12">
                     <h2 class="color-white">Build Amazing Soundscapes</h2>
+                    <p class="subtitle" style="font-size:1.6em;color:#ECECEC;">With our custom tool to create audio zones</p>
                     <img src="{{ asset('images/logo-resonance.png')  }}" alt="" width="300px" height="">
                     {{-- <p class="subtitle color-white">With the ultimate tool to enhance experience</p> --}}
                     
                 </div>
                 <div class="col m12 s12">
-                    <a href="/login" class="btn button large background-secondary">Try now!</a>
+                    @if (Auth::check())
+                         <a href="/dashboard" class="btn button large background-secondary">Try now!</a>
+                    @else
+                         <a href="/login" class="btn button large background-secondary">Try now!</a>
+                    @endif
                 </div>
             </div>
         </div>   
