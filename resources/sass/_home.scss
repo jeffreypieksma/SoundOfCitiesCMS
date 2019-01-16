@@ -35,7 +35,6 @@ nav .register-btn:hover span{
 
 section#banner{
     background-color:#f6f1ff;
-    padding-top:40px;
     min-height:calc(100vh - 64px);
     
     .btn{
@@ -87,7 +86,6 @@ section#banner{
 section#app-features{
     background-color:$secondary;
     background-color:#fff;
-    padding-top:40px;
     .icon-box{
         text-align: center;
         margin-bottom:20px;
@@ -112,7 +110,6 @@ section#app-features{
 
 section#app-cta{
     min-height:100vh !important;
-    padding-top:40px;
     background-color:$accent;
 
     .btn{
@@ -131,7 +128,6 @@ section#app-cta{
 
 section#soundScaper{
     background-color:$primary;
-    padding-top:40px;
 
     .button{
         margin-top:60px;
@@ -146,7 +142,6 @@ footer {
 
     section#footer{
         background-color:$black;
-        padding-top:40px;
 
         h3{
             font-size:1.4rem;  

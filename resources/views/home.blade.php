@@ -2,7 +2,7 @@
 
 @section('head')
     {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.css"> --}}
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                         <ul class="right hide-on-med-and-down">
                             <li><a href="#banner">Resonance</a></li>
                             <li><a href="#app-features">App Features</a></li>
-                            <li><a href="#app-cta">App</a></li>
+                            {{-- <li><a href="#app-cta">App</a></li> --}}
                             <li><a href="#soundScaper">soundScaper</a></li>
                             @if (Auth::check())
                                  <li class="register-btn"><a href="/admin"><span>Dashboard</span></a></li>
@@ -29,11 +29,16 @@
             </nav>
 
             <ul class="sidenav" id="mobile">
-                <li><a href="#banner">Resonance</a></li>
-                <li><a href="#app-features">App Features</a></li>
+                <li><img src="{{ asset('images/logo-app.png')  }}" alt="" width="200px" height=""></li>
+                {{-- <li><a href="#banner">Resonance</a></li> --}}
+                {{-- <li><a href="#app-features">App Features</a></li> --}}
                 {{-- <li><a href="#app-cta">App</a></li> --}}
-                <li><a href="#soundScaper">soundScaper</a></li>
-                <li class="register-btn"><a href="#register">Register</a></li>
+                {{-- <li><a href="#soundScaper">soundScaper</a></li> --}}
+                 @if (Auth::check())
+                    <li><a href="/admin"><span>Dashboard</span></a></li>
+                @else
+                    <li><a href="/register"><span>Register</span></a></li>
+                @endif
             </ul>
         </div>
     </section>
@@ -45,7 +50,7 @@
                     <div class="box-left">
                         <h1 class="hero-title color-primary">Resonance</h1>
                         <div class="hero-intro" style="">
-                            <p>Play unique soundscapes on different locations with our mobile iOs App 
+                            <p>Play unique music on different locations with our mobile iOs App! 
                             
                             </p>
                         </div>
@@ -107,7 +112,7 @@
                 </div>
             </div>
             <div class="content-bottom">
-                <a href="#app-cta" class=""><i class="material-icons icon">keyboard_arrow_down</i></a>
+                <a href="#soundScaper" class=""><i class="material-icons icon">keyboard_arrow_down</i></a>
             </div>
         </div>
         
@@ -153,8 +158,7 @@
                 <div class="row">
                     <div class="col m3 s6">
                         <h3 class="color-white">Information</h3>
-                        <ul>
-                            
+                        <ul>  
                             <li><img src="{{ asset('images/logo-app.png')  }}" alt="" width="200px" height=""></li>
                             <li></li>
                             <li></li>
@@ -172,12 +176,10 @@
                     <div class="col m3 s12">
                         <h3 class="color-white">Contact</h3>
                         <ul>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                        </ul>
-                        
+                            <li>Yoni Collier</li>
+                            <li>y.collier@leedsbeckett.ac.uk</li>
+                            <li>Leeds Beckett University, Leeds</li>
+                        </ul>        
                     </div>
                     <div class="col m3 s12">
                         <h3 class="color-white">Resonance SoundScape</h3>
