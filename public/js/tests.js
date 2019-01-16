@@ -76,7 +76,6 @@ module.exports = __webpack_require__(45);
 /***/ 45:
 /***/ (function(module, exports) {
 
-"use strict";
 function Zone(id, type, coords, center_point, radius) {
     this.id = id;
     this.type = type;
