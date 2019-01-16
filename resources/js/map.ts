@@ -167,15 +167,21 @@ function drawZones(data) {
     }
 }
 
-/*** Store all the audio zones into the database and reload the page  ***/
+/* Store all the audio zones into the database and reload the page  */
 const saveBtn: HTMLElement = document.getElementById('saveCollection');
+const toggleLayersBtn: HTMLElement = document.getElementById('toggleLayers');
 
 saveBtn.addEventListener('click', function () {    
     ZoneObj.storeAudioZones(audioZones) 
     setTimeout(reloadWindow, 1000); 
-  
+
 });
 
 function reloadWindow() {
     document.location.reload(true)
 }
+
+toggleLayersBtn.addEventListener('click', function () {    
+    $("body").toggleClass('layers-active')
+    $("#layers").toggleClass('active')
+});

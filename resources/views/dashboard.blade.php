@@ -56,8 +56,8 @@
             </div>
         </div>
 
-        <div id="toggleNavigation">
-            <a class="btn-floating  waves-effect waves-light background-accent">
+        <div id="toggleLayers" data-target="layers">
+            <a class="btn-floating waves-effect waves-light background-accent">
                 <div class="ui-layers-icon" ></div>
                 {{-- <i class="material-icons">settings</i> --}}     
             </a>         
@@ -65,7 +65,7 @@
 
         <div class="container-fluid">
             {{-- Init the map  --}}
-            <div id="mapid" class="animated fadeIn faster"></div>
+            <div id="mapid" class="animated fadeInRight faster"></div>
 
             <a class="btn-floating btn-large waves-effect waves-light background-accent" id="saveCollection">
                 <i class="material-icons">save</i>
@@ -77,7 +77,7 @@
             @include('modals.audio')
         </div>
 
-        <div id="layers" class="animated fadeInRight fast active box-shadow-inset">
+        <div id="layers" class="animated fadeInRight faster box-shadow-inset">
             <ul class="layer">
                 <h3 class="color-primary text-center">{{ __('app.layers') }}</h3>
                 @foreach($audioZones as $audioZone)

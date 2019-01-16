@@ -2136,8 +2136,9 @@ function drawZones(data) {
         }
     }
 }
-/*** Store all the audio zones into the database and reload the page  ***/
+/* Store all the audio zones into the database and reload the page  */
 var saveBtn = document.getElementById('saveCollection');
+var toggleLayersBtn = document.getElementById('toggleLayers');
 saveBtn.addEventListener('click', function () {
     ZoneObj.storeAudioZones(audioZones);
     setTimeout(reloadWindow, 1000);
@@ -2145,6 +2146,10 @@ saveBtn.addEventListener('click', function () {
 function reloadWindow() {
     document.location.reload(true);
 }
+toggleLayersBtn.addEventListener('click', function () {
+    $("body").toggleClass('layers-active');
+    $("#layers").toggleClass('active');
+});
 
 
 /***/ })

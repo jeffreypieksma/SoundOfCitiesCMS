@@ -7,6 +7,12 @@ body {
   margin-bottom: 40px;
 }
 
+body.layers-active{
+  #mapid{
+    width:85%;
+  }
+}
+
 #mapid {
   height: calc(100vh - 64px);
   width: 85%;
@@ -20,6 +26,27 @@ body {
 
 .leaflet-draw-toolbar .leaflet-draw-draw-polyline{display: none; }
 
+#create-collection {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99999;
+}
+
+#saveCollection {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99999;
+}
+
+#toggleLayers {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  z-index: 9999999999999999999;
+}
+
 #layers {
   width: 15%;
   float: right;
@@ -30,18 +57,24 @@ body {
   flex-direction: column;
   justify-content: center;
   overflow: auto;
+  opacity:0;
 
-}
-#layers.active{
+  &.active{
     z-index:9999;
     position: fixed;
     right:0;
+    opacity:1;
+  }
+  h3{ text-align:center; }
 }
+
 .ui-layers-icon {
   background-image: url("/icons/ui_layers.png");
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
+  background-position-y: 10px;
+  background-position-x: 10px;
 }
 
 #layers ul li {
