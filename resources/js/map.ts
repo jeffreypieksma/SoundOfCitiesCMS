@@ -28,9 +28,7 @@ function drawControlLayers() {
     controlLayer.addTo(map)
 }
 
-drawControlLayers()
-
-//Add controls with options to control 
+//Add controls with draw options
 function drawMapControl() {
     
     map.addControl(new L.Control.Draw({
@@ -45,25 +43,31 @@ function drawMapControl() {
             polyline: false,
             marker: false,
             circlemarker: false,
-            polygon: {
-                allowIntersection: false, // Restricts shapes to simple polygons
-                showArea: true,
-                drawError: {
-                    color: '#e1e100', // Color the shape will turn when intersects
-                    message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-                },
-                shapeOptions: {
-                    color: '#553F92'
-                }
-            },
+            rectangle: false,
+            polygon: false,
+            // polygon: {
+            //     allowIntersection: false, // Restricts shapes to simple polygons
+            //     showArea: true,
+            //     drawError: {
+            //         color: '#e1e100', // Color the shape will turn when intersects
+            //         message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+            //     },
+            //     shapeOptions: {
+            //         color: '#553F92'
+            //     }
+            // },
         
         }
     }));
 
 }
-
+//Draw map and control layers 
 drawMapControl()
+drawControlLayers()
 
+/*
+    When leaflet draw event is created execute this code 
+*/
 map.on(L.Draw.Event.CREATED, function (e) { 
 
     let type = e.layerType,
@@ -77,7 +81,6 @@ map.on(L.Draw.Event.CREATED, function (e) {
         latLng = '';
 
     if(type == 'circle') {
-
         latLng = e.latlng || e.layer.getLatLng();
         radius = layer.getRadius();
 
@@ -112,12 +115,25 @@ function getCurrentCollectionId() {
     return document.getElementById('collection_info').dataset.id
 }
 
+function getAudioZones( ) {
+    let id = getCurrentCollectionId()
+
+    axios.get('/audioZones/'+id)
+    .then(function (res) {
+        drawZones(res.data)
+    })
+    .catch(function (error) {
+        console.log(error)
+    })
+}
+
+getAudioZones()
+
 function drawCircle(coords, radius, color) {
     const lat = coords[0].lat
     const lng = coords[0].lng
     L.circle([lat, lng], {radius: radius} ).addTo(vectorZones)
 }
-
 
 function drawPolygon(coords, color ) {
     let data = []
@@ -130,23 +146,6 @@ function drawPolygon(coords, color ) {
 
     L.polygon(data, {color: 'red' }).addTo(vectorZones);
 }
-
-function getAudioZones( ) {
-    let id = getCurrentCollectionId()
-
-    let list = {};
-
-    let data = axios.get('/audioZones/'+id)
-        .then(function (res) {
-            drawZones(res.data);
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
-
-        return list;
-}
-getAudioZones()
 
 function drawZones(data) {
 

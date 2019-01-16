@@ -2041,8 +2041,7 @@ function drawControlLayers() {
     });
     controlLayer.addTo(map);
 }
-drawControlLayers();
-//Add controls with options to control 
+//Add controls with draw options
 function drawMapControl() {
     map.addControl(new L.Control.Draw({
         position: 'topleft',
@@ -2056,21 +2055,17 @@ function drawMapControl() {
             polyline: false,
             marker: false,
             circlemarker: false,
-            polygon: {
-                allowIntersection: false,
-                showArea: true,
-                drawError: {
-                    color: '#e1e100',
-                    message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-                },
-                shapeOptions: {
-                    color: '#553F92'
-                }
-            },
+            rectangle: false,
+            polygon: false,
         }
     }));
 }
+//Draw map and control layers 
 drawMapControl();
+drawControlLayers();
+/*
+    When leaflet draw event is created execute this code
+*/
 map.on(L.Draw.Event.CREATED, function (e) {
     var type = e.layerType, layer = e.layer, coords = layer._latlngs, center_point = '', radius = '', color = '', label = '', visibility = 1, latLng = '';
     if (type == 'circle') {
@@ -2100,6 +2095,17 @@ map.on(L.Draw.Event.CREATED, function (e) {
 function getCurrentCollectionId() {
     return document.getElementById('collection_info').dataset.id;
 }
+function getAudioZones() {
+    var id = getCurrentCollectionId();
+    axios_1.default.get('/audioZones/' + id)
+        .then(function (res) {
+        drawZones(res.data);
+    })
+        .catch(function (error) {
+        console.log(error);
+    });
+}
+getAudioZones();
 function drawCircle(coords, radius, color) {
     var lat = coords[0].lat;
     var lng = coords[0].lng;
@@ -2114,19 +2120,6 @@ function drawPolygon(coords, color) {
     }
     L.polygon(data, { color: 'red' }).addTo(vectorZones);
 }
-function getAudioZones() {
-    var id = getCurrentCollectionId();
-    var list = {};
-    var data = axios_1.default.get('/audioZones/' + id)
-        .then(function (res) {
-        drawZones(res.data);
-    })
-        .catch(function (error) {
-        console.log(error);
-    });
-    return list;
-}
-getAudioZones();
 function drawZones(data) {
     var audioZones = data;
     for (var i = 0; i < audioZones.length; i++) {
