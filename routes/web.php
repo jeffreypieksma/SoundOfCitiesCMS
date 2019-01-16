@@ -27,6 +27,7 @@ Route::get('locale/{locale}', function ($locale) {
 
 Route::group(['middleware' => ['auth'] ], function () {
 	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
+	Route::get('admin', 'CollectionController@index')->name('dashboard');
 	Route::get('dashboard/{id}', 'CollectionController@dashboardView')->name('map');
 	
 	//CollectionController
@@ -37,9 +38,6 @@ Route::group(['middleware' => ['auth'] ], function () {
 	Route::post('/collection/create', 'CollectionController@create')->name('create_collection');
 	Route::post('/collection/update', 'CollectionController@update')->name('update_collections');
 	Route::delete('/collection', 'CollectionController@delete')->name('delete_collections');
-
-	Route::get('collection/import/{id}', 'CollectionController@import')->name('import_collection');
-	Route::get('collection/export/{id}', 'CollectionController@export')->name('export_collection');
 
 	//AudioZoneController
 	Route::get('/audioZones/{id}', 'AudioZoneController@getCollectionWithAudioZones')->name('audioZones');
@@ -56,27 +54,25 @@ Route::group(['middleware' => ['auth'] ], function () {
 
 });
 
-//->middleware('auth');
+//Collection import and export function 
+Route::get('collection/import/{id}', 'CollectionController@import')->name('import_collection');
+Route::get('collection/export/{id}', 'CollectionController@export')->name('export_collection');
 
-
-
-
+/*
 Route::group(['prefix' => 'admin', 'middleware' => ['web'] ], function () {
-
-	Route::get('/', 'CollectionController@index')->name('dashboard');
 	
     //list users
-	// Route::get('/users', 'UserController@index')->name('users');
+	Route::get('/users', 'UserController@index')->name('users');
 
-	// Route::get('/user/create', 'UserController@create_user_form')->name('create_user_form');
-	// Route::post('/user/create', 'UserController@create')->name('create_user');
-	// Route::get('/users', 'UserController@index')->name('admin_users');
-	// Route::get('/user/read/{id}', 'UserController@read')->name('read_user');
-	// Route::get('/user/update/{id}', 'UserController@update_user_form')->name('update_user_form');
-	// Route::post('/user/update', 'UserController@update')->name('update_user');
-	// Route::get('/user/delete/{id}', 'UserController@delete')->name('delete_user');
-
+	Route::get('/user/create', 'UserController@create_user_form')->name('create_user_form');
+	Route::post('/user/create', 'UserController@create')->name('create_user');
+	Route::get('/users', 'UserController@index')->name('admin_users');
+	Route::get('/user/read/{id}', 'UserController@read')->name('read_user');
+	Route::get('/user/update/{id}', 'UserController@update_user_form')->name('update_user_form');
+	Route::post('/user/update', 'UserController@update')->name('update_user');
+	Route::get('/user/delete/{id}', 'UserController@delete')->name('delete_user');
 	
 });
+*/
 
 Auth::routes();
