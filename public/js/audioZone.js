@@ -1877,12 +1877,12 @@ var AudioZone = /** @class */ (function () {
         var playonce = document.getElementById('audio_playonce').checked;
         var loopable = document.getElementById('audio_loopable').checked;
         var data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable: loopable };
-        this.addTrackToZone(data);
+        this.storeAudioEffects(data);
     };
     /*
         Store audio effects to database
     */
-    AudioZone.prototype.addTrackToZone = function (data) {
+    AudioZone.prototype.storeAudioEffects = function (data) {
         axios_1.default.post('/audio/effects/create', {
             data: data
         })
@@ -1947,11 +1947,11 @@ var AudioZone = /** @class */ (function () {
         document.getElementById('audio_loopable').checked = false;
     };
     AudioZone.prototype.showSuccesMessage = function (message) {
-        console.log('Succes ' + message);
+        //console.log('Succes ' + message);
         document.getElementById('succesMessage').innerHTML = message;
     };
     AudioZone.prototype.showErrorMessage = function (message) {
-        console.log('Error ' + message);
+        //console.log('Error '+ message);
         document.getElementById('errorMessage').innerHTML = message;
     };
     return AudioZone;
@@ -1980,6 +1980,7 @@ window.onload = function () {
     $(".layer-item .remove").on('click', function () {
         var audio_zone_id = $(this).attr("data-id");
         ZoneObj.deleteAudioZone(audio_zone_id);
+        $(this).parent().remove();
     });
     /*
         Close audio popup

@@ -42,6 +42,11 @@ nav .nav-wrapper {
   margin-bottom: 40px;
 }
 
+#mobile {
+  text-align: center;
+  padding-top: 64px;
+}
+
 html,
 body {
   overflow-x: hidden;
@@ -180,7 +185,6 @@ nav .register-btn:hover span {
 
 section#banner {
   background-color: #f6f1ff;
-  padding-top: 40px;
   min-height: calc(100vh - 64px);
 }
 
@@ -229,7 +233,6 @@ section#banner .btn:hover {
 section#app-features {
   background-color: #F59F1F;
   background-color: #fff;
-  padding-top: 40px;
 }
 
 section#app-features .icon-box {
@@ -255,7 +258,6 @@ section#app-features .subtitle {
 
 section#app-cta {
   min-height: 100vh !important;
-  padding-top: 40px;
   background-color: #DC1F86;
 }
 
@@ -275,7 +277,6 @@ section#app-cta .btn:hover {
 
 section#soundScaper {
   background-color: #553F92;
-  padding-top: 40px;
 }
 
 section#soundScaper .button {
@@ -289,7 +290,6 @@ section#soundScaper .button:hover {
 
 footer section#footer {
   background-color: #2B2626;
-  padding-top: 40px;
 }
 
 footer section#footer h3 {

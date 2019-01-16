@@ -173,10 +173,10 @@ const saveBtn: HTMLElement = document.getElementById('saveCollection');
 
 saveBtn.addEventListener('click', function () {    
     ZoneObj.storeAudioZones(audioZones) 
-    setTimeout(reload, 1000); 
+    setTimeout(reloadWindow, 1000); 
   
 });
 
-function reload() {
+function reloadWindow() {
     document.location.reload(true)
 }

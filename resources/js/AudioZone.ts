@@ -61,13 +61,13 @@ export class AudioZone {
 
         const data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable }
 
-        this.addTrackToZone(data)
+        this.storeAudioEffects(data)
    
     }
     /*
         Store audio effects to database
     */
-    addTrackToZone(data) {
+    storeAudioEffects(data) {
 
         axios.post('/audio/effects/create', {
             data
@@ -142,13 +142,13 @@ export class AudioZone {
     }
 
     showSuccesMessage(message) {
-        console.log('Succes ' + message);
+        //console.log('Succes ' + message);
         (<HTMLInputElement>document.getElementById('succesMessage')).innerHTML  = message;
     }
 
     showErrorMessage(message) {
 
-        console.log('Error '+ message);
+        //console.log('Error '+ message);
 
         (<HTMLInputElement>document.getElementById('errorMessage')).innerHTML  = message;
     }
@@ -186,7 +186,7 @@ window.onload = function () {
     $(".layer-item .remove").on('click', function() { 
         const audio_zone_id = $(this).attr("data-id")
         ZoneObj.deleteAudioZone(audio_zone_id)
-       
+        $(this).parent().remove();
     });
 
     /*

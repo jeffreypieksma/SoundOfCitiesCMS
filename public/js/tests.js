@@ -76,8 +76,7 @@ module.exports = __webpack_require__(45);
 /***/ 45:
 /***/ (function(module, exports) {
 
-//Import map and audioZone
-//Constructor for all the full zones 
+"use strict";
 function Zone(id, type, coords, center_point, radius) {
     this.id = id;
     this.type = type;
@@ -85,56 +84,34 @@ function Zone(id, type, coords, center_point, radius) {
     this.center_point = center_point;
     this.radius = radius;
 }
-console.log('test init');
-/* Unit testing
-
-    1st: Check if all zones are stored properly and the amount is right.
-        Store data - return the ids - count ids - compare with amount of objects.
-    2nd test: Check if the amount of coordinates are right.
-    3rd: test: Check if coordinates are stored right.
-    4th: test: Draw items on map.
-    5th: test: Delete a zone
-*/
 var ZoneCreator = /** @class */ (function () {
     function ZoneCreator() {
     }
-    ZoneCreator.prototype.drawZone = function (coords) {
-        return "";
+    ZoneCreator.prototype.drawZone = function (zone) {
+        return zone.coords.length;
+    };
+    ZoneCreator.prototype.drawCircleZone = function (zone) {
+        return zone.coords.length;
+    };
+    ZoneCreator.prototype.drawPolyZone = function (zone) {
+        return zone.coords.length;
     };
     return ZoneCreator;
 }());
+var zoneCreator = new ZoneCreator();
+var circleCoords = new Array({ 'lat': '53.21061991910329', 'lng': '5.702758220639979' });
+var polyCoords = new Array({ 'lat': '53.21061991910329', 'lng': '5.702758220639979' }, { 'lat': '53.21051704917011', 'lng': '5.733996253312515' }, { 'lat': '53.20188619560709', 'lng': '5.731593310342751' });
+var circleZone = new Zone(1, 'circle', circleCoords, '53.21061991910329', 302323);
+var polyZone = new Zone(2, 'polygon', polyCoords, '', '');
 function assertTrue(isSuccess, message) {
     if (!isSuccess) {
-        console.error("Test niet geslaagd: " + message);
+        console.error("Test not succeed: " + message);
     }
 }
-var zoneCreator = new ZoneCreator();
-var coords = [
-    [
-        function (lat) { return '53.21061991910329'; },
-        function (lng) { return '5.702758220639979'; }
-    ],
-    [
-        function (lat) { return '53.21051704917011'; },
-        function (lng) { return '5.733996253312515'; }
-    ],
-    [
-        function (lat) { return '53.20188619560709'; },
-        function (lng) { return '5.731593310342751'; }
-    ]
-];
-var circleCoords = [function (lat) { return '	53.21061991910329'; }, function (lng) { return '5.702758220639979'; }];
-var circleZone = new Zone(1, 'circle', circleCoords, '53.21061991910329', 302323);
-//storeAudioZone(circleZone)
-var polygonZone = new Zone(2, 'circle', coords, '53.21061991910329', '');
-//storeAudioZone(polygonZone)
-var squareZone = new Zone(3, 'circle', coords, '53.21061991910329', '');
-//storeAudioZone(squareZone)
-//assertTrue must be true 
-assertTrue(zoneCreator.drawZone(circleZone) === "", "Should handle...");
-assertTrue(zoneCreator.drawZone(polygonZone) === "", "Should handle...");
-assertTrue(zoneCreator.drawZone(squareZone) === "", "Should handle...");
-console.log("All tests executed");
+//assertTrue must be true to succeed test
+assertTrue(zoneCreator.drawCircleZone(circleZone) == '1', "Should return 1s");
+assertTrue(zoneCreator.drawPolyZone(polyZone) == '3', "Should return 3");
+console.log("Tests executed");
 
 
 /***/ })
