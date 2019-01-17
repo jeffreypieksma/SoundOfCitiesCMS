@@ -47,10 +47,16 @@ export class AudioZone {
         Get audio form value from HTML 
     */
     addAudioToZone() {     
-        //const collection_id = this.collection_id
         const audio_zone_id = this.getAudioZoneId()
 
-        let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
+        let selectedTrack = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !==null;
+        if(selectedTrack) {
+            let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
+        }else{
+            return false;
+        }
+      
+        //let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
 
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
         let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
@@ -74,6 +80,7 @@ export class AudioZone {
         })
         .then(res => {
             console.log(res)
+            this.toggleModal()
         })
         .catch(error => {
             console.log(error)
@@ -105,11 +112,9 @@ export class AudioZone {
         })
         .then(res => {
             console.log(res)
-            this.showSuccesMessage(res.data)
         })
         .catch(error => {
             console.log(error)
-            this.showSuccesMessage(error)
         })
     }
 
@@ -139,21 +144,13 @@ export class AudioZone {
         (<HTMLInputElement>document.getElementById('audio_fadeOut')).value =  '';
         (<HTMLInputElement>document.getElementById('audio_playonce')).checked = false;
         (<HTMLInputElement>document.getElementById('audio_loopable')).checked = false;
+    }    
+
+    toggleModal() {
+        $( "#audio-modal" ).toggle()
     }
-
-    showSuccesMessage(message) {
-        //console.log('Succes ' + message);
-        (<HTMLInputElement>document.getElementById('succesMessage')).innerHTML  = message;
-    }
-
-    showErrorMessage(message) {
-
-        //console.log('Error '+ message);
-
-        (<HTMLInputElement>document.getElementById('errorMessage')).innerHTML  = message;
-    }
-    
 }
+
 window.onload = function () {  
 
     let ZoneObj = new AudioZone()

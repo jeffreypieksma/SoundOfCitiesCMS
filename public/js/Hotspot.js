@@ -1868,9 +1868,15 @@ var AudioZone = /** @class */ (function () {
         Get audio form value from HTML
     */
     AudioZone.prototype.addAudioToZone = function () {
-        //const collection_id = this.collection_id
         var audio_zone_id = this.getAudioZoneId();
-        var track_id = document.querySelector('input[name="audioFile"]:checked').value;
+        var selectedTrack = document.querySelector('input[name="audioFile"]:checked') !== null;
+        if (selectedTrack) {
+            var track_id = document.querySelector('input[name="audioFile"]:checked').value;
+        }
+        else {
+            return false;
+        }
+        //let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
         var volumeControl = document.getElementById('audio_volume_control').value;
         var fadeIn = document.getElementById('audio_fadeIn').value;
         var fadeOut = document.getElementById('audio_fadeOut').value;
@@ -1883,11 +1889,13 @@ var AudioZone = /** @class */ (function () {
         Store audio effects to database
     */
     AudioZone.prototype.storeAudioEffects = function (data) {
+        var _this = this;
         axios_1.default.post('/audio/effects/create', {
             data: data
         })
             .then(function (res) {
             console.log(res);
+            _this.toggleModal();
         })
             .catch(function (error) {
             console.log(error);
@@ -1912,17 +1920,14 @@ var AudioZone = /** @class */ (function () {
         });
     };
     AudioZone.prototype.deleteAudioZone = function (id) {
-        var _this = this;
         axios_1.default.delete('/audioZone/delete', {
             data: { 'id': id }
         })
             .then(function (res) {
             console.log(res);
-            _this.showSuccesMessage(res.data);
         })
             .catch(function (error) {
             console.log(error);
-            _this.showSuccesMessage(error);
         });
     };
     /*
@@ -1946,13 +1951,8 @@ var AudioZone = /** @class */ (function () {
         document.getElementById('audio_playonce').checked = false;
         document.getElementById('audio_loopable').checked = false;
     };
-    AudioZone.prototype.showSuccesMessage = function (message) {
-        //console.log('Succes ' + message);
-        document.getElementById('succesMessage').innerHTML = message;
-    };
-    AudioZone.prototype.showErrorMessage = function (message) {
-        //console.log('Error '+ message);
-        document.getElementById('errorMessage').innerHTML = message;
+    AudioZone.prototype.toggleModal = function () {
+        $("#audio-modal").toggle();
     };
     return AudioZone;
 }());

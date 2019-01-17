@@ -3,7 +3,7 @@
 @section('head')
 
    <link rel="stylesheet" href="{{ asset('css/leaflet2.css') }}"/>
-   <script src="{{ asset('js/leaflet2.js') }}"></script>
+   <script src="{{ asset('js/leaflet.js') }}"></script>
 
     <script src="{{ asset('js/src/Leaflet.draw.js') }}"></script>
     <script src="{{ asset('js/src/Leaflet.Draw.Event.js') }}"></script>
@@ -91,10 +91,11 @@
                                 <i class="material-icons color-black remove-layer">visibility</i>
                                 {{ __('app.layer') }} {{ $audioZone->id }}
                             </span>
-                            <span class="hotspot" data-id="{{ $audioZone->id }}">
-                                <i class="material-icons color-black remove-layer">info_outline</i>
-                                
-                            </span>
+
+                            {{-- <span class="hotspot" data-id="{{ $audioZone->id }}">
+                                <i class="material-icons color-black remove-layer">info_outline</i>     
+                            </span> --}}
+
                             <span class="remove tooltip" data-id="{{ $audioZone->id }}" onclick="return confirm('Are you sure?')">
                                 <i class="material-icons color-black remove-layer">delete</i>
                                 <span class="tooltiptext">{{ __('app.tooltip_remove_layer') }}</span>
@@ -114,7 +115,7 @@
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
     <script src="{{ asset('js/AudioZone.js') }}"></script>
-    <script src="{{ asset('js/Hotspot.js') }}"></script>
+    {{-- <script src="{{ asset('js/Hotspot.js') }}"></script> --}}
     <script src="{{ asset('js/tests.js') }}"></script>
 
 @endsection
