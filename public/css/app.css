@@ -100,6 +100,14 @@ html body .color-black {
   color: #2B2626;
 }
 
+html body .color-succes {
+  color: #f44336;
+}
+
+html body .color-warning {
+  color: #00c853;
+}
+
 html body .background-primary {
   background: #553F92;
 }
@@ -118,6 +126,14 @@ html body .background-white {
 
 html body .background-black {
   background: #2B2626;
+}
+
+html body .background-succes {
+  background: #f44336;
+}
+
+html body .background-warning {
+  background: #00c853;
 }
 
 .card {

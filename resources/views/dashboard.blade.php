@@ -82,8 +82,8 @@
             @include('modals.hotspot')
         </div>
 
-        <div id="layers" class="animated fadeInRight faster box-shadow-inset" style="background-image:url('/svg/wind_layers_paint.svg');">
-            <h3 class="color-primary text-center">{{ __('app.layers') }}</h3>
+        <div id="layers" class="animated fadeInRight faster box-shadow-inset" style="background-image:url({{ asset('/svg/wind_layers_paint.svg') }});">
+            <h3 class="color-primary text-center">{{ __('app.layers') }}</h3> 
             <ul class="layer">
                 @foreach($audioZones as $audioZone)
                     <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">

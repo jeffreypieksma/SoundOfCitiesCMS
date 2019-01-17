@@ -65,6 +65,14 @@ html body .color-black {
   color: #2B2626;
 }
 
+html body .color-succes {
+  color: #f44336;
+}
+
+html body .color-warning {
+  color: #00c853;
+}
+
 html body .background-primary {
   background: #553F92;
 }
@@ -83,6 +91,14 @@ html body .background-white {
 
 html body .background-black {
   background: #2B2626;
+}
+
+html body .background-succes {
+  background: #f44336;
+}
+
+html body .background-warning {
+  background: #00c853;
 }
 
 .card {
@@ -363,5 +379,35 @@ body.layers-active #mapid {
 
 #messageWrapper .alert-danger {
   background-color: red;
+}
+
+.collection-index {
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-position: 100% 80%;
+}
+
+.collection-index table {
+  background-color: #fff;
+}
+
+.collection-wrapper {
+  background-repeat: no-repeat;
+  background-position: 80% 100%;
+  margin-top: 60px;
+  padding: 60px;
+}
+
+.collection-wrapper form {
+  background-color: #fff;
+}
+
+.collection-wrapper table {
+  background-color: #fff;
+}
+
+.collection-wrapper h3 {
+  font-family: FuturaStdBook;
+  color: #553F92;
 }
 

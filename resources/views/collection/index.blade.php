@@ -7,7 +7,8 @@
 @section('content')
     <div class="container">
         <h3 class="collection-intro">{{ __('app.welcome') }} {{ $user->name }} </h3>
-        <div class="collection-index card" >
+        <div class="collection-index card" style="background-image: url({{ asset('svg/wind_locations_paint.svg') }});">
+       
             @if($collections->isEmpty())
                 <div id="emptyState">
                     <p>{{ __('app.collection_no_results') }}</p>
