@@ -314,7 +314,7 @@ body.layers-active #mapid {
           filter: brightness(0) invert(1);
 }
 
-.audioPopup {
+.popup {
   display: none;
   position: fixed;
   background: #fff;
@@ -329,11 +329,11 @@ body.layers-active #mapid {
   background-position: 50% 100%;
 }
 
-.audioPopup.open {
+.popup.open {
   display: block;
 }
 
-.audioPopup.close {
+.popup.close {
   display: none;
 }
 

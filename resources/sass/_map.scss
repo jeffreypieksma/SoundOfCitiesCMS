@@ -128,7 +128,7 @@ body.layers-active{
   filter: brightness(0) invert(1);
 }
 
-.audioPopup{
+.popup{
   display: none;
   position: fixed;
   background: #fff;
@@ -143,12 +143,35 @@ body.layers-active{
   background-position: 50% 100%;
 }
 
-.audioPopup.open{
+.popup.open{
   display: block;
 }
-.audioPopup.close{
+.popup.close{
   display: none;
 }
+
+
+// .audioPopup{
+//   display: none;
+//   position: fixed;
+//   background: #fff;
+//   height:calc(100vh - 64px );
+//   left: 100px;
+//   padding: 20px;
+//   width: 40%;
+//   bottom: 0;
+//   top: 64px;
+//   overflow: auto;
+//   background-repeat:no-repeat;
+//   background-position: 50% 100%;
+// }
+
+// .audioPopup.open{
+//   display: block;
+// }
+// .audioPopup.close{
+//   display: none;
+// }
 
 #messageWrapper{
   height:30px;

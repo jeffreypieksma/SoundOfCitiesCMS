@@ -1,5 +1,5 @@
 <!--Audio modal Structure -->
-<div id="audio-modal" class="audioPopup box-shadow-inset" style="background-image:url('/svg/wind_addsounds_paint.svg');">
+<div id="audio-modal" class="audioPopup popup box-shadow-inset">
     
     <div class="modal-content" >
         <h4 class="color-primary">{{ __('app.audio_title') }}</h4>

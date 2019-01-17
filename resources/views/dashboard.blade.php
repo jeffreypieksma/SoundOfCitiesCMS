@@ -77,17 +77,23 @@
             @include('modals.audio')
         </div>
 
+        <div id="hotspot-popup">
+            @include('modals.hotspot')
+        </div>
+
         <div id="layers" class="animated fadeInRight faster box-shadow-inset" style="background-image:url('/svg/wind_layers_paint.svg');">
             <h3 class="color-primary text-center">{{ __('app.layers') }}</h3>
             <ul class="layer">
                 @foreach($audioZones as $audioZone)
                     <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">
                         <li>
-                        
-
                             <span class="title" data-id="{{ $audioZone->id }}">
                                 <i class="material-icons color-black remove-layer">visibility</i>
                                 {{ __('app.layer') }} {{ $audioZone->id }}
+                            </span>
+                            <span class="hotspot" data-id="{{ $audioZone->id }}">
+                                <i class="material-icons color-black remove-layer">info_outline</i>
+                                
                             </span>
                             <span class="remove tooltip" data-id="{{ $audioZone->id }}" onclick="return confirm('Are you sure?')">
                                 <i class="material-icons color-black remove-layer">delete</i>
@@ -108,6 +114,7 @@
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
     <script src="{{ asset('js/AudioZone.js') }}"></script>
+    <script src="{{ asset('js/Hotspot.js') }}"></script>
     <script src="{{ asset('js/tests.js') }}"></script>
 
 @endsection
