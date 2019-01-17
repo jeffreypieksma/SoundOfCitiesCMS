@@ -33,14 +33,15 @@
 
             <div class="row">
                <div class="col s6">
-                    <span>{{ __('app.fadeIn') }}</span>
+                    <span>{{ __('app.fadeIn') }} <small>%</small></span>
+                    
                     <p class="range-field">
-                        <input type="range" id="audio_fadeIn" min="0" max="100" />
+                        <input type="range" id="audio_fadeIn" min="0" max="100"/>
                     </p>
                 </div>
                 <div class="col s6">
                 
-                    <span>{{ __('app.fadeOut') }}</span>
+                    <span>{{ __('app.fadeOut') }} <small>%</small></span>
                     <p class="range-field">
                         <input type="range" id="audio_fadeOut" min="0" max="100" />
                     </p>
@@ -63,14 +64,14 @@
      
 
             <div class="row">
-                <div class="input-field col s6">                         
+                <div class="input-field col s3">                         
                     <button class="btn waves-effect waves-light background-primary color-white text-center" type="submit" id="add-audio" name="action">
                         {{ __('app.save') }}
                         <i class="material-icons left">save</i>
                     </button>
 
                 </div>
-                <div class="input-field col s6">                         
+                <div class="input-field col s3">                         
                     <button class="btn waves-effect waves-light background-secondary color-white text-center" id="cancel-modal">
                         {{ __('app.cancel') }}
                         <i class="material-icons left">cancel</i>

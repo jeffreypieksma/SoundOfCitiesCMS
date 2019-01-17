@@ -28,6 +28,8 @@ return [
 
     'cancel' => 'Annuleren',
 
+    'collection_update' => 'Update collectie',
+    'collection_create' => 'Create new collection',
     'collection_title' => 'Collectie Title',
     'collection_description' => 'Collectie Beschrijving',
     'collection_no_results' => 'Er zijn nog geen collecties aangemaakt',

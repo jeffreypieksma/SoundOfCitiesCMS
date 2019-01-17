@@ -391,6 +391,11 @@ body.layers-active #mapid {
   background-color: #fff;
 }
 
+h3.collection-intro {
+  font-family: FuturaStdBook;
+  color: #553F92;
+}
+
 .collection-wrapper {
   background-repeat: no-repeat;
   background-position: 80% 100%;

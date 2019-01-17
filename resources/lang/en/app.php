@@ -29,7 +29,8 @@ return [
     'layer' => 'Zone',
 
     'cancel' => 'Cancel',
-
+    'collection_update' => 'Update collection',
+    'collection_create' => 'Create new collection',
     'collection_title' => 'Collection Title',
     'collection_description' => 'Collection Description',
     'collection_no_results' => 'No collections created yet',

@@ -38,7 +38,7 @@
 
                     <div class="row">
                         <div class="file-field input-field col 12">
-                            <div class="btn">
+                            <div class="btn color-white background-primary" >
                                 <span>{{ __('app.upload_audio_files') }}</span>
                         
                                 <input type="file" name="audio[]" id="audio-files" multiple required/>
@@ -51,7 +51,7 @@
 
                     <div class="row">
                         <div class="input-field col s2">                         
-                            <button class="btn waves-effect waves-light" type="submit" id="store-collection" name="action">{{ __('app.save') }}
+                            <button class="btn waves-effect waves-light color-white background-primary" type="submit" id="store-collection" name="action">{{ __('app.save') }}
                                 <i class="material-icons right">send</i>
                             </button>
 
