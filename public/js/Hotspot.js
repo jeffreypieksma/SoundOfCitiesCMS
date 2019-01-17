@@ -1824,7 +1824,176 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 27 */,
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __webpack_require__(7);
+var AudioZone = /** @class */ (function () {
+    function AudioZone() {
+    }
+    AudioZone.prototype.getCurrentCollectionId = function () {
+        return this.collection_id;
+    };
+    AudioZone.prototype.setCurrentCollectionId = function () {
+        this.collection_id = parseInt(document.getElementById('collection_info').dataset.id);
+    };
+    AudioZone.prototype.getAudioZoneId = function () {
+        return this.audio_zone_id;
+    };
+    AudioZone.prototype.setAudioZoneId = function (audio_zone_id) {
+        this.audio_zone_id = parseInt(audio_zone_id);
+    };
+    AudioZone.prototype.getAudioEffectData = function () {
+        return this.audioEffectData;
+    };
+    /*
+        Store all audio zones to database
+    */
+    AudioZone.prototype.storeAudioZones = function (audioZones) {
+        audioZones.collection_id = this.getCurrentCollectionId();
+        axios_1.default.post('/audioZones/create', {
+            audioZones: audioZones
+        })
+            .then(function (res) {
+            var data = res.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    /*
+        Get audio form value from HTML
+    */
+    AudioZone.prototype.addAudioToZone = function () {
+        //const collection_id = this.collection_id
+        var audio_zone_id = this.getAudioZoneId();
+        var track_id = document.querySelector('input[name="audioFile"]:checked').value;
+        var volumeControl = document.getElementById('audio_volume_control').value;
+        var fadeIn = document.getElementById('audio_fadeIn').value;
+        var fadeOut = document.getElementById('audio_fadeOut').value;
+        var playonce = document.getElementById('audio_playonce').checked;
+        var loopable = document.getElementById('audio_loopable').checked;
+        var data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable: loopable };
+        this.storeAudioEffects(data);
+    };
+    /*
+        Store audio effects to database
+    */
+    AudioZone.prototype.storeAudioEffects = function (data) {
+        axios_1.default.post('/audio/effects/create', {
+            data: data
+        })
+            .then(function (res) {
+            console.log(res);
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    /*
+        Get audio effects from database and set html form data
+    */
+    AudioZone.prototype.getAudioEffects = function (id) {
+        var _this = this;
+        axios_1.default.get('/audio/effects/' + id)
+            .then(function (res) {
+            if (res.data) {
+                _this.setFormData(res.data);
+            }
+            else {
+                _this.clearFormData();
+            }
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    AudioZone.prototype.deleteAudioZone = function (id) {
+        var _this = this;
+        axios_1.default.delete('/audioZone/delete', {
+            data: { 'id': id }
+        })
+            .then(function (res) {
+            console.log(res);
+            _this.showSuccesMessage(res.data);
+        })
+            .catch(function (error) {
+            console.log(error);
+            _this.showSuccesMessage(error);
+        });
+    };
+    /*
+        Set audio popup effect form data
+    */
+    AudioZone.prototype.setFormData = function (data) {
+        if (data.track_id) {
+            $("input[name='audioFile'][value=" + data.track_id + "]").prop('checked', true);
+        }
+        document.getElementById('audio_volume_control').value = data.volumeControl;
+        document.getElementById('audio_fadeIn').value = data.fadeIn;
+        document.getElementById('audio_fadeOut').value = data.fadeOut;
+        document.getElementById('audio_playonce').checked = data.playonce;
+        document.getElementById('audio_loopable').checked = data.loopable;
+    };
+    AudioZone.prototype.clearFormData = function () {
+        $("input[name='audioFile']").prop('checked', false);
+        document.getElementById('audio_volume_control').value = '';
+        document.getElementById('audio_fadeIn').value = '';
+        document.getElementById('audio_fadeOut').value = '';
+        document.getElementById('audio_playonce').checked = false;
+        document.getElementById('audio_loopable').checked = false;
+    };
+    AudioZone.prototype.showSuccesMessage = function (message) {
+        //console.log('Succes ' + message);
+        document.getElementById('succesMessage').innerHTML = message;
+    };
+    AudioZone.prototype.showErrorMessage = function (message) {
+        //console.log('Error '+ message);
+        document.getElementById('errorMessage').innerHTML = message;
+    };
+    return AudioZone;
+}());
+exports.AudioZone = AudioZone;
+window.onload = function () {
+    var ZoneObj = new AudioZone();
+    var addAudioBtn = document.getElementById('add-audio');
+    addAudioBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        ZoneObj.addAudioToZone();
+    });
+    /*
+        Get data attribute from HTML and toggle audio popup.
+    */
+    $(".layer-item .title").on('click', function () {
+        var audio_zone_id = $(this).attr("data-id");
+        ZoneObj.setAudioZoneId(audio_zone_id);
+        //Get audio effect from database 
+        ZoneObj.getAudioEffects(audio_zone_id);
+        $("#audio-modal").toggle();
+    });
+    /*
+        Get data attribute from HTML and delete layer from DB.
+    */
+    $(".layer-item .remove").on('click', function () {
+        var audio_zone_id = $(this).attr("data-id");
+        ZoneObj.deleteAudioZone(audio_zone_id);
+        $(this).parent().remove();
+    });
+    /*
+        Close audio popup
+    */
+    var cancel_modal = document.getElementById('cancel-modal');
+    cancel_modal.addEventListener('click', function (event) {
+        event.preventDefault();
+        $("#audio-modal").toggle();
+    });
+};
+
+
+/***/ }),
 /* 28 */,
 /* 29 */,
 /* 30 */,
@@ -1854,143 +2023,54 @@ module.exports = __webpack_require__(45);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __webpack_require__(7);
+var AudioZone_1 = __webpack_require__(27);
+var audioZone = new AudioZone_1.AudioZone();
 var Hotspot = /** @class */ (function () {
     function Hotspot() {
     }
-    Hotspot.prototype.getCurrentCollectionId = function () {
-        return this.collection_id;
-    };
-    Hotspot.prototype.setCurrentCollectionId = function () {
-        this.collection_id = parseInt(document.getElementById('collection_info').dataset.id);
-    };
-    Hotspot.prototype.getAudioZoneId = function () {
-        return this.audio_zone_id;
-    };
-    Hotspot.prototype.setAudioZoneId = function (audio_zone_id) {
-        this.audio_zone_id = parseInt(audio_zone_id);
-    };
-    Hotspot.prototype.getAudioEffectData = function () {
-        return this.data;
-    };
     /*
-        Store all audio zones to database
+        Get hotspot form value from HTML
     */
-    Hotspot.prototype.storeAudioZones = function (audioZones) {
-        audioZones.collection_id = this.getCurrentCollectionId();
-        axios_1.default.post('/audioZones/create', {
-            audioZones: audioZones
-        })
-            .then(function (res) {
-            var data = res.data;
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
+    Hotspot.prototype.addHotspotToAudioZone = function () {
+        var audio_zone_id = audioZone.getAudioZoneId();
+        var title = document.getElementById('hotspot_title').value;
+        var history = document.getElementById('hotspot_history').value;
+        var music = document.getElementById('hotspot_music').value;
+        var activities = document.getElementById('hotspot_activities').value;
+        var data = { audio_zone_id: audio_zone_id, title: title, history: history, music: music, activities: activities };
+        this.storeHotspot(data);
     };
-    /*
-        Get audio form value from HTML
-    */
-    Hotspot.prototype.addAudioToZone = function () {
-        //const collection_id = this.collection_id
-        var audio_zone_id = this.getAudioZoneId();
-        var track_id = document.querySelector('input[name="audioFile"]:checked').value;
-        var volumeControl = document.getElementById('audio_volume_control').value;
-        var fadeIn = document.getElementById('audio_fadeIn').value;
-        var fadeOut = document.getElementById('audio_fadeOut').value;
-        var playonce = document.getElementById('audio_playonce').checked;
-        var loopable = document.getElementById('audio_loopable').checked;
-        var data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable: loopable };
-        this.storeAudioEffects(data);
+    Hotspot.prototype.storeHotspot = function (data) {
     };
-    /*
-        Store audio effects to database
-    */
-    Hotspot.prototype.storeAudioEffects = function (data) {
-        axios_1.default.post('/audio/effects/create', {
-            data: data
-        })
-            .then(function (res) {
-            console.log(res);
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
+    Hotspot.prototype.getHotspot = function (id) {
     };
-    /*
-        Get audio effects from database and set html form data
-    */
-    Hotspot.prototype.getAudioEffects = function (id) {
-        var _this = this;
-        axios_1.default.get('/audio/effects/' + id)
-            .then(function (res) {
-            if (res.data) {
-                _this.setFormData(res.data);
-            }
-            else {
-                _this.clearFormData();
-            }
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
+    Hotspot.prototype.deleteHotspot = function (id) {
     };
-    Hotspot.prototype.deleteAudioZone = function (id) {
-        var _this = this;
-        axios_1.default.delete('/audioZone/delete', {
-            data: { 'id': id }
-        })
-            .then(function (res) {
-            console.log(res);
-            _this.showSuccesMessage(res.data);
-        })
-            .catch(function (error) {
-            console.log(error);
-            _this.showSuccesMessage(error);
-        });
-    };
-    /*
-        Set audio popup effect form data
-    */
     Hotspot.prototype.setFormData = function (data) {
-        if (data.track_id) {
-            $("input[name='audioFile'][value=" + data.track_id + "]").prop('checked', true);
-        }
-        document.getElementById('audio_volume_control').value = data.volumeControl;
-        document.getElementById('audio_fadeIn').value = data.fadeIn;
-        document.getElementById('audio_fadeOut').value = data.fadeOut;
-        document.getElementById('audio_playonce').checked = data.playonce;
-        document.getElementById('audio_loopable').checked = data.loopable;
     };
     Hotspot.prototype.clearFormData = function () {
-        $("input[name='audioFile']").prop('checked', false);
-        document.getElementById('audio_volume_control').value = '';
-        document.getElementById('audio_fadeIn').value = '';
-        document.getElementById('audio_fadeOut').value = '';
-        document.getElementById('audio_playonce').checked = false;
-        document.getElementById('audio_loopable').checked = false;
-    };
-    Hotspot.prototype.showSuccesMessage = function (message) {
-        //console.log('Succes ' + message);
-        document.getElementById('succesMessage').innerHTML = message;
-    };
-    Hotspot.prototype.showErrorMessage = function (message) {
-        //console.log('Error '+ message);
-        document.getElementById('errorMessage').innerHTML = message;
     };
     return Hotspot;
 }());
 exports.Hotspot = Hotspot;
 window.onload = function () {
+    var hotspot = new Hotspot();
+    var addHotspotBtn = document.getElementById('add-hotspot');
+    addHotspotBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        hotspot.addHotspotToAudioZone();
+    });
     /*
         Get data attribute from HTML and toggle modal popup.
     */
     $(".layer-item .hotspot").on('click', function () {
         var audio_zone_id = $(this).attr("data-id");
+        audioZone.setAudioZoneId(audio_zone_id);
+        //hotspot.getHotspotData(audio_zone_id)
         $("#hotspot-modal").toggle();
     });
     /*
-        Modal popup
+        Modal popup close
     */
     var cancel_modal = document.getElementById('cancel-modal');
     cancel_modal.addEventListener('click', function (event) {
