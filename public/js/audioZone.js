@@ -1876,7 +1876,6 @@ var AudioZone = /** @class */ (function () {
         else {
             return false;
         }
-        //let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
         var volumeControl = document.getElementById('audio_volume_control').value;
         var fadeIn = document.getElementById('audio_fadeIn').value;
         var fadeOut = document.getElementById('audio_fadeOut').value;

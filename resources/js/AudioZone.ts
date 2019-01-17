@@ -49,15 +49,15 @@ export class AudioZone {
     addAudioToZone() {     
         const audio_zone_id = this.getAudioZoneId()
 
-        let selectedTrack = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !==null;
+        let selectedTrack = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
+        
         if(selectedTrack) {
             let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
-        }else{
+        } else {
             return false;
         }
       
-        //let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
-
+        
         let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
         let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
         let fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
