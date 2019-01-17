@@ -1,9 +1,8 @@
 <!--Audio modal Structure -->
-<div id="audio-modal" class="audioPopup box-shadow-inset">
+<div id="audio-modal" class="audioPopup box-shadow-inset" style="background-image:url('/svg/wind_addsounds_paint.svg');">
     
-    <div class="modal-content">
+    <div class="modal-content" >
         <h4 class="color-primary">{{ __('app.audio_title') }}</h4>
-        {{-- <p class="subtitle">{{ __('app.select_audio') }}</p> --}}
         <form method="POST" id="audio-form">
             {{ csrf_field() }}
             
@@ -81,10 +80,5 @@
                
             </div>
         </form>
-
     </div>
-
-    {{-- <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">{{ __('app.cancel') }}</a>
-    </div> --}}
 </div>

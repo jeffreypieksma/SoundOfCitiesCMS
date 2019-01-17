@@ -1,9 +1,27 @@
-nav .nav-wrapper{
-    background-color: $primary !important;
-}
-
 #nav-main{
     margin-bottom:40px;
+}
+
+nav{
+
+    background-color:$primary !important;
+
+    .nav-wrapper{
+        margin: 0 auto;
+        max-width: 1280px;
+        background-color: $primary !important;
+    } 
+
+    .register-btn:hover span{
+        background-color:#fff;
+        color:#553F92;
+    }
+
+    .register-btn span{
+        border:1px solid #fff;
+        padding:5px 10px;
+        border-radius:5px;
+    }
 }
 
 #mobile{

@@ -77,22 +77,23 @@
             @include('modals.audio')
         </div>
 
-        <div id="layers" class="animated fadeInRight faster box-shadow-inset">
+        <div id="layers" class="animated fadeInRight faster box-shadow-inset" style="background-image:url('/svg/wind_layers_paint.svg');">
+            <h3 class="color-primary text-center">{{ __('app.layers') }}</h3>
             <ul class="layer">
-                <h3 class="color-primary text-center">{{ __('app.layers') }}</h3>
                 @foreach($audioZones as $audioZone)
                     <a href="#{{ $audioZone->id }}" data-id="{{ $audioZone->id }}" class="layer-item">
                         <li>
-                            <span class="title" data-id="{{ $audioZone->id }}">{{ __('app.layer') }}
-                                {{ $audioZone->id }}
+                        
+
+                            <span class="title" data-id="{{ $audioZone->id }}">
+                                <i class="material-icons color-black remove-layer">visibility</i>
+                                {{ __('app.layer') }} {{ $audioZone->id }}
                             </span>
                             <span class="remove tooltip" data-id="{{ $audioZone->id }}" onclick="return confirm('Are you sure?')">
-                                <i class="material-icons color-black remove-layer">remove_circle</i>
-                                 <span class="tooltiptext">{{ __('app.tooltip_remove_layer') }}</span>
+                                <i class="material-icons color-black remove-layer">delete</i>
+                                <span class="tooltiptext">{{ __('app.tooltip_remove_layer') }}</span>
                             </span>
-                            {{-- <a href="{{ route('delete_audioZone', ['id' => $audioZone->id])}}" 
-                                onclick="return confirm('Are you sure') ">Verwijder
-                            </a> --}}
+
                         </li>
                     </a>
                 @endforeach
@@ -110,19 +111,3 @@
     <script src="{{ asset('js/tests.js') }}"></script>
 
 @endsection
-
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif

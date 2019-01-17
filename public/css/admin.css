@@ -85,6 +85,10 @@ html body .background-black {
   background: #2B2626;
 }
 
+.card {
+  padding: 40px;
+}
+
 .btn-floating:hover {
   background-color: #F59F1F !important;
 }
@@ -102,7 +106,6 @@ html body .background-black {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
@@ -138,12 +141,29 @@ html body .background-black {
   opacity: 1;
 }
 
-nav .nav-wrapper {
+#nav-main {
+  margin-bottom: 40px;
+}
+
+nav {
   background-color: #553F92 !important;
 }
 
-#nav-main {
-  margin-bottom: 40px;
+nav .nav-wrapper {
+  margin: 0 auto;
+  max-width: 1280px;
+  background-color: #553F92 !important;
+}
+
+nav .register-btn:hover span {
+  background-color: #fff;
+  color: #553F92;
+}
+
+nav .register-btn span {
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 #mobile {
@@ -218,6 +238,8 @@ body.layers-active #mapid {
           justify-content: center;
   overflow: auto;
   opacity: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
 }
 
 #layers.active {
@@ -231,13 +253,8 @@ body.layers-active #mapid {
   text-align: center;
 }
 
-.ui-layers-icon {
-  background-image: url("/icons/ui_layers.png");
-  width: 40px;
-  height: 40px;
-  background-repeat: no-repeat;
-  background-position-y: 10px;
-  background-position-x: 10px;
+#layers ul {
+  background-color: #fff;
 }
 
 #layers ul li {
@@ -253,15 +270,48 @@ body.layers-active #mapid {
   background-color: #f1f1f1;
 }
 
+#layers .layer-item {
+  border-bottom: 1px solid #ddd;
+  display: block;
+}
+
 #layers .layer-item .title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #553F92;
+  color: #333;
+}
+
+#layers .layer-item .title i {
+  margin-right: 5px;
 }
 
 #layers .layer-item .remove {
   position: absolute;
   right: 20px;
-  margin-top: 15px;
+  margin-top: 10px;
+}
+
+#layers .layer-item .remove-layer {
+  vertical-align: middle;
+}
+
+#layers .layer-item:first-child {
+  border-top: 1px solid #ddd;
+}
+
+#layers .layer-item:last-child {
+  border-bottom: 1px solid #ddd;
+}
+
+.ui-layers-icon {
+  background-image: url("/icons/ui_layers.png");
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-position-y: 10px;
+  background-position-x: 10px;
+  -webkit-filter: brightness(0) invert(1);
+          filter: brightness(0) invert(1);
 }
 
 .audioPopup {
@@ -275,6 +325,8 @@ body.layers-active #mapid {
   bottom: 0;
   top: 64px;
   overflow: auto;
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
 }
 
 .audioPopup.open {

@@ -32,6 +32,14 @@ html body{
     color: $black;
   }
 
+  .color-succes{
+
+  }
+
+  .color-warning{
+
+  }
+
   //purple
   .background-primary{
     background: $primary;
@@ -54,6 +62,19 @@ html body{
   .background-black{
     background: $black;
   }
+
+  .background-succes{
+
+  }
+
+  .background-warning{
+
+  }
+  
+}
+
+.card{
+  padding:40px;
 }
 
 .btn-floating:hover{
@@ -75,7 +96,6 @@ html body{
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {

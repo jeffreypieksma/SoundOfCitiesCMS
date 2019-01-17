@@ -34,12 +34,29 @@ span {
   src: url("/fonts/Futura TOT Book.ttf") format("truetype");
 }
 
-nav .nav-wrapper {
+#nav-main {
+  margin-bottom: 40px;
+}
+
+nav {
   background-color: #553F92 !important;
 }
 
-#nav-main {
-  margin-bottom: 40px;
+nav .nav-wrapper {
+  margin: 0 auto;
+  max-width: 1280px;
+  background-color: #553F92 !important;
+}
+
+nav .register-btn:hover span {
+  background-color: #fff;
+  color: #553F92;
+}
+
+nav .register-btn span {
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 #mobile {
@@ -98,6 +115,10 @@ html body .background-black {
   background: #2B2626;
 }
 
+.card {
+  padding: 40px;
+}
+
 .btn-floating:hover {
   background-color: #F59F1F !important;
 }
@@ -115,7 +136,6 @@ html body .background-black {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
@@ -149,22 +169,6 @@ html body .background-black {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-}
-
-nav .register-btn span {
-  border: 1px solid #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-nav .nav-wrapper {
-  margin: 0 auto;
-  max-width: 1280px;
-}
-
-nav .register-btn:hover span {
-  background-color: #fff;
-  color: #553F92;
 }
 
 .sidenav-overlay {
