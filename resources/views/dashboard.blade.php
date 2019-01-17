@@ -60,7 +60,7 @@
 
         <div id="toggleLayers" data-target="layers">
             <a class="btn-floating waves-effect waves-light background-accent">
-                <div class="ui-layers-icon" style="background-image: url({{ asset('icons/ui_layers.png') }});"></div>   
+                <div class="ui-layers-icon" style="background-image: url({{ asset('images/ui_layers.png') }});"></div>   
             </a>         
         </div>
 
