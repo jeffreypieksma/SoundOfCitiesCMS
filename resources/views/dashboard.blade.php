@@ -56,6 +56,8 @@
             </div>
         </div>
 
+        <div id="location"></div>
+
         <div id="toggleLayers" data-target="layers">
             <a class="btn-floating waves-effect waves-light background-accent">
                 <div class="ui-layers-icon" ></div>
@@ -115,6 +117,7 @@
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
     <script src="{{ asset('js/AudioZone.js') }}"></script>
+    <script src="{{ asset('js/Location.js') }}"></script>
     {{-- <script src="{{ asset('js/Hotspot.js') }}"></script> --}}
     <script src="{{ asset('js/tests.js') }}"></script>
 

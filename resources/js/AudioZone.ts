@@ -49,21 +49,21 @@ export class AudioZone {
     addAudioToZone() {     
         const audio_zone_id = this.getAudioZoneId()
 
-        let selectedTrack = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
+        let track_id = '';
+        const selectedTrack = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')) !== null;
         
         if(selectedTrack) {
-            let track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
+            track_id = (<HTMLInputElement>document.querySelector('input[name="audioFile"]:checked')).value;
         } else {
             return false;
         }
       
-        
-        let volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
-        let fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
-        let fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
+        const volumeControl = (<HTMLInputElement>document.getElementById('audio_volume_control')).value
+        const fadeIn = (<HTMLInputElement>document.getElementById('audio_fadeIn')).value
+        const fadeOut = (<HTMLInputElement>document.getElementById('audio_fadeOut')).value
 
-        let playonce = (<HTMLInputElement>document.getElementById('audio_playonce')).checked
-        let loopable = (<HTMLInputElement>document.getElementById('audio_loopable')).checked
+        const playonce = (<HTMLInputElement>document.getElementById('audio_playonce')).checked
+        const loopable = (<HTMLInputElement>document.getElementById('audio_loopable')).checked
 
         const data = { audio_zone_id: audio_zone_id, track_id: track_id, volumeControl: volumeControl, fadeOut: fadeOut, fadeIn: fadeIn, playonce: playonce, loopable:loopable }
 

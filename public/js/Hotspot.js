@@ -1869,9 +1869,10 @@ var AudioZone = /** @class */ (function () {
     */
     AudioZone.prototype.addAudioToZone = function () {
         var audio_zone_id = this.getAudioZoneId();
+        var track_id = '';
         var selectedTrack = document.querySelector('input[name="audioFile"]:checked') !== null;
         if (selectedTrack) {
-            var track_id = document.querySelector('input[name="audioFile"]:checked').value;
+            track_id = document.querySelector('input[name="audioFile"]:checked').value;
         }
         else {
             return false;
