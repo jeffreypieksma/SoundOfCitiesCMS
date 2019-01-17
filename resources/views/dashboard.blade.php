@@ -60,7 +60,7 @@
 
         <div id="toggleLayers" data-target="layers">
             <a class="btn-floating waves-effect waves-light background-accent">
-                <div class="ui-layers-icon" ></div>
+                <div class="ui-layers-icon" style="background-image: url('/icons/ui_layers.png');"></div>
                 {{-- <i class="material-icons">settings</i> --}}     
             </a>         
         </div>

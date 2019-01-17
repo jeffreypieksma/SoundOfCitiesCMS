@@ -309,7 +309,6 @@ body.layers-active #mapid {
 }
 
 .ui-layers-icon {
-  background-image: url("/icons/ui_layers.png");
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
