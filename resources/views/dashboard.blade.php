@@ -116,9 +116,8 @@
 
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
-    <script src="{{ asset('js/AudioZone.js') }}"></script>
+    <script src="{{ asset('js/audioZone.js') }}"></script>
+    <script src="{{ asset('js/tests.js') }}"></script>
     {{-- <script src="{{ asset('js/Location.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/Hotspot.js') }}"></script> --}}
-    <script src="{{ asset('js/tests.js') }}"></script>
-
 @endsection
