@@ -24,7 +24,7 @@
     @yield('head')
 
 </head>
-<body>  
+<body class="admin">  
     <div id="app">
         @include('admin.includes.navigation')
 

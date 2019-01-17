@@ -24,6 +24,14 @@ nav{
     }
 }
 
+body.admin{
+    .nav-wrapper{
+        margin: 0 auto;
+        max-width: 90vw;
+    } 
+
+}
+
 #mobile{
     text-align: center;
     padding-top:64px;  

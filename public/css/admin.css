@@ -166,6 +166,11 @@ nav .register-btn span {
   border-radius: 5px;
 }
 
+body.admin .nav-wrapper {
+  margin: 0 auto;
+  max-width: 90vw;
+}
+
 #mobile {
   text-align: center;
   padding-top: 64px;
