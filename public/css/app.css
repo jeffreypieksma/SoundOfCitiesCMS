@@ -207,6 +207,10 @@ section#banner {
   min-height: calc(100vh - 64px);
 }
 
+section#banner .hero-download-links img {
+  max-width: 200px;
+}
+
 section#banner .btn {
   height: 45px;
   line-height: 45px;

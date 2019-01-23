@@ -50,12 +50,12 @@
                     <div class="box-left">
                         <h1 class="hero-title color-primary">Resonance</h1>
                         <div class="hero-intro" style="">
-                            <p>Play unique sounds on different locations with our brand new iOs App! 
+                            <p>Play immersive, location-specific music at different locations<br> with our brand new iOs App!
                             
                             </p>
                         </div>
                         <div class="hero-download-links">
-                            <img src=" {{ asset('images/download-on-app-store.png')  }}" alt="" height="60px" width="">
+                            <img src=" {{ asset('images/download-on-app-store.png')  }}" alt="Download on app store" height="" width="">
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
     <section id="app-features" class="full-height center scrollspy" >
         <div class="container">
             <div class="row text-center">
-                <div class="col m12">
+                <div class="col m12 offset-s2">
                     {{-- <h2 class="color-primary">App Features</h2> --}}
                     <img src="{{ asset('images/logo-app.png')  }}" alt="" width="200px" height="">
                     <p class="subtitle"></p>
@@ -87,7 +87,7 @@
                     <ul class="icons app-functions">
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/navigate-function.png')  }}" alt="">
-                            <span class="icon-text">Navigate trough unique locations</span>
+                            <span class="icon-text">Navigate through unique locations</span>
                         </li>
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/track_function.png')  }}" alt="">
@@ -95,18 +95,18 @@
                         </li>
                     </ul>
                 </div>  
-                <div class="col m4 s12 text-center">
-                    <img src=" {{ asset('images/app-banner-image.png')  }}" alt="" width="" height="400px">
+                <div class="col m4 s6 offset-s2 text-center">
+                    <img src=" {{ asset('images/app-banner-image.png')  }}" alt="" width="" height="300px">
                 </div>
                 <div class="col m4 s12">
                     <ul class="icons app-functions">
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/walk-function.png')  }}" alt="">
-                            <span class="icon-text">Free walk routes</span>
+                            <span class="icon-text">Free walking routes</span>
                         </li>
                         <li class="icon-box col s6 m12">
                             <img src="{{ asset('images/camera-function.png')  }}" alt="">
-                            <span class="icon-text">Capture locations</span>
+                            <span class="icon-text">Capture locations in photos</span>
                         </li>
                     </ul>
                 </div>
@@ -182,7 +182,7 @@
                         <h3 class="color-white">Contact</h3>
                         <ul>
                             <li>Yoni Collier</li>
-                            <li>y.collier@leedsbeckett.ac.uk</li>
+                            <li>yoni@cloakanddagger-music.com</li>
                             <li>Leeds Beckett University, Leeds</li>
                         </ul>        
                     </div>
