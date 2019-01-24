@@ -50,20 +50,23 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col m2 s6">                         
-                            <button class="btn waves-effect waves-light color-white background-primary" type="submit" id="store-collection" name="action">{{ __('app.save') }}
-                                <i class="material-icons right">send</i>
-                            </button>
 
-                        </div>
-
-                        <div class="input-field col s6 m2">  
+                     <div class="input-field col m3 s6">  
                             <a href="{{ route('collections') }}">
-                                <button class="btn waves-effect waves-light background-secondary color-white text-center">                
+                                <button class="btn waves-effect waves-light background-primary color-white text-center">                
                                     {{ __('app.cancel') }}
                                     <i class="material-icons left">cancel</i>         
                                 </button>
                             </a>
+                        </div>
+
+                        <div class="input-field col m3 s6">                         
+                            <button class="btn waves-effect waves-light color-white background-secondary" type="submit" id="store-collection" name="action">
+                                <i class="material-icons left">send</i>
+                                {{ __('app.save') }}
+                                
+                            </button>
+
                         </div>
 
                     </div>
