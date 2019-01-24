@@ -258,6 +258,14 @@ body.layers-active #mapid {
   height: calc(100vh - 64px);
   background-color: #fff;
   color: #fff;
+  overflow: auto;
+  opacity: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  display: none;
+}
+
+#layers.active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -268,13 +276,6 @@ body.layers-active #mapid {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  overflow: auto;
-  opacity: 0;
-  background-repeat: no-repeat;
-  background-position: 50% 100%;
-}
-
-#layers.active {
   z-index: 9999;
   position: fixed;
   right: 0;
@@ -375,6 +376,15 @@ body.layers-active #mapid {
   display: none;
 }
 
+@media (max-width: 1281px) {
+  .popup {
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    top: 56px;
+  }
+}
+
 #messageWrapper {
   height: 30px;
   text-align: center;
@@ -397,21 +407,6 @@ body.layers-active #mapid {
 
 #messageWrapper .alert-danger {
   background-color: red;
-}
-
-.collection-index {
-  background-repeat: no-repeat;
-  background-position: 50% 100%;
-  background-position: 100% 80%;
-}
-
-.collection-index table {
-  background-color: #fff;
-}
-
-h3.collection-intro {
-  font-family: FuturaStdBook;
-  color: #553F92;
 }
 
 .collection-wrapper {
@@ -437,5 +432,21 @@ h3.collection-intro {
 .collection-wrapper h3 {
   font-family: FuturaStdBook;
   color: #553F92;
+}
+
+.collection-index {
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-position: 100% 80%;
+}
+
+.collection-index table {
+  background-color: #fff;
+}
+
+h3.collection-intro {
+  font-family: FuturaStdBook;
+  color: #553F92;
+  font-size: 2.5rem;
 }
 

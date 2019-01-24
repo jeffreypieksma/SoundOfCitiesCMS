@@ -53,15 +53,17 @@ body.layers-active{
   height: calc(100vh - 64px);
   background-color: #fff;
   color: #fff;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
+
   overflow: auto;
   opacity:0;
   background-repeat:no-repeat;
   background-position: 50% 100%;
+  display: none;
 
   &.active{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
     z-index:9999;
     position: fixed;
     right:0;
@@ -156,28 +158,14 @@ body.layers-active{
   display: none;
 }
 
-
-// .audioPopup{
-//   display: none;
-//   position: fixed;
-//   background: #fff;
-//   height:calc(100vh - 64px );
-//   left: 100px;
-//   padding: 20px;
-//   width: 40%;
-//   bottom: 0;
-//   top: 64px;
-//   overflow: auto;
-//   background-repeat:no-repeat;
-//   background-position: 50% 100%;
-// }
-
-// .audioPopup.open{
-//   display: block;
-// }
-// .audioPopup.close{
-//   display: none;
-// }
+@media (max-width: 1281px) {
+  .popup{
+    width:100%;
+    left:0px;
+    right:0px;
+    top:56px;
+  }
+}
 
 #messageWrapper{
   height:30px;
