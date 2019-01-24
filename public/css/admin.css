@@ -102,7 +102,13 @@ html body .background-warning {
 }
 
 .card {
-  padding: 40px;
+  padding: 10px;
+}
+
+@media (min-width: 1281px) {
+  .card {
+    padding: 40px;
+  }
 }
 
 .btn-floating:hover {
@@ -184,7 +190,12 @@ nav .register-btn span {
 
 body.admin .nav-wrapper {
   margin: 0 auto;
-  max-width: 90vw;
+}
+
+@media (min-width: 1281px) {
+  body.admin .nav-wrapper {
+    max-width: 90vw;
+  }
 }
 
 #mobile {
@@ -334,6 +345,13 @@ body.layers-active #mapid {
           filter: brightness(0) invert(1);
 }
 
+@media (max-width: 1281px) {
+  #layers {
+    width: 100%;
+    margin: auto;
+  }
+}
+
 .popup {
   display: none;
   position: fixed;
@@ -399,8 +417,13 @@ h3.collection-intro {
 .collection-wrapper {
   background-repeat: no-repeat;
   background-position: 80% 100%;
-  margin-top: 60px;
-  padding: 60px;
+}
+
+@media (min-width: 1281px) {
+  .collection-wrapper {
+    margin-top: 60px;
+    padding: 60px;
+  }
 }
 
 .collection-wrapper form {

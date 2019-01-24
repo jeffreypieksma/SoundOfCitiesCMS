@@ -8,7 +8,7 @@
 
     <div id="create_collection_form" class="container collection-wrapper" style="background-image: url({{ asset('svg/wind_layers_paint.svg') }});">
         <div class="row">
-            <div class="col m8 offset-m2 s12"> 
+            <div class="col m12 s12"> 
                 <h3 class="collection-intro">{{ __('app.collection_create') }}</h3>
                 <div id="error-wrapper">
                     @if (count($errors) > 0)
@@ -37,7 +37,7 @@
                     </div>     
 
                     <div class="row">
-                        <div class="file-field input-field col 12">
+                        <div class="file-field input-field col s12 ">
                             <div class="btn color-white background-primary" >
                                 <span>{{ __('app.upload_audio_files') }}</span>
                         
@@ -50,14 +50,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s2">                         
+                        <div class="input-field col m2 s6">                         
                             <button class="btn waves-effect waves-light color-white background-primary" type="submit" id="store-collection" name="action">{{ __('app.save') }}
                                 <i class="material-icons right">send</i>
                             </button>
 
                         </div>
 
-                        <div class="input-field col s3">  
+                        <div class="input-field col s6 m2">  
                             <a href="{{ route('collections') }}">
                                 <button class="btn waves-effect waves-light background-secondary color-white text-center">                
                                     {{ __('app.cancel') }}

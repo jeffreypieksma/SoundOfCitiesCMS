@@ -61,7 +61,12 @@ nav .register-btn span {
 
 body.admin .nav-wrapper {
   margin: 0 auto;
-  max-width: 90vw;
+}
+
+@media (min-width: 1281px) {
+  body.admin .nav-wrapper {
+    max-width: 90vw;
+  }
 }
 
 #mobile {
@@ -137,7 +142,13 @@ html body .background-warning {
 }
 
 .card {
-  padding: 40px;
+  padding: 10px;
+}
+
+@media (min-width: 1281px) {
+  .card {
+    padding: 40px;
+  }
 }
 
 .btn-floating:hover {

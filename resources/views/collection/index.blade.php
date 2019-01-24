@@ -21,7 +21,7 @@
                             </a>
                         </div>
                     @else
-                        <table>
+                        <table class="responsive-table highlight">
                             <thead>
                             <tr>
                                 <th>{{ __('collection.title') }}</th>

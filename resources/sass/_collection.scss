@@ -17,8 +17,11 @@ h3.collection-intro{
 .collection-wrapper{
     background-repeat:no-repeat;
     background-position: 80% 100%;
-    margin-top:60px;
-    padding:60px;
+    
+    @media (min-width: 1281px) {
+        margin-top:60px;
+        padding:60px;
+    }
     
     form{
         background-color:#fff;

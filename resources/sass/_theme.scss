@@ -74,7 +74,14 @@ html body{
 }
 
 .card{
-  padding:40px;
+  padding:10px;
+}
+
+@media (min-width: 1281px) {
+  
+  .card{
+    padding:40px;
+  }
 }
 
 .btn-floating:hover{

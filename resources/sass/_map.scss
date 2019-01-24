@@ -127,6 +127,13 @@ body.layers-active{
   filter: brightness(0) invert(1);
 }
 
+@media (max-width: 1281px) {
+  #layers {
+    width:100%;
+    margin:auto;
+  }
+}
+
 .popup{
   display: none;
   position: fixed;

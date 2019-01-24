@@ -26,7 +26,7 @@ Route::get('locale/{locale}', function ($locale) {
 });
 
 Route::group(['middleware' => ['auth'] ], function () {
-	//Route::get('dashboard', 'CollectionController@index')->name('dashboard');
+	Route::get('dashboard', 'CollectionController@index')->name('admin_dashboard');
 	Route::get('admin', 'CollectionController@index')->name('dashboard');
 	Route::get('dashboard/{id}', 'CollectionController@dashboardView')->name('map');
 	
